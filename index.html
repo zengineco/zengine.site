@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+  WORKFLOW STACK
+  FILE: zengine_tv_v2.1.0.html | BRAND: Zengine(tm) | AUTHOR: Vincent Gonzalez | (c) 2026 Zengine(tm)
+  VERSION: v2.1.0 | LAST STABLE: v2.0.0 2026-03-25
+  DESCRIPTION: Zengine World TV - live atlas of Earth. ZFT four-dial strip with radial pop-out.
+  v2.1 additions: ZG crystal logo (3 positions), SMPTE 8s auto-advance countdown, mobile
+  bottom-sheet pop-out, recently-tuned localStorage history as Category option, feed removal link.
+  BOOT ORDER: 1-CSS 2-HTML 3-CONFIG 4-StaticCanvas 5-SMPTECanvas 6-ZFT 7-FilterEngine
+              8-ChannelLoader 9-YTapi 10-HLS 11-Dice 12-Search 13-Power 14-History 15-Init
+  EXTERNAL: Google Fonts, YouTube iFrame API (on demand), hls.js via cdnjs (on demand), AdSense
+  ASSET: ZG logo https://zengineco.github.io/zengine.site/assets/logo.png
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZENGINE WORLD TV — The World Is Live</title>
+<meta name="description" content="Zengine World TV - live atlas of Earth. Tune in.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@300;400;600&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8826956454892311" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --wood-dark:#2a1a08;--wood-mid:#3d2510;--wood-light:#5c3a1e;--wood-edge:#1a0e04;
+  --chrome:#b8a070;--chrome-light:#d4bc8a;--chrome-dark:#8a6840;
+  --screen-bg:#050503;--phosphor:#c8e8c0;
+  --led-amber:#ff8800;--led-red:#ff2200;--led-off:#1a0800;--led-green:#00e5a0;
+  --label:#c8a060;--btn-border:#8a6840;
+  --zft-bg:#130a02;--zft-border:#3a2010;
+  --pop-bg:#0d0600;--scanline:0.15;
+}
+html,body{width:100%;min-height:100%;background:#0b0804;overflow-x:hidden;font-family:'Oswald',Arial Narrow,sans-serif}
+#page-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:1.2rem 1rem .8rem;gap:.7rem}
+
+/* SEARCH BAR */
+#search-bar{width:min(900px,96vw);display:flex;gap:7px;align-items:center}
+#search-input{flex:1;background:#0a0600;border:1px solid var(--chrome-dark);border-radius:2px;padding:6px 11px;font-family:'Special Elite',serif;font-size:.78rem;color:var(--led-amber);letter-spacing:.04em;outline:none;transition:border-color .2s}
+#search-input::placeholder{color:#3a2008}
+#search-input:focus{border-color:var(--chrome-light)}
+#search-btn{padding:6px 14px;background:var(--wood-dark);border:1px solid var(--chrome-dark);border-radius:2px;color:var(--label);font-family:'Oswald',sans-serif;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .15s;white-space:nowrap}
+#search-btn:hover{border-color:var(--chrome-light);color:var(--chrome-light)}
+#search-label{font-family:'Special Elite',serif;font-size:.57rem;color:#3a2008;letter-spacing:.1em;white-space:nowrap}
+
+/* CABINET */
+#tv-cabinet{position:relative;width:min(900px,96vw);border-radius:16px 16px 4px 4px;
+  box-shadow:inset 0 2px 0 var(--wood-light),inset 0 -3px 0 var(--wood-edge),inset 3px 0 0 var(--wood-edge),inset -3px 0 0 var(--wood-edge),0 8px 40px rgba(0,0,0,.85);
+  background-image:repeating-linear-gradient(92deg,transparent 0,transparent 3px,rgba(0,0,0,.06) 3px,rgba(0,0,0,.06) 4px),repeating-linear-gradient(88deg,transparent 0,transparent 8px,rgba(255,255,255,.015) 8px,rgba(255,255,255,.015) 9px),linear-gradient(180deg,#4a2e14 0%,#3d2510 40%,#2e1c0c 100%);
+  padding:16px 16px 0}
+#tv-cabinet::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;border-radius:16px 16px 0 0;background:linear-gradient(90deg,var(--chrome-dark) 0%,var(--chrome-light) 25%,var(--chrome) 50%,var(--chrome-light) 75%,var(--chrome-dark) 100%)}
+
+/* TV MAIN ROW */
+#tv-main{display:flex;gap:13px;align-items:stretch;min-height:310px}
+
+/* SCREEN */
+#screen-housing{flex:1;position:relative;background:var(--screen-bg);border-radius:5px;overflow:hidden;min-height:280px;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.97),0 0 0 2px var(--chrome-dark),0 0 0 4px var(--wood-edge)}
+#screen-housing::before{content:'';position:absolute;inset:0;border-radius:5px;box-shadow:inset 4px 4px 14px rgba(255,255,255,.04),inset -4px -4px 14px rgba(0,0,0,.7);pointer-events:none;z-index:20}
+#screen-housing::after{content:'';position:absolute;inset:0;border-radius:5px;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,var(--scanline)) 2px,rgba(0,0,0,var(--scanline)) 4px);pointer-events:none;z-index:19}
+#screen-vignette{position:absolute;inset:0;border-radius:5px;background:radial-gradient(ellipse at 50% 48%,transparent 38%,rgba(0,0,0,.58) 100%);pointer-events:none;z-index:18}
+
+/* SCREEN LAYERS */
+#screen-off{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;z-index:8}
+#screen-off .zg{font-family:'Oswald',sans-serif;font-size:2.4rem;font-weight:600;color:#120a03;letter-spacing:.2em}
+#screen-off .hint{font-family:'Special Elite',serif;font-size:.65rem;color:#1e1005;letter-spacing:.12em}
+#yt-player-div{position:absolute;inset:0;display:none;z-index:4}
+#yt-player-div iframe{width:100%!important;height:100%!important;border:none}
+#mjpeg-frame{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:4;border:none}
+#hls-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;z-index:4}
+#static-canvas,#smpte-canvas{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:6}
+#signal-lost-text{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-family:'Oswald',monospace;font-size:.6rem;letter-spacing:.18em;color:rgba(255,255,255,.75);text-shadow:0 1px 4px #000;display:none;z-index:7;white-space:nowrap}
+#cc-bar{position:absolute;bottom:7px;left:7px;right:7px;background:rgba(0,0,0,.88);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:3px 9px;font-family:'Special Elite',serif;font-size:.7rem;color:#fff;display:none;z-index:10;overflow:hidden;white-space:nowrap}
+#cc-inner{display:inline-block;animation:ticker 22s linear infinite}
+@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-200%)}}
+
+/* SIDE CONTROLS */
+#side-controls{width:104px;display:flex;flex-direction:column;gap:10px;padding:2px 0;align-items:center}
+#led-display{width:100%;background:#060300;border:2px solid var(--chrome-dark);border-radius:3px;padding:5px 5px;box-shadow:inset 0 0 10px rgba(0,0,0,.9)}
+#led-region,#led-category{font-family:'Oswald',monospace;font-size:.5rem;font-weight:300;color:#4a2e00;letter-spacing:.1em;text-transform:uppercase;line-height:1.3}
+#led-label{font-family:'Oswald',monospace;font-size:.8rem;font-weight:600;color:var(--led-amber);letter-spacing:.07em;line-height:1.2;margin-top:2px;text-shadow:0 0 7px rgba(255,136,0,.45)}
+#led-status{font-family:'Oswald',monospace;font-size:.47rem;font-weight:300;color:#2e1a00;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
+#power-led{width:7px;height:7px;border-radius:50%;background:var(--led-off);transition:all .3s}
+#power-led.on{background:var(--led-red);box-shadow:0 0 5px var(--led-red)}
+.side-btn{width:100%;padding:4px 2px;background:var(--wood-dark);border:1px solid var(--btn-border);border-radius:2px;color:var(--label);font-family:'Oswald',sans-serif;font-size:.55rem;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:all .15s}
+.side-btn:hover{background:#3a2510;border-color:var(--chrome-light);color:var(--chrome-light)}
+.side-btn.active{border-color:var(--led-amber);color:var(--led-amber)}
+#power-btn{width:100%;padding:5px 2px;background:#0e0400;border:1px solid #3a1005;border-radius:2px;color:#5a2008;font-family:'Oswald',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.17em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+#power-btn:hover{border-color:#cc4420;color:#ff6633}
+#power-btn.on{border-color:var(--led-red);color:var(--led-red);box-shadow:0 0 6px rgba(255,34,0,.18)}
+
+/* ZFT STRIP */
+#zft-strip{margin-top:10px;background:var(--zft-bg);border:1px solid var(--zft-border);border-radius:0 0 3px 3px;padding:10px 14px 13px;position:relative}
+#zft-strip::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--chrome-dark) 0%,var(--chrome-light) 30%,var(--chrome) 50%,var(--chrome-light) 70%,var(--chrome-dark) 100%)}
+#zft-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+#zft-label{font-family:'Special Elite',serif;font-size:.57rem;color:var(--chrome-dark);letter-spacing:.18em;text-transform:uppercase}
+#dice-btn{font-family:'Oswald',sans-serif;font-size:.57rem;letter-spacing:.14em;color:var(--led-amber);background:#140900;border:1px solid #4a2e00;border-radius:2px;padding:3px 9px;cursor:pointer;text-transform:uppercase;transition:all .15s;display:flex;align-items:center;gap:5px}
+#dice-btn:hover{border-color:var(--led-amber);background:#1e1000}
+#dice-btn:active{transform:scale(.97)}
+.dice-icon{width:13px;height:13px;border:1px solid var(--led-amber);border-radius:2px;display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,1fr);padding:2px;gap:1px}
+.dice-dot{width:2px;height:2px;border-radius:50%;background:var(--led-amber);align-self:center;justify-self:center}
+
+/* ZFT DIALS */
+#zft-dials{display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.zft-dial-unit{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;flex:1;min-width:85px}
+.zft-dial-label{font-family:'Special Elite',serif;font-size:.5rem;color:var(--chrome-dark);letter-spacing:.16em;text-transform:uppercase}
+.zft-knob-outer{width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#3a2a18 0%,#1a1008 60%,#0d0804 100%);border:2px solid var(--chrome-dark);box-shadow:0 3px 8px rgba(0,0,0,.7),inset 0 1px 2px rgba(255,255,255,.07);position:relative;cursor:pointer;user-select:none;transition:box-shadow .15s,border-color .15s}
+.zft-knob-outer:hover{border-color:var(--chrome-light);box-shadow:0 3px 10px rgba(0,0,0,.7),0 0 8px rgba(255,136,0,.18)}
+.zft-knob-outer.active{border-color:var(--led-amber);box-shadow:0 0 12px rgba(255,136,0,.32)}
+.zft-knob-mark{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--led-amber);box-shadow:0 0 4px var(--led-amber)}
+.zft-knob-val{font-family:'Oswald',monospace;font-size:.55rem;font-weight:600;color:var(--led-amber);letter-spacing:.05em;text-align:center;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-shadow:0 0 5px rgba(255,136,0,.35)}
+
+/* POP-OUT */
+.zft-popout{position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);background:var(--pop-bg);border:1px solid var(--chrome-dark);border-radius:5px;padding:6px 0;min-width:154px;max-width:210px;z-index:300;display:none;box-shadow:0 -4px 20px rgba(0,0,0,.85),0 0 0 1px rgba(255,136,0,.08);max-height:260px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#4a2e00 #0a0400}
+.zft-popout.open{display:block}
+.zft-popout::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:10px;height:6px;background:var(--pop-bg);border-left:1px solid var(--chrome-dark);border-right:1px solid var(--chrome-dark);border-bottom:1px solid var(--chrome-dark);clip-path:polygon(0 0,100% 0,50% 100%)}
+.popout-title{font-family:'Special Elite',serif;font-size:.48rem;color:var(--chrome-dark);letter-spacing:.16em;text-transform:uppercase;padding:0 9px 5px;border-bottom:1px solid #1e1005;margin-bottom:3px}
+.popout-item{display:flex;align-items:center;gap:7px;padding:4px 9px;font-family:'Oswald',sans-serif;font-size:.62rem;letter-spacing:.07em;color:var(--label);cursor:pointer;transition:background .1s,color .1s;white-space:nowrap}
+.popout-item:hover{background:#1e0e00;color:var(--chrome-light)}
+.popout-item.selected{color:var(--led-amber);background:#140900}
+.popout-item .pi{font-size:.75rem;flex-shrink:0;width:17px;text-align:center}
+
+/* BRAND PLATE */
+#brand-plate{padding:7px 0 11px;text-align:center;border-top:1px solid var(--wood-edge);margin-top:5px}
+#brand-plate .bn{font-family:'Special Elite',serif;font-size:.58rem;color:var(--chrome);letter-spacing:.25em;text-transform:uppercase}
+#brand-plate .bm{font-family:'Oswald',sans-serif;font-size:.46rem;font-weight:300;color:var(--chrome-dark);letter-spacing:.16em;margin-top:2px}
+
+/* AD + FOOTER */
+#ad-strip{width:min(900px,96vw);text-align:center;min-height:90px}
+#site-footer{font-family:'Oswald',sans-serif;font-size:.5rem;font-weight:300;color:#2e1e0a;letter-spacing:.18em;text-transform:uppercase;text-align:center;padding-bottom:.6rem}
+
+/* KNOB SPIN ANIM */
+@keyframes kspin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.knob-spinning{animation:kspin .38s ease-out}
+
+/* ZG LOGO */
+#zg-logo-off{width:80px;height:80px;object-fit:contain;opacity:.18;filter:brightness(.6);transition:opacity .3s}
+#zg-logo-search{width:22px;height:22px;object-fit:contain;opacity:.55;flex-shrink:0}
+#zg-logo-plate{width:15px;height:15px;object-fit:contain;opacity:.5;vertical-align:middle;margin-right:4px}
+
+/* SMPTE COUNTDOWN */
+#smpte-countdown{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);margin-top:40px;font-family:'Oswald',monospace;font-size:.62rem;letter-spacing:.18em;color:rgba(255,255,255,.55);text-align:center;display:none;z-index:7;pointer-events:none;white-space:nowrap}
+#smpte-skip-btn{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.25);border-radius:2px;padding:4px 14px;font-family:'Oswald',sans-serif;font-size:.55rem;letter-spacing:.14em;color:rgba(255,255,255,.6);cursor:pointer;display:none;z-index:7;text-transform:uppercase;transition:all .15s}
+#smpte-skip-btn:hover{border-color:rgba(255,255,255,.6);color:#fff}
+
+/* RECENTLY TUNED badge in LED */
+#led-history-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#00e5a0;box-shadow:0 0 4px #00e5a0;margin-left:3px;vertical-align:middle;opacity:0;transition:opacity .3s}
+#led-history-dot.visible{opacity:1}
+
+/* MOBILE — bottom-sheet pop-out */
+@media(max-width:620px){
+  #tv-main{flex-direction:column}
+  #side-controls{width:100%;flex-direction:row;flex-wrap:wrap;justify-content:space-between;padding:0;gap:7px}
+  #led-display{flex:1;min-width:130px}
+  .side-btn,#power-btn{flex:1;min-width:55px}
+  #screen-housing{min-height:190px}
+  .zft-dial-unit{min-width:70px}
+  .zft-knob-outer{width:42px;height:42px}
+  .zft-popout{
+    position:fixed;bottom:0;left:0;right:0;top:auto;
+    transform:none;
+    max-width:100%;min-width:100%;
+    border-radius:10px 10px 0 0;
+    border-left:none;border-right:none;border-bottom:none;
+    max-height:60vh;
+    z-index:500;
+  }
+  .zft-popout::after{display:none}
+  .popout-item{min-height:44px;font-size:.75rem;padding:0 16px;border-bottom:1px solid #1a0e04}
+  .popout-title{font-size:.6rem;padding:10px 16px 8px;text-align:center}
+}
+</style>
+</head>
+<body>
+<div id="page-wrap">
+
+  <div id="search-bar">
+    <img id="zg-logo-search" src="https://zengineco.github.io/zengine.site/assets/logo.png" alt="Zengine" onerror="this.style.display='none'">
+    <span id="search-label">Direct Tune</span>
+    <input id="search-input" type="text" placeholder="YouTube ID, HLS .m3u8 URL, or MJPEG URL">
+    <button id="search-btn">Tune</button>
+  </div>
+
+  <div id="tv-cabinet">
+    <div id="tv-main">
+      <div id="screen-housing">
+        <div id="screen-off">
+          <img id="zg-logo-off" src="https://zengineco.github.io/zengine.site/assets/logo.png" alt="Zengine" onerror="this.style.display='none'">
+          <div class="hint">ZENGINE WORLD TV</div>
+          <div class="hint" style="font-size:.52rem;color:#150e05;margin-top:3px">PRESS POWER &mdash; THE WORLD IS LIVE</div>
+          <div class="hint" style="font-size:.42rem;color:#120b04;margin-top:6px;letter-spacing:.18em">v2.1.0 &nbsp;&middot;&nbsp; &copy; 2026 Vincent Gonzalez &nbsp;&middot;&nbsp; Zengine&trade;</div>
+        </div>
+        <div id="yt-player-div"></div>
+        <img id="mjpeg-frame" alt="Live webcam feed" crossorigin="anonymous">
+        <video id="hls-video" playsinline muted></video>
+        <canvas id="static-canvas"></canvas>
+        <canvas id="smpte-canvas"></canvas>
+        <div id="screen-vignette"></div>
+        <div id="cc-bar"><span id="cc-inner">ZENGINE WORLD TV &middot; THE WORLD IS LIVE &middot; ZENGINE.SITE &middot; </span></div>
+        <div id="signal-lost-text">SIGNAL LOST</div>
+        <div id="smpte-countdown">TRYING NEXT IN <span id="countdown-num">8</span>...</div>
+        <button id="smpte-skip-btn">Skip &rarr;</button>
+      </div>
+      <div id="side-controls">
+        <div id="led-display">
+          <div id="led-region">WORLD</div>
+          <div id="led-category">ALL</div>
+          <div id="led-label">WORLD TV</div>
+          <div id="led-status">STANDBY<span id="led-history-dot"></span></div>
+        </div>
+        <div id="power-led"></div>
+        <button class="side-btn" id="cc-btn">CC</button>
+        <button class="side-btn" id="mute-btn">Mute</button>
+        <button class="side-btn" id="prev-btn">&#9664; Prev</button>
+        <button class="side-btn" id="next-btn">Next &#9654;</button>
+        <button id="power-btn">Power</button>
+      </div>
+    </div>
+    <div id="zft-strip">
+      <div id="zft-title-row">
+        <span id="zft-label">Zengine&trade; Fine Tuner</span>
+        <button id="dice-btn">
+          <div class="dice-icon">
+            <div class="dice-dot"></div><div class="dice-dot"></div>
+            <div class="dice-dot"></div><div class="dice-dot"></div>
+            <div class="dice-dot"></div><div class="dice-dot"></div>
+          </div>
+          Randomize
+        </button>
+      </div>
+      <div id="zft-dials"></div>
+    </div>
+    <div id="brand-plate">
+      <div class="bn"><img id="zg-logo-plate" src="https://zengineco.github.io/zengine.site/assets/logo.png" alt="" onerror="this.style.display='none'">Channel Z &middot; Zengine World TV&trade;</div>
+      <div class="bm">ZFT Model ZTV-2000 &middot; v2.1.0 &middot; &copy; 2026 Vincent Gonzalez &middot; Zengine&trade; &middot; All feeds publicly broadcast by their operators &middot; <a href="mailto:hello@zengine.site?subject=Feed%20Removal%20Request" style="color:inherit;opacity:.55;text-decoration:none">Request feed removal</a></div>
+    </div>
+  </div>
+
+  <div id="ad-strip">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8826956454892311" data-ad-slot="auto" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <div id="site-footer">www.zengine.site &nbsp;|&nbsp; &copy; 2026 Vincent Gonzalez &nbsp;&middot;&nbsp; Zengine&trade; &nbsp;|&nbsp; The World Is Live &nbsp;|&nbsp; v2.1.0</div>
+</div>
+
+<script>
+// Author: Vincent Gonzalez | © 2026 Zengine™ | www.zengine.site
+// File: zengine_tv_v2.1.0.html | Zengine World TV — The World Is Live
+"use strict";
+
+/* ===== CONFIG BLOCK ===== */
+var CONFIG = {
+  STATIC_MS: 220,
+  YT_API_URL: 'https://www.youtube.com/iframe_api',
+  HLS_CDN: 'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js',
+
+  DIALS: [
+    {
+      id: 'region', label: 'Region',
+      options: [
+        {value:'*',label:'World',icon:'🌐'},
+        {value:'north-america',label:'North America',icon:'🌎'},
+        {value:'latin-america',label:'Latin America',icon:'🌎'},
+        {value:'europe',label:'Europe',icon:'🌍'},
+        {value:'africa',label:'Africa',icon:'🌍'},
+        {value:'east-asia',label:'East Asia',icon:'🌏'},
+        {value:'south-asia',label:'South Asia',icon:'🌏'},
+        {value:'southeast-asia',label:'SE Asia',icon:'🌏'},
+        {value:'middle-east',label:'Middle East',icon:'🌏'},
+        {value:'oceania',label:'Oceania',icon:'🌏'},
+        {value:'polar',label:'Polar',icon:'❄️'},
+        {value:'orbit',label:'Orbit / Space',icon:'🛰️'},
+        {value:'deep-sea',label:'Deep Sea',icon:'🌊'}
+      ]
+    },
+    {
+      id: 'language', label: 'Language',
+      options: [
+        {value:'*',label:'All Languages',icon:'🌐'},
+        {value:'en',label:'English',icon:'🇺🇸'},
+        {value:'ja',label:'Japanese',icon:'🇯🇵'},
+        {value:'ko',label:'Korean',icon:'🇰🇷'},
+        {value:'zh',label:'Mandarin',icon:'🇨🇳'},
+        {value:'es',label:'Spanish',icon:'🇪🇸'},
+        {value:'fr',label:'French',icon:'🇫🇷'},
+        {value:'de',label:'German',icon:'🇩🇪'},
+        {value:'ar',label:'Arabic',icon:'🇸🇦'},
+        {value:'pt',label:'Portuguese',icon:'🇧🇷'},
+        {value:'ru',label:'Russian',icon:'🇷🇺'},
+        {value:'hi',label:'Hindi',icon:'🇮🇳'},
+        {value:'silent',label:'No Audio (cam)',icon:'🔇'}
+      ]
+    },
+    {
+      id: 'platform', label: 'Platform',
+      options: [
+        {value:'*',label:'All Platforms',icon:'🌐'},
+        {value:'youtube',label:'YouTube Live',icon:'▶️'},
+        {value:'mjpeg',label:'Webcam (MJPEG)',icon:'📷'},
+        {value:'hls',label:'HLS Stream',icon:'📡'}
+      ]
+    },
+    {
+      id: 'category', label: 'Category',
+      options: [
+        {value:'*',label:'All',icon:'📡'},
+        {value:'city',label:'City / Street',icon:'🏙️'},
+        {value:'science',label:'Science / Obs.',icon:'🔭'},
+        {value:'weather',label:'Weather / Atmo.',icon:'🌤️'},
+        {value:'transit',label:'Transit',icon:'🚢'},
+        {value:'wildlife',label:'Wildlife / Nature',icon:'🦅'},
+        {value:'news',label:'News / Broadcast',icon:'🗞️'},
+        {value:'sports',label:'Sports / Combat',icon:'🥊'},
+        {value:'music',label:'Music / Perf.',icon:'🎵'},
+        {value:'history',label:'History / Doc.',icon:'📖'},
+        {value:'satire',label:'Satire / Comedy',icon:'😂'},
+        {value:'culture',label:'Culture / Religion',icon:'🕌'},
+        {value:'government',label:'Government / Civic',icon:'🏛️'},
+        {value:'space',label:'Space / Orbital',icon:'🚀'},
+        {value:'ocean',label:'Ocean / Marine',icon:'🌊'}
+      ]
+    }
+  ],
+
+  /* ===== ASSET MANIFEST =====
+     v2.0.0 SEED — 8 framework feeds. Full manifest in v2.1.
+     Schema: id, label, city, country, region, language, platform,
+             category, utc_offset, reliability, src, fallbacks[], cc_text
+     ========================= */
+  CHANNELS: [
+    {
+      id:'nasa-iss-live', label:'NASA ISS LIVE', city:'Low Earth Orbit', country:'XX',
+      region:'orbit', language:'en', platform:'youtube', category:'space',
+      utc_offset:0, reliability:'usually',
+      src:'21X5lGlDOfg', fallbacks:['P5_gNSALwFk','TPJPQM0HYqU'],
+      cc_text:'NASA ISS Live Feed \u00b7 Low Earth Orbit \u00b7 Altitude ~408km \u00b7 The ISS circles Earth every 90 min \u00b7 ZENGINE WORLD TV'
+    },
+    {
+      id:'times-square-live', label:'TIMES SQ \u00b7 NYC', city:'New York City', country:'US',
+      region:'north-america', language:'silent', platform:'youtube', category:'city',
+      utc_offset:-5, reliability:'solid',
+      src:'y60wDzZt7lM', fallbacks:['F6-NA6VBPOI'],
+      cc_text:'Times Square Live \u00b7 New York City \u00b7 The Crossroads of the World \u00b7 24/7 Public Cam \u00b7 ZENGINE WORLD TV'
+    },
+    {
+      id:'tokyo-shibuya', label:'SHIBUYA \u00b7 TOKYO', city:'Tokyo', country:'JP',
+      region:'east-asia', language:'silent', platform:'youtube', category:'city',
+      utc_offset:9, reliability:'usually',
+      src:'pM33ErFt_OQ', fallbacks:['5UHKFGPFjCY'],
+      cc_text:'Shibuya Crossing Live \u00b7 Tokyo, Japan \u00b7 The world\'s busiest pedestrian crossing \u00b7 ZENGINE WORLD TV'
+    },
+    {
+      id:'mauna-kea', label:'MAUNA KEA \u00b7 HI', city:'Hilo', country:'US',
+      region:'north-america', language:'en', platform:'youtube', category:'science',
+      utc_offset:-10, reliability:'usually',
+      src:'D7GJc3hMaJ0', fallbacks:['WdT7KJhkmBs'],
+      cc_text:'Mauna Kea Observatory \u00b7 Hawaii \u00b7 4205m altitude \u00b7 Premier astronomical site \u00b7 ZENGINE WORLD TV'
+    },
+    {
+      id:'venice-canal', label:'GRAND CANAL \u00b7 VEN', city:'Venice', country:'IT',
+      region:'europe', language:'silent', platform:'youtube', category:'city',
+      utc_offset:1, reliability:'usually',
+      src:'oJpMl_SQNWA', fallbacks:['4vAQC6h0Y0E'],
+      cc_text:'Grand Canal Live \u00b7 Venice, Italy \u00b7 One of the last living canal cities on Earth \u00b7 ZENGINE WORLD TV'
+    },
+    {
+      id:'earth-from-above', label:'EARTH FROM ABOVE', city:'Orbit', country:'XX',
+      region:'orbit', language:'silent', platform:'youtube', category:'space',
+      utc_offset:0, reliability:'usually',
+      src:'nA9UZF-SZoQ', fallbacks:['21X5lGlDOfg','P5_gNSALwFk'],
+      cc_text:'Earth from the ISS \u00b7 Views from Low Earth Orbit \u00b7 Recorded by NASA astronauts \u00b7 ZENGINE WORLD TV'
+    },
+    {
+      id:'aurora-iceland', label:'AURORA \u00b7 ICELAND', city:'Reykjavik', country:'IS',
+      region:'europe', language:'silent', platform:'youtube', category:'weather',
+      utc_offset:0, reliability:'event',
+      src:'OzGtpYOkLCQ', fallbacks:['az-6XJIV7G0'],
+      cc_text:'Aurora Borealis Live \u00b7 Iceland \u00b7 Northern Lights webcam \u00b7 Active during geomagnetic storms \u00b7 ZENGINE WORLD TV'
+    },
+    {
+      id:'monterey-bay-aq', label:'MONTEREY BAY AQ', city:'Monterey', country:'US',
+      region:'north-america', language:'en', platform:'youtube', category:'ocean',
+      utc_offset:-8, reliability:'solid',
+      src:'KjcFQbzLbH4', fallbacks:['q0DpZfZhANk'],
+      cc_text:'Monterey Bay Aquarium \u00b7 Kelp Forest Cam \u00b7 Pacific Ocean, California \u00b7 ZENGINE WORLD TV'
+    }
+  ]
+};
+
+/* ===== STATE ===== */
+var STATE = {
+  powered:false, currentCh:null, chIndex:0, filteredChs:[],
+  muted:false, volume:75, ccOn:false,
+  dialValues:{}, ytPlayer:null, ytReady:false, ytPending:null,
+  hlsInstance:null, staticAF:null, staticRunning:false, smpteLit:false,
+  popoutOpen:null,
+  smpteTimer:null, countdownInterval:null  // SMPTE auto-advance state
+};
+CONFIG.DIALS.forEach(function(d){ STATE.dialValues[d.id] = '*'; });
+
+/* ===== ELEMENT CACHE ===== */
+var EL = {
+  screenOff:    document.getElementById('screen-off'),
+  ytDiv:        document.getElementById('yt-player-div'),
+  mjpeg:        document.getElementById('mjpeg-frame'),
+  hlsVideo:     document.getElementById('hls-video'),
+  staticCanvas: document.getElementById('static-canvas'),
+  smpteCanvas:  document.getElementById('smpte-canvas'),
+  ccBar:        document.getElementById('cc-bar'),
+  ccInner:      document.getElementById('cc-inner'),
+  signalLost:   document.getElementById('signal-lost-text'),
+  smpteCountdown: document.getElementById('smpte-countdown'),
+  countdownNum:   document.getElementById('countdown-num'),
+  smpteSkipBtn:   document.getElementById('smpte-skip-btn'),
+  ledRegion:    document.getElementById('led-region'),
+  ledCategory:  document.getElementById('led-category'),
+  ledLabel:     document.getElementById('led-label'),
+  ledStatus:    document.getElementById('led-status'),
+  ledHistoryDot: document.getElementById('led-history-dot'),
+  powerLed:     document.getElementById('power-led'),
+  powerBtn:     document.getElementById('power-btn'),
+  ccBtn:        document.getElementById('cc-btn'),
+  muteBtn:      document.getElementById('mute-btn'),
+  prevBtn:      document.getElementById('prev-btn'),
+  nextBtn:      document.getElementById('next-btn'),
+  zftDials:     document.getElementById('zft-dials'),
+  diceBtn:      document.getElementById('dice-btn'),
+  searchInput:  document.getElementById('search-input'),
+  searchBtn:    document.getElementById('search-btn'),
+  cabinet:      document.getElementById('tv-cabinet')
+};
+
+/* ===== CANVAS: STATIC NOISE ===== */
+var _sCtx = null;
+function startStatic(){
+  var c = EL.staticCanvas;
+  c.width = c.offsetWidth||640; c.height = c.offsetHeight||360;
+  _sCtx = c.getContext('2d');
+  c.style.display = 'block';
+  STATE.staticRunning = true;
+  _sFrame();
+}
+function _sFrame(){
+  if(!STATE.staticRunning) return;
+  var w=_sCtx.canvas.width, h=_sCtx.canvas.height;
+  var img=_sCtx.createImageData(w,h), d=img.data;
+  for(var i=0;i<d.length;i+=4){var v=Math.random()*255|0;d[i]=v;d[i+1]=v;d[i+2]=v;d[i+3]=255;}
+  _sCtx.putImageData(img,0,0);
+  if(Math.random()<.06){_sCtx.fillStyle=Math.random()<.5?'rgba(0,200,80,.07)':'rgba(255,136,0,.05)';_sCtx.fillRect(0,0,w,h);}
+  STATE.staticAF = requestAnimationFrame(_sFrame);
+}
+function stopStatic(){
+  STATE.staticRunning=false;
+  if(STATE.staticAF){cancelAnimationFrame(STATE.staticAF);STATE.staticAF=null;}
+  EL.staticCanvas.style.display='none';
+}
+function flashStatic(cb){
+  hideAll(); startStatic();
+  setTimeout(function(){stopStatic();if(cb)cb();}, CONFIG.STATIC_MS);
+}
+
+/* ===== CANVAS: SMPTE COLOR BARS ===== */
+function showSMPTE(lbl){
+  var c=EL.smpteCanvas;
+  c.width=c.offsetWidth||640; c.height=c.offsetHeight||360;
+  var ctx=c.getContext('2d'), w=c.width, h=c.height;
+  var top=['#c0c0c0','#c0c000','#00c0c0','#00c000','#c000c0','#c00000','#0000c0'];
+  var bw=w/top.length;
+  top.forEach(function(col,i){ctx.fillStyle=col;ctx.fillRect(Math.floor(i*bw),0,Math.ceil(bw),Math.floor(h*.67));});
+  var bot=[{c:'#00214c',w:bw},{c:'#ffffff',w:bw},{c:'#21004c',w:bw},{c:'#101010',w:bw*2},{c:'#000000',w:bw},{c:'#1d1d1d',w:bw}];
+  var bx=0, by=Math.floor(h*.67), bh=h-by;
+  bot.forEach(function(s){ctx.fillStyle=s.c;ctx.fillRect(Math.floor(bx),by,Math.ceil(s.w),bh);bx+=s.w;});
+  c.style.display='block'; STATE.smpteLit=true;
+  EL.signalLost.textContent='SIGNAL LOST'+(lbl?' \u00b7 '+lbl:'');
+  EL.signalLost.style.display='block';
+  // 8-second auto-advance countdown
+  // READS: STATE.filteredChs, STATE.chIndex
+  // WRITES: STATE.smpteTimer, STATE.countdownInterval
+  _clearSmpteCountdown();
+  var hasNext = STATE.filteredChs && STATE.filteredChs.length > 1;
+  if(hasNext && STATE.powered){
+    var secs=8;
+    EL.countdownNum.textContent=secs;
+    EL.smpteCountdown.style.display='block';
+    EL.smpteSkipBtn.style.display='block';
+    STATE.countdownInterval=setInterval(function(){
+      secs--;
+      EL.countdownNum.textContent=secs;
+      if(secs<=0){_clearSmpteCountdown();chNext();}
+    },1000);
+    STATE.smpteTimer=setTimeout(function(){_clearSmpteCountdown();},9000); // safety cleanup
+  }
+}
+function _clearSmpteCountdown(){
+  if(STATE.countdownInterval){clearInterval(STATE.countdownInterval);STATE.countdownInterval=null;}
+  if(STATE.smpteTimer){clearTimeout(STATE.smpteTimer);STATE.smpteTimer=null;}
+  EL.smpteCountdown.style.display='none';
+  EL.smpteSkipBtn.style.display='none';
+}
+function hideSMPTE(){EL.smpteCanvas.style.display='none';EL.signalLost.style.display='none';STATE.smpteLit=false;_clearSmpteCountdown();}
+
+/* ===== HIDE ALL ===== */
+function hideAll(){
+  EL.screenOff.style.display='none';
+  EL.ytDiv.style.display='none';
+  EL.mjpeg.style.display='none';
+  EL.hlsVideo.style.display='none';
+  EL.ccBar.style.display='none';
+  stopStatic(); hideSMPTE();
+  if(STATE.hlsInstance){try{STATE.hlsInstance.destroy();}catch(e){}STATE.hlsInstance=null;}
+  try{EL.mjpeg.src='';}catch(e){}
+  try{EL.hlsVideo.src='';}catch(e){}
+  if(STATE.ytPlayer&&typeof STATE.ytPlayer.stopVideo==='function'){try{STATE.ytPlayer.stopVideo();}catch(e){}}
+}
+
+/* ===== LED UPDATE ===== */
+function updateLED(ch, status){
+  if(!ch){EL.ledRegion.textContent='WORLD';EL.ledCategory.textContent='ALL';EL.ledLabel.textContent='WORLD TV';EL.ledStatus.textContent=status||'STANDBY';return;}
+  var ro=_dialOpt('region',ch.region), co=_dialOpt('category',ch.category);
+  EL.ledRegion.textContent=(ro?ro.label:ch.region).toUpperCase();
+  EL.ledCategory.textContent=(co?co.label:ch.category).toUpperCase();
+  EL.ledLabel.textContent=ch.label;
+  EL.ledStatus.textContent=status||'LIVE';
+}
+function _dialOpt(id,val){
+  var d=CONFIG.DIALS.filter(function(x){return x.id===id;})[0];
+  if(!d) return null;
+  return d.options.filter(function(o){return o.value===val;})[0]||null;
+}
+
+/* ===== FILTER ENGINE ===== */
+function getFiltered(){
+  return CONFIG.CHANNELS.filter(function(ch){
+    return CONFIG.DIALS.every(function(d){
+      var v=STATE.dialValues[d.id];
+      return v==='*'||ch[d.id]===v;
+    });
+  });
+}
+
+/* ===== CHANNEL LOADER ===== */
+function loadIdx(idx){
+  if(!STATE.powered) return;
+  var chs=STATE.filteredChs;
+  if(!chs||!chs.length){_noResults();return;}
+  idx=Math.max(0,Math.min(chs.length-1,idx));
+  STATE.chIndex=idx;
+  var ch=chs[idx]; STATE.currentCh=ch;
+  updateLED(ch,'LOADING...');
+  EL.ccInner.textContent=ch.cc_text+' \u00b7 ';
+  if(STATE.ccOn) EL.ccBar.style.display='block';
+  flashStatic(function(){
+    hideAll();
+    if(ch.platform==='youtube') _loadYT(ch,0);
+    else if(ch.platform==='mjpeg') _loadMJPEG(ch,0);
+    else if(ch.platform==='hls') _loadHLS(ch,0);
+    updateLED(ch,'LIVE');
+  });
+}
+function _noResults(){hideAll();showSMPTE('NO RESULTS');updateLED(null,'NO SIGNAL');EL.signalLost.textContent='NO CHANNELS MATCH \u00b7 ADJUST ZFT DIALS';}
+function chNext(){if(!STATE.powered)return;var l=STATE.filteredChs.length;if(!l)return;loadIdx((STATE.chIndex+1)%l);}
+function chPrev(){if(!STATE.powered)return;var l=STATE.filteredChs.length;if(!l)return;loadIdx((STATE.chIndex-1+l)%l);}
+
+/* ===== YOUTUBE ===== */
+function _loadYT(ch,fi){
+  var src=fi===0?ch.src:(ch.fallbacks[fi-1]||null);
+  if(!src){_streamErr(ch);return;}
+  EL.ytDiv.style.display='block';
+  if(!STATE.ytReady){STATE.ytPending={ch:ch,fi:fi,src:src};_loadYTApi();return;}
+  if(!STATE.ytPlayer){_createYTP(src,ch,fi);return;}
+  try{STATE.ytPlayer.loadVideoById(src);_applyVol();}catch(e){console.error('YT loadById:',e);_streamErr(ch);}
+}
+function _loadYTApi(){
+  if(document.getElementById('yt-api-script')) return;
+  var s=document.createElement('script');s.id='yt-api-script';s.src=CONFIG.YT_API_URL;document.head.appendChild(s);
+}
+function _createYTP(vid,ch,fi){
+  EL.ytDiv.innerHTML='';
+  var el=document.createElement('div');el.id='yt-inner';EL.ytDiv.appendChild(el);
+  STATE.ytPlayer=new YT.Player('yt-inner',{
+    height:'100%',width:'100%',videoId:vid,
+    playerVars:{autoplay:1,controls:1,rel:0,modestbranding:1,iv_load_policy:3,cc_load_policy:0},
+    events:{
+      onReady:function(e){STATE.ytReady=true;STATE.ytPlayer=e.target;_applyVol();},
+      onError:function(e){console.error('YT err:',e.data);_loadYT(ch,fi+1);}
+    }
+  });
+}
+window.onYouTubeIframeAPIReady=function(){
+  STATE.ytReady=true;
+  if(STATE.ytPending){var p=STATE.ytPending;STATE.ytPending=null;_createYTP(p.src,p.ch,p.fi);}
+};
+
+/* ===== MJPEG ===== */
+function _loadMJPEG(ch,fi){
+  var src=fi===0?ch.src:(ch.fallbacks[fi-1]||null);
+  if(!src){_streamErr(ch);return;}
+  EL.mjpeg.style.display='block';
+  EL.mjpeg.onerror=function(){_loadMJPEG(ch,fi+1);};
+  EL.mjpeg.src=src;
+}
+
+/* ===== HLS ===== */
+function _loadHLS(ch,fi){
+  var src=fi===0?ch.src:(ch.fallbacks[fi-1]||null);
+  if(!src){_streamErr(ch);return;}
+  EL.hlsVideo.style.display='block';
+  function _go(){
+    if(STATE.hlsInstance){try{STATE.hlsInstance.destroy();}catch(e){}}
+    if(window.Hls&&Hls.isSupported()){
+      STATE.hlsInstance=new Hls();
+      STATE.hlsInstance.loadSource(src);
+      STATE.hlsInstance.attachMedia(EL.hlsVideo);
+      STATE.hlsInstance.on(Hls.Events.ERROR,function(ev,d){if(d.fatal){_loadHLS(ch,fi+1);}});
+      EL.hlsVideo.play().catch(function(e){console.error('HLS play:',e);});
+    }else if(EL.hlsVideo.canPlayType('application/vnd.apple.mpegurl')){
+      EL.hlsVideo.src=src;EL.hlsVideo.play().catch(function(e){console.error('nHLS:',e);});
+    }else{_streamErr(ch);}
+    _applyVol();
+  }
+  if(!window.Hls){
+    var s=document.createElement('script');s.src=CONFIG.HLS_CDN;
+    s.onload=_go;s.onerror=function(){_streamErr(ch);};document.head.appendChild(s);
+  }else{_go();}
+}
+
+/* ===== STREAM ERROR ===== */
+function _streamErr(ch){hideAll();showSMPTE(ch?ch.label:'');updateLED(ch,'SIGNAL LOST');}
+
+/* ===== VOLUME ===== */
+function _applyVol(){
+  var v=STATE.muted?0:STATE.volume;
+  if(STATE.ytPlayer&&typeof STATE.ytPlayer.setVolume==='function'){
+    try{STATE.ytPlayer.setVolume(v);if(STATE.muted)STATE.ytPlayer.mute();else STATE.ytPlayer.unMute();}catch(e){}
+  }
+  EL.hlsVideo.volume=v/100;EL.hlsVideo.muted=STATE.muted;
+}
+
+/* ===== ZFT BUILDER ===== */
+function buildZFT(){
+  EL.zftDials.innerHTML='';
+  CONFIG.DIALS.forEach(function(dial){
+    var unit=document.createElement('div');unit.className='zft-dial-unit';unit.id='du-'+dial.id;
+    var lbl=document.createElement('div');lbl.className='zft-dial-label';lbl.textContent=dial.label;
+    var knob=document.createElement('div');knob.className='zft-knob-outer';knob.id='kn-'+dial.id;
+    knob.setAttribute('data-dial',dial.id);
+    var mark=document.createElement('div');mark.className='zft-knob-mark';knob.appendChild(mark);
+    var val=document.createElement('div');val.className='zft-knob-val';val.id='kv-'+dial.id;
+    val.textContent=_dLabel(dial,'*');
+    var pop=_buildPop(dial);pop.id='pop-'+dial.id;
+    unit.appendChild(lbl);unit.appendChild(knob);unit.appendChild(val);unit.appendChild(pop);
+    EL.zftDials.appendChild(unit);
+    knob.addEventListener('click',function(e){e.stopPropagation();_togglePop(dial.id);});
+  });
+  document.addEventListener('click',function(){_closeAllPops();});
+}
+
+function _buildPop(dial){
+  var pop=document.createElement('div');pop.className='zft-popout';
+  var t=document.createElement('div');t.className='popout-title';t.textContent=dial.label;pop.appendChild(t);
+  dial.options.forEach(function(opt){
+    var item=document.createElement('div');
+    item.className='popout-item'+(opt.value===STATE.dialValues[dial.id]?' selected':'');
+    item.setAttribute('data-value',opt.value);
+    var icon=document.createElement('span');icon.className='pi';icon.textContent=opt.icon;
+    item.appendChild(icon);item.appendChild(document.createTextNode(opt.label));
+    item.addEventListener('click',function(e){e.stopPropagation();_setDial(dial.id,opt.value);_closeAllPops();});
+    pop.appendChild(item);
+  });
+  return pop;
+}
+
+function _togglePop(id){
+  var isOpen=STATE.popoutOpen===id;
+  _closeAllPops();
+  if(!isOpen){
+    var pop=document.getElementById('pop-'+id),kn=document.getElementById('kn-'+id);
+    if(pop)pop.classList.add('open');if(kn)kn.classList.add('active');
+    STATE.popoutOpen=id;
+  }
+}
+function _closeAllPops(){
+  CONFIG.DIALS.forEach(function(d){
+    var pop=document.getElementById('pop-'+d.id),kn=document.getElementById('kn-'+d.id);
+    if(pop)pop.classList.remove('open');if(kn)kn.classList.remove('active');
+  });
+  STATE.popoutOpen=null;
+}
+
+function _setDial(id,val){
+  STATE.dialValues[id]=val;
+  var dial=CONFIG.DIALS.filter(function(d){return d.id===id;})[0];
+  var kv=document.getElementById('kv-'+id);
+  if(kv&&dial) kv.textContent=_dLabel(dial,val);
+  // rotate mark
+  var kn=document.getElementById('kn-'+id);
+  if(kn&&dial){
+    var oi=dial.options.findIndex(function(o){return o.value===val;});
+    var tot=dial.options.length;
+    var deg=tot>1?((oi/(tot-1))*270-135):0;
+    var mk=kn.querySelector('.zft-knob-mark');
+    if(mk){var r=25-11;mk.style.top=(25-r*Math.cos((deg)*Math.PI/180)-1.5)+'px';mk.style.left=(25+r*Math.sin((deg)*Math.PI/180)-1.5)+'px';mk.style.transform='none';}
+  }
+  // update pop selected state
+  var pop=document.getElementById('pop-'+id);
+  if(pop){pop.querySelectorAll('.popout-item').forEach(function(item){item.classList.toggle('selected',item.getAttribute('data-value')===val);});}
+  if(STATE.powered){
+    STATE.filteredChs=getFiltered();STATE.chIndex=0;
+    if(STATE.filteredChs.length>0)loadIdx(0);else _noResults();
+  }
+}
+
+function _dLabel(dial,val){
+  var o=dial.options.filter(function(x){return x.value===val;})[0];
+  return o?(o.icon+' '+o.label):val;
+}
+
+/* ===== DICE ===== */
+EL.diceBtn.addEventListener('click',function(){
+  if(!STATE.powered) return;
+  document.querySelectorAll('.zft-knob-outer').forEach(function(k){
+    k.classList.remove('knob-spinning');void k.offsetWidth;k.classList.add('knob-spinning');
+    setTimeout(function(){k.classList.remove('knob-spinning');},420);
+  });
+  var ch=CONFIG.CHANNELS[Math.floor(Math.random()*CONFIG.CHANNELS.length)];
+  CONFIG.DIALS.forEach(function(d){
+    STATE.dialValues[d.id]=Math.random()<.5?ch[d.id]:'*';
+    var kv=document.getElementById('kv-'+d.id);
+    if(kv)kv.textContent=_dLabel(d,STATE.dialValues[d.id]);
+    var pop=document.getElementById('pop-'+d.id);
+    if(pop){pop.querySelectorAll('.popout-item').forEach(function(item){item.classList.toggle('selected',item.getAttribute('data-value')===STATE.dialValues[d.id]);});}
+  });
+  STATE.filteredChs=getFiltered();
+  var idx=STATE.filteredChs.indexOf(ch);
+  if(idx<0){CONFIG.DIALS.forEach(function(d){STATE.dialValues[d.id]='*';});STATE.filteredChs=getFiltered();idx=STATE.filteredChs.indexOf(ch);}
+  STATE.chIndex=Math.max(0,idx);
+  loadIdx(STATE.chIndex);
+});
+
+/* ===== SEARCH ===== */
+function _handleSearch(){
+  var raw=EL.searchInput.value.trim();if(!raw)return;
+  var ytPat=/^[A-Za-z0-9_\-]{11}$/;
+  var hlsPat=/\.(m3u8|m3u)/i;
+  var mjpPat=/\.(mjpg|mjpeg|cgi)|action=stream/i;
+  if(!STATE.powered)EL.powerBtn.click();
+  if(ytPat.test(raw)){_customYT(raw);}
+  else if(raw.indexOf('youtube.com')>=0||raw.indexOf('youtu.be')>=0){var m=raw.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_\-]{11})/);if(m)_customYT(m[1]);else alert('Could not parse YouTube ID.');}
+  else if(hlsPat.test(raw)){_customHLS(raw);}
+  else if(mjpPat.test(raw)){_customMJPEG(raw);}
+  else{alert('Enter a YouTube video ID (11 chars), HLS URL (.m3u8), or MJPEG URL.');}
+}
+function _customYT(vid){var ch={id:'custom-yt',label:'CUSTOM TUNE',city:'',country:'',region:'*',language:'*',platform:'youtube',category:'*',utc_offset:0,reliability:'event',src:vid,fallbacks:[],cc_text:'Custom YouTube Feed \u00b7 ZENGINE WORLD TV'};STATE.currentCh=ch;updateLED(ch,'CUSTOM');flashStatic(function(){hideAll();_loadYT(ch,0);});}
+function _customHLS(url){var ch={id:'custom-hls',label:'CUSTOM HLS',city:'',country:'',region:'*',language:'*',platform:'hls',category:'*',utc_offset:0,reliability:'event',src:url,fallbacks:[],cc_text:'Custom HLS Stream \u00b7 ZENGINE WORLD TV'};STATE.currentCh=ch;updateLED(ch,'CUSTOM');flashStatic(function(){hideAll();_loadHLS(ch,0);});}
+function _customMJPEG(url){var ch={id:'custom-mjpeg',label:'CUSTOM CAM',city:'',country:'',region:'*',language:'*',platform:'mjpeg',category:'*',utc_offset:0,reliability:'event',src:url,fallbacks:[],cc_text:'Custom MJPEG Cam \u00b7 ZENGINE WORLD TV'};STATE.currentCh=ch;updateLED(ch,'CUSTOM');flashStatic(function(){hideAll();_loadMJPEG(ch,0);});}
+EL.searchBtn.addEventListener('click',_handleSearch);
+EL.searchInput.addEventListener('keydown',function(e){if(e.key==='Enter')_handleSearch();});
+
+/* ===== POWER ===== */
+EL.powerBtn.addEventListener('click',function(){
+  STATE.powered=!STATE.powered;
+  EL.powerBtn.classList.toggle('on',STATE.powered);
+  EL.powerLed.classList.toggle('on',STATE.powered);
+  if(STATE.powered){
+    _loadYTApi();
+    STATE.filteredChs=getFiltered();STATE.chIndex=0;
+    flashStatic(function(){if(STATE.filteredChs.length>0)loadIdx(0);else _noResults();});
+  }else{
+    hideAll();EL.screenOff.style.display='flex';updateLED(null,'STANDBY');
+  }
+});
+
+/* ===== SIDE BUTTONS ===== */
+EL.ccBtn.addEventListener('click',function(){STATE.ccOn=!STATE.ccOn;EL.ccBtn.classList.toggle('active',STATE.ccOn);EL.ccBar.style.display=STATE.ccOn&&STATE.powered?'block':'none';});
+EL.muteBtn.addEventListener('click',function(){STATE.muted=!STATE.muted;EL.muteBtn.classList.toggle('active',STATE.muted);_applyVol();});
+EL.nextBtn.addEventListener('click',chNext);
+EL.prevBtn.addEventListener('click',chPrev);
+
+/* ===== KEYBOARD ===== */
+document.addEventListener('keydown',function(e){
+  if(e.target===EL.searchInput)return;
+  if(e.key==='ArrowRight'||e.key==='ArrowUp')chNext();
+  else if(e.key==='ArrowLeft'||e.key==='ArrowDown')chPrev();
+  else if(e.key==='p'||e.key==='P')EL.powerBtn.click();
+  else if(e.key==='m'||e.key==='M')EL.muteBtn.click();
+  else if(e.key==='c'||e.key==='C')EL.ccBtn.click();
+});
+
+/* ===== SWIPE ===== */
+(function(){
+  var sx=null,sy=null;
+  EL.cabinet.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+  EL.cabinet.addEventListener('touchend',function(e){
+    if(sx===null)return;
+    var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){dx>0?chPrev():chNext();}
+    sx=null;
+  },{passive:true});
+})();
+
+/* ===== RECENTLY TUNED HISTORY =====
+   READS:  localStorage 'zwtv_history'
+   WRITES: localStorage 'zwtv_history', LED history dot
+   Stores last 10 channel IDs watched this session + persisted.
+   Surfaced as a synthetic 'recently-tuned' category option.
+   ===================================== */
+var HISTORY_KEY = 'zwtv_history';
+var HISTORY_MAX = 10;
+
+function _historyAdd(ch){
+  // READS: ch.id
+  // WRITES: localStorage HISTORY_KEY
+  if(!ch||!ch.id||ch.id.indexOf('custom')===0) return; // don't save custom tunes
+  try{
+    var raw=localStorage.getItem(HISTORY_KEY);
+    var ids=raw?JSON.parse(raw):[];
+    ids=ids.filter(function(x){return x!==ch.id;});
+    ids.unshift(ch.id);
+    if(ids.length>HISTORY_MAX) ids=ids.slice(0,HISTORY_MAX);
+    localStorage.setItem(HISTORY_KEY,JSON.stringify(ids));
+    EL.ledHistoryDot.classList.add('visible');
+  }catch(e){console.error('_historyAdd:',e);}
+}
+
+function _historyGet(){
+  // READS: localStorage HISTORY_KEY, CONFIG.CHANNELS
+  // Returns array of channel objects in history order
+  try{
+    var raw=localStorage.getItem(HISTORY_KEY);
+    if(!raw) return [];
+    var ids=JSON.parse(raw);
+    var result=[];
+    ids.forEach(function(id){
+      var ch=CONFIG.CHANNELS.filter(function(c){return c.id===id;})[0];
+      if(ch) result.push(ch);
+    });
+    return result;
+  }catch(e){return [];}
+}
+
+function _historyHasItems(){return _historyGet().length>0;}
+
+// Wire skip button — READS: STATE, WRITES: triggers chNext
+EL.smpteSkipBtn.addEventListener('click',function(){
+  _clearSmpteCountdown();
+  chNext();
+});
+
+// Patch loadIdx to record history
+// READS: STATE.currentCh, CONFIG.STATIC_MS
+// WRITES: localStorage via _historyAdd
+var _origLoadIdx=loadIdx;
+loadIdx=function(idx){
+  _origLoadIdx(idx);
+  setTimeout(function(){
+    if(STATE.currentCh) _historyAdd(STATE.currentCh);
+  },CONFIG.STATIC_MS+50);
+};
+
+// Patch getFiltered to support 'recently-tuned' synthetic category
+// READS: STATE.dialValues.category, _historyGet()
+// WRITES: STATE.filteredChs (via caller)
+var _origGetFiltered=getFiltered;
+getFiltered=function(){
+  if(STATE.dialValues.category==='recently-tuned'){
+    // Return history channels, filtered by other active dials
+    var hist=_historyGet();
+    return hist.filter(function(ch){
+      return CONFIG.DIALS.every(function(d){
+        if(d.id==='category') return true; // already handled
+        var v=STATE.dialValues[d.id];
+        return v==='*'||ch[d.id]===v;
+      });
+    });
+  }
+  return _origGetFiltered();
+};
+
+/* ===== INIT =====
+   BOOT ORDER: history check → category dial injection → buildZFT → prefilter
+   ================ */
+(function init(){
+  // READS: _historyHasItems(), CONFIG.DIALS
+  // WRITES: CONFIG.DIALS category options, LED history dot
+  var catDial=CONFIG.DIALS.filter(function(d){return d.id==='category';})[0];
+  if(catDial&&_historyHasItems()){
+    var already=catDial.options.filter(function(o){return o.value==='recently-tuned';}).length>0;
+    if(!already){
+      catDial.options.unshift({value:'recently-tuned',label:'Recently Tuned',icon:'\uD83D\uDD50'});
+    }
+    EL.ledHistoryDot.classList.add('visible');
+  }
+  buildZFT();
+  STATE.filteredChs=getFiltered();
+})();
+</script>
+</body>
+</html>
