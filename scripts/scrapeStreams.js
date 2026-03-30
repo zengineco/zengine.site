@@ -1,30 +1,18 @@
 // =============================================================
 // FILE:    scripts/scrapeStreams.js
 // PROJECT: Zengine.site × Modulign Standard DAG-OR v3.0
-// VERSION: v2.0.0
+// VERSION: v2.1.0
 // DATE:    2026-03-30
-// /* ===== LAST STABLE: v1.1.0 — 2026-03-29 ===== */
-//
-// BOOT ORDER:
-//   1. Load source modules
-//   2. Run all scrapers in parallel batches
-//   3. Validate MJPEG streams (embed skipped)
-//   4. Deduplicate by URL
-//   5. Merge bootstrap if below MIN_STREAMS
-//   6. Generate MGN codes (mgnCodegen.js)
-//   7. Upsert to Supabase (all three registries)
-//   8. Write data/streams.json (frontend fallback)
+// /* ===== LAST STABLE: v2.0.0 — 2026-03-30 ===== */
 //
 // SOURCES (in order of reliability):
-//   1. Bootstrap     — 250 curated verified streams (guaranteed floor)
-//   2. Windy API     — up to 500 live webcams from their registry
-//   3. DOT feeds     — US state traffic + mountain cams
-//   4. Earthcam      — scraped embed URLs
-//   5. Insecam       — public MJPEG IP cameras
-//   6. Opentopia     — public webcam directory
-//   7. Camhacker     — public MJPEG streams
-//
-// TARGET: 500-1000 verified streams per run
+//   1. YouTube      — 115 permanent channel + video IDs (always work)
+//   2. Bootstrap    — 155 curated verified streams (guaranteed floor)
+//   3. Windy API    — up to 500 live webcams
+//   4. DOT feeds    — US state traffic + mountain cams
+//   5. Earthcam     — scraped embed URLs
+//   6. Insecam      — public MJPEG IP cameras
+//   7. Opentopia    — public webcam directory
 // =============================================================
 
 'use strict';
@@ -34,9 +22,10 @@ var path    = require('path');
 var fetch   = require('node-fetch');
 var cheerio = require('cheerio');
 
-var codegen         = require('./mgnCodegen');
-var windyAPI        = require('./scrapers/scrapeWindyAPI');
-var dotScraper      = require('./scrapers/scrapeDOT');
+var codegen        = require('./mgnCodegen');
+var windyAPI       = require('./scrapers/scrapeWindyAPI');
+var dotScraper     = require('./scrapers/scrapeDOT');
+var youtubeScraper = require('./scrapers/scrapeYouTube');
 
 // ===== CONFIG BLOCK =====
 var OUTPUT_PATH    = path.join(__dirname, '..', 'data', 'streams.json');
@@ -321,34 +310,40 @@ async function main() {
 
     var allStreams = [];
 
-    // 1. Load bootstrap as guaranteed floor
+    // 1. YouTube — permanent channel IDs, always work, goes in first
+    console.log('\n[Main] === YouTube ===');
+    var youtubeCams = youtubeScraper.buildYouTubeStreams();
+    allStreams = allStreams.concat(youtubeCams);
+    console.log('[Main] YouTube: ' + youtubeCams.length + ' streams');
+
+    // 2. Load bootstrap as guaranteed floor
     try {
       var bootstrap = JSON.parse(fs.readFileSync(BOOTSTRAP_PATH, 'utf8'));
       allStreams = allStreams.concat(bootstrap);
       console.log('[Main] Bootstrap loaded: ' + bootstrap.length + ' streams');
     } catch(e) { console.error('[Main] Bootstrap load failed: ' + e.message); }
 
-    // 2. Windy API — up to 500 cams
+    // 3. Windy API — up to 500 cams
     console.log('\n[Main] === Windy API ===');
     var windyCams = await windyAPI.scrapeWindyAPI(500);
     allStreams = allStreams.concat(windyCams);
 
-    // 3. DOT feeds — all states
+    // 4. DOT feeds — all states
     console.log('\n[Main] === DOT Feeds ===');
     var dotCams = await dotScraper.scrapeDOT();
     allStreams = allStreams.concat(dotCams);
 
-    // 4. Earthcam scrape
+    // 5. Earthcam scrape
     console.log('\n[Main] === Earthcam ===');
     var earthcamCams = await scrapeEarthcam();
     allStreams = allStreams.concat(earthcamCams);
 
-    // 5. Insecam (expanded country list)
+    // 6. Insecam (expanded country list)
     console.log('\n[Main] === Insecam ===');
     var insecamCams = await scrapeInsecam();
     allStreams = allStreams.concat(insecamCams);
 
-    // 6. Opentopia
+    // 7. Opentopia
     console.log('\n[Main] === Opentopia ===');
     var otopiaCams = await scrapeOpentopia();
     allStreams = allStreams.concat(otopiaCams);
