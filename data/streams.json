@@ -1,989 +1,3584 @@
 [
   {
     "id": "001",
-    "title": "Opentopia Cam",
-    "category": "nature",
+    "title": "NASA ISS — Live Earth View",
+    "category": "space",
     "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/66",
+    "url": "https://www.youtube.com/embed/21X5lGlDOfg?autoplay=1&mute=1",
     "tags": [
-      "outdoor",
-      "opentopia"
+      "nasa",
+      "iss",
+      "space",
+      "earth"
     ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.866Z"
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·OBS·SR/NA/US/FL/KSC·0001·|GEO|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.928Z"
   },
   {
     "id": "002",
-    "title": "Opentopia Cam",
-    "category": "nature",
+    "title": "NASA TV — Mission Control Live",
+    "category": "space",
     "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/978",
+    "url": "https://www.youtube.com/embed/nA9UZF-SZoQ?autoplay=1&mute=1",
     "tags": [
-      "outdoor",
-      "opentopia"
+      "nasa",
+      "space",
+      "mission"
     ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0002·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·OBS·SR/NA/US/FL/KSC·0002·|GEO|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.929Z"
   },
   {
     "id": "003",
-    "title": "Opentopia Cam",
-    "category": "nature",
+    "title": "ISS HD Earth View — Continuous Orbit",
+    "category": "space",
     "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/1289",
+    "url": "https://www.youtube.com/embed/86YLFOog4GM?autoplay=1&mute=1",
     "tags": [
-      "outdoor",
-      "opentopia"
+      "iss",
+      "earth",
+      "orbit",
+      "space"
     ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0003·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·OBS·OR/L1/ISS/ISS/ISS·0001·|GEO|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.929Z"
   },
   {
     "id": "004",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/2565",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0004·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "005",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/2892",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0005·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "006",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/4487",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0006·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "007",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5128",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0007·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "008",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5276",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0008·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "009",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5282",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0009·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "010",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5283",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000A·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "011",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5288",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000B·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "012",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5298",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000C·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "013",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5311",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000D·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "014",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5322",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000E·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "015",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/5358",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000F·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "016",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/17663",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000G·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "017",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/17887",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000H·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "018",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/17873",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000J·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "019",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/17779",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000K·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "020",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/18013",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000L·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "021",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/18425",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000M·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.868Z"
-  },
-  {
-    "id": "022",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/18560",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000N·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.869Z"
-  },
-  {
-    "id": "023",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/6576",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000P·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.869Z"
-  },
-  {
-    "id": "024",
-    "title": "Opentopia Cam",
-    "category": "nature",
-    "stream_type": "embed",
-    "url": "https://www.opentopia.com/webcam/10339",
-    "tags": [
-      "outdoor",
-      "opentopia"
-    ],
-    "source": "opentopia",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000Q·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-30T08:35:21.869Z"
-  },
-  {
-    "id": "025",
-    "title": "Times Square NYC",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/timessquare/",
-    "tags": [
-      "usa",
-      "city"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·PKS·SR/NA/US/NY/NYC·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "026",
-    "title": "Abbey Road London",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/abbeyroad/",
-    "tags": [
-      "uk",
-      "city"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/WE/GB/ENG/LON·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "027",
-    "title": "ISS Live Feed",
+    "title": "SpaceX — Launch and Mission Feed",
     "category": "space",
-    "url": "https://www.ustream.tv/embed/17074538",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/wwMDvPCGeE0?autoplay=1&mute=1",
     "tags": [
-      "space",
-      "nasa"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·OBS·SR/NA/US/FL/KSC·0001·|GEO|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "028",
-    "title": "NASA Live",
-    "category": "space",
-    "url": "https://www.nasa.gov/nasalive",
-    "tags": [
-      "nasa",
-      "space"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·OBS·SR/NA/US/FL/KSC·0002·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "029",
-    "title": "Africam Safari",
-    "category": "wildlife",
-    "url": "https://www.africam.com/wildlife/nkorho_bush_lodge",
-    "tags": [
-      "africa",
-      "wildlife"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·FOR·SR/AF/ZA/LP/CPT·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "030",
-    "title": "Chattanooga Aquarium Jellyfish",
-    "category": "wildlife",
-    "url": "https://www.tnaqua.org/webcams/",
-    "tags": [
-      "ocean",
-      "jellyfish"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·000R·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "031",
-    "title": "Niagara Falls",
-    "category": "nature",
-    "url": "https://www.earthcam.com/embed/niagarafalls/",
-    "tags": [
-      "waterfall",
-      "nature"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·RVR·SR/NA/US/WY/YNP·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "032",
-    "title": "Old Faithful Yellowstone",
-    "category": "nature",
-    "url": "https://www.nps.gov/yell/learn/photosmultimedia/webcams.htm",
-    "tags": [
-      "geyser",
-      "nature",
-      "usa"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·GEO·SR/NA/US/WY/YNP·0002·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "033",
-    "title": "Bald Eagle Nest Cam",
-    "category": "wildlife",
-    "url": "https://www.eagles.org/cam/",
-    "tags": [
-      "birds",
-      "wildlife"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000S·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "034",
-    "title": "Monterey Bay Aquarium",
-    "category": "wildlife",
-    "url": "https://www.mbayaq.org/animals-and-exhibits/live-cams",
-    "tags": [
-      "ocean",
-      "aquarium"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·000T·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "035",
-    "title": "Downtown Chicago",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/chicago/",
-    "tags": [
-      "usa",
-      "city"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/NA/US/IL/CHI·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "036",
-    "title": "Venice Grand Canal",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/venice/",
-    "tags": [
-      "italy",
-      "water"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/WE/IT/VEN/VCE·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "037",
-    "title": "Eiffel Tower Paris",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/paris/",
-    "tags": [
-      "france",
-      "city"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/WE/FR/IDF/PAR·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "038",
-    "title": "Miami South Beach",
-    "category": "nature",
-    "url": "https://www.earthcam.com/embed/miami/",
-    "tags": [
-      "beach",
-      "usa"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·CST·SR/NA/US/FL/MIA·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "039",
-    "title": "Las Vegas Strip",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/lasvegas/",
-    "tags": [
-      "neon",
-      "usa"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/NA/US/NV/LAS·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "040",
-    "title": "Dublin Temple Bar",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/dublin/",
-    "tags": [
-      "ireland",
-      "city"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/WE/IE/L/DUB·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "041",
-    "title": "Barcelona La Rambla",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/barcelona/",
-    "tags": [
-      "spain",
-      "city"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/WE/ES/CAT/BCN·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "042",
-    "title": "Sydney Opera House",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/sydney/",
-    "tags": [
-      "australia",
-      "city"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/OC/AU/NSW/SYD·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "043",
-    "title": "Hong Kong Harbour",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/hongkong/",
-    "tags": [
-      "china",
-      "city"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/EA/HK/HK/HKG·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "044",
-    "title": "North Shore Hawaii Surf",
-    "category": "nature",
-    "url": "https://www.earthcam.com/embed/hawaii/",
-    "tags": [
-      "surf",
-      "ocean"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·CST·SR/NA/US/HI/HNL·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "045",
-    "title": "Alaska Brown Bear Cam",
-    "category": "wildlife",
-    "url": "https://explore.org/livecams/brown-bears/brown-bear-salmon-cam-brooks-falls",
-    "tags": [
-      "bears",
-      "alaska"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·UNK·SR/NA/US/AK/ANC·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "046",
-    "title": "African Watering Hole",
-    "category": "wildlife",
-    "url": "https://explore.org/livecams/african-wildlife/africam-nkorho-bush-lodge",
-    "tags": [
-      "africa",
-      "wildlife"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·FOR·SR/AF/ZA/LP/CPT·0002·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "047",
-    "title": "Coral Reef Aquarium",
-    "category": "wildlife",
-    "url": "https://explore.org/livecams/oceans/explore-ocean",
-    "tags": [
-      "reef",
-      "ocean"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·000U·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "048",
-    "title": "Northern Lights Iceland",
-    "category": "nature",
-    "url": "https://www.youtube.com/embed/live_stream?channel=UCX9eTHIphnEoccI8Sqccdhw",
-    "tags": [
-      "aurora",
-      "iceland"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·ATM·SR/WE/IS/IS/REY·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "049",
-    "title": "Windy Alps Ski Cam",
-    "category": "nature",
-    "url": "https://webcam.windy.com/webcam/1289532/player",
-    "tags": [
-      "snow",
-      "alps"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·MTN·SR/WE/CH/VD/GVA·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "050",
-    "title": "Windy Santorini Greece",
-    "category": "city",
-    "url": "https://webcam.windy.com/webcam/1195768/player",
-    "tags": [
-      "greece",
-      "mediterranean"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/WE/GR/ATT/ATH·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "051",
-    "title": "Windy Barcelona Beach",
-    "category": "nature",
-    "url": "https://webcam.windy.com/webcam/1196091/player",
-    "tags": [
-      "beach",
-      "spain"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·CST·SR/WE/ES/CAT/BCN·0002·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "052",
-    "title": "Windy Tokyo Bay",
-    "category": "city",
-    "url": "https://webcam.windy.com/webcam/1432876/player",
-    "tags": [
-      "japan",
-      "bay"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/EA/JP/TKY/TOK·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "053",
-    "title": "Windy Maldives Ocean",
-    "category": "nature",
-    "url": "https://webcam.windy.com/webcam/1301045/player",
-    "tags": [
-      "maldives",
-      "tropical"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·OCN·SR/SC/MV/MV/MLE·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "054",
-    "title": "Windy Sydney Harbour",
-    "category": "city",
-    "url": "https://webcam.windy.com/webcam/1277048/player",
-    "tags": [
-      "australia",
-      "harbour"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/OC/AU/NSW/SYD·0002·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "055",
-    "title": "Cat Cafe Shelter Cam",
-    "category": "wildlife",
-    "url": "https://www.youtube.com/embed/J---aiyznGQ",
-    "tags": [
-      "cats",
-      "shelter"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000V·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "056",
-    "title": "SpaceX Launch Facility",
-    "category": "space",
-    "url": "https://www.youtube.com/embed/wwMDvPCGeE0",
-    "tags": [
+      "spacex",
       "rockets",
       "space"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·OBS·SR/NA/US/TX/BCA·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·OBS·SR/NA/US/TX/BCA·0001·|GEO|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.929Z"
   },
   {
-    "id": "057",
-    "title": "Penguin Colony Cam",
-    "category": "wildlife",
-    "url": "https://explore.org/livecams/penguins/live-penguin-cam",
+    "id": "005",
+    "title": "NOAA — GOES East Satellite Earth",
+    "category": "space",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/IkNf8j4nAeg?autoplay=1&mute=1",
     "tags": [
-      "penguins",
-      "antarctica"
+      "satellite",
+      "noaa",
+      "earth",
+      "weather"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·POL·SR/PL/AQ/AQ/MCM·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "noaa",
+    "mgn_code": "MGN·NAT·OBS·SR/NA/US/FL/HRC·0001·|GEO|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.929Z"
   },
   {
-    "id": "058",
-    "title": "Grand Canyon South Rim",
-    "category": "nature",
-    "url": "https://www.earthcam.com/embed/grandcanyon/",
+    "id": "006",
+    "title": "Times Square NYC — Live 24/7",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/1-iS7LArMPA?autoplay=1&mute=1",
     "tags": [
+      "nyc",
+      "times square",
       "usa",
-      "canyon"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·DST·SR/NA/US/WY/YNP·0003·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "059",
-    "title": "Bondi Beach Sydney",
-    "category": "nature",
-    "url": "https://www.earthcam.com/embed/bondi/",
-    "tags": [
-      "surf",
-      "australia"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·CST·SR/OC/AU/NSW/SYD·0003·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "060",
-    "title": "Colosseum Rome",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/rome/",
-    "tags": [
-      "italy",
-      "history"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/WE/IT/LAZ/ROM·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "061",
-    "title": "Prague Old Town Square",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/prague/",
-    "tags": [
-      "czech",
       "city"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·PKS·SR/WE/CZ/PR/PRG·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "youtube",
+    "mgn_code": "MGN·URB·PKS·SR/NA/US/NY/NYC·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.929Z"
   },
   {
-    "id": "062",
-    "title": "Times Square Crossroads",
+    "id": "007",
+    "title": "Tokyo Shibuya Crossing — Live",
     "category": "city",
-    "url": "https://www.earthcam.com/embed/timessquare2/",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/NcVeZlLh1Zc?autoplay=1&mute=1",
     "tags": [
-      "usa",
-      "neon"
+      "tokyo",
+      "japan",
+      "shibuya",
+      "city"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/NA/US/NY/NYC·0002·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "youtube",
+    "mgn_code": "MGN·URB·STR·SR/EA/JP/TKY/TOK·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.930Z"
   },
   {
-    "id": "063",
-    "title": "Seattle Space Needle",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/seattle/",
-    "tags": [
-      "usa",
-      "pacific"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/NA/US/WA/SEA·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "064",
-    "title": "Amsterdam Canal",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/amsterdam/",
-    "tags": [
-      "netherlands",
-      "water"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/WE/NL/NH/AMS·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "065",
-    "title": "Maui Whale Watch",
+    "id": "008",
+    "title": "Africam — Safari Watering Hole",
     "category": "wildlife",
-    "url": "https://explore.org/livecams/oceans/maui-whale-watch",
-    "tags": [
-      "whales",
-      "hawaii"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·UNK·SR/NA/US/HI/HNL·0002·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "066",
-    "title": "Hummingbird Garden Cam",
-    "category": "wildlife",
-    "url": "https://explore.org/livecams/birds/hummingbird-garden",
-    "tags": [
-      "birds",
-      "garden"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000W·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "067",
-    "title": "Mount Fuji Japan",
-    "category": "nature",
-    "url": "https://www.earthcam.com/embed/fujisan/",
-    "tags": [
-      "mountain",
-      "japan"
-    ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·MTN·SR/EA/JP/TKY/TOK·0002·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
-  },
-  {
-    "id": "068",
-    "title": "Savanna Sunrise Africa",
-    "category": "wildlife",
-    "url": "https://explore.org/livecams/african-wildlife/africam-noorhoek",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/ydYDqZQpim8?autoplay=1&mute=1",
     "tags": [
       "africa",
-      "savanna"
+      "safari",
+      "wildlife"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·FOR·SR/AF/ZA/LP/CPT·0003·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·FOR·SR/AF/ZA/LP/CPT·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.930Z"
   },
   {
-    "id": "069",
-    "title": "San Francisco Bay",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/sanfrancisco/",
+    "id": "009",
+    "title": "Alaska Brown Bear Salmon Cam",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/B4-L2nfGcuE?autoplay=1&mute=1",
     "tags": [
-      "usa",
-      "bay"
+      "bears",
+      "alaska",
+      "wildlife"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·URB·STR·SR/NA/US/CA/SFO·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/NA/US/AK/ANC·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.930Z"
   },
   {
-    "id": "070",
-    "title": "New Orleans French Quarter",
-    "category": "city",
-    "url": "https://www.earthcam.com/embed/neworleans/",
+    "id": "010",
+    "title": "Monterey Bay Aquarium — Open Sea",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/UXm6ZFpKCd8?autoplay=1&mute=1",
     "tags": [
+      "ocean",
+      "aquarium",
+      "fish"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.930Z"
+  },
+  {
+    "id": "011",
+    "title": "Monterey Bay Aquarium — Kelp Forest",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/xGCDkSmSMmI?autoplay=1&mute=1",
+    "tags": [
+      "ocean",
+      "kelp",
+      "aquarium"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·FOR·SR/UNK/UNK/UNK/UNK·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "012",
+    "title": "Monterey Bay Aquarium — Coral Reef",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/R2_nSJ-j1kk?autoplay=1&mute=1",
+    "tags": [
+      "reef",
+      "coral",
+      "ocean"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "013",
+    "title": "Cat Cafe Live — Shelter Cam",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/J---aiyznGQ?autoplay=1&mute=1",
+    "tags": [
+      "cats",
+      "shelter",
+      "animals"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0004·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "014",
+    "title": "Puppy Rescue Live",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/3GRSbr0EYYU?autoplay=1&mute=1",
+    "tags": [
+      "dogs",
+      "rescue",
+      "animals"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0005·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "015",
+    "title": "Niagara Falls — Live Cam",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/9iMGFqMmUFs?autoplay=1&mute=1",
+    "tags": [
+      "niagara",
+      "waterfall",
+      "nature"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·RVR·SR/NA/US/WY/YNP·0001·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "016",
+    "title": "Relaxing Forest Stream — Nature Live",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/xNN7iwhXvnM?autoplay=1&mute=1",
+    "tags": [
+      "forest",
+      "stream",
+      "nature",
+      "relaxing"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·FOR·SR/UNK/UNK/UNK/UNK·0006·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "017",
+    "title": "Ocean Waves — Beach Cam Relaxing",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/bn9F19Hi1Lk?autoplay=1&mute=1",
+    "tags": [
+      "beach",
+      "ocean",
+      "waves",
+      "relaxing"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·0007·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "018",
+    "title": "Northern Lights — Aurora Live",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/TbgOTEMp5qE?autoplay=1&mute=1",
+    "tags": [
+      "aurora",
+      "iceland",
+      "northern lights"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·ATM·SR/WE/IS/IS/REY·0001·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "019",
+    "title": "Crackling Fireplace — 4K Cozy",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/L_LUpnjgPso?autoplay=1&mute=1",
+    "tags": [
+      "fire",
+      "relaxing",
+      "cozy"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0008·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "020",
+    "title": "Deep Sea — Underwater Ocean Live",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/gTj4IQJM2zE?autoplay=1&mute=1",
+    "tags": [
+      "ocean",
+      "underwater",
+      "deep sea"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·0009·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "021",
+    "title": "Rain on Window — Relaxing Sleep",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/mPZkdNFkNps?autoplay=1&mute=1",
+    "tags": [
+      "rain",
+      "relaxing",
+      "sleep"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000A·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "022",
+    "title": "Bald Eagle Nest — Live Cam",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/dY2pnfcmGxI?autoplay=1&mute=1",
+    "tags": [
+      "eagle",
+      "birds",
+      "wildlife",
+      "nest"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000B·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "023",
+    "title": "Earthcam — Times Square NYC",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/timessquare/?id=terc",
+    "tags": [
+      "nyc",
+      "times square",
+      "usa"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·PKS·SR/NA/US/NY/NYC·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "024",
+    "title": "Earthcam — Nashville Broadway",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/nashville/?id=nashville",
+    "tags": [
+      "nashville",
       "usa",
       "music"
     ],
-    "source": "bootstrap",
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000C·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "025",
+    "title": "Earthcam — Chicago Millennium Park",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/chicago/?id=millenniumpark",
+    "tags": [
+      "chicago",
+      "usa",
+      "city"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·PKS·SR/NA/US/IL/CHI·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "026",
+    "title": "Earthcam — Las Vegas Strip",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/lasvegas/?id=lvstrip",
+    "tags": [
+      "las vegas",
+      "usa",
+      "neon"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/NA/US/NV/LAS·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "027",
+    "title": "Earthcam — New Orleans Bourbon St",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/neworleans/?id=bourbonst",
+    "tags": [
+      "new orleans",
+      "bourbon street",
+      "usa"
+    ],
+    "source": "earthcam",
     "mgn_code": "MGN·URB·STR·SR/NA/US/LA/MSY·0001·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "028",
+    "title": "Earthcam — Dublin Temple Bar",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/dublin/?id=templebar",
+    "tags": [
+      "dublin",
+      "ireland",
+      "city"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/WE/IE/L/DUB·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "029",
+    "title": "Earthcam — Paris Eiffel Tower",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/paris/?id=eiffel",
+    "tags": [
+      "paris",
+      "france",
+      "eiffel"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/WE/FR/IDF/PAR·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "030",
+    "title": "Earthcam — Prague Old Town",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/prague/?id=oldtown",
+    "tags": [
+      "prague",
+      "czech",
+      "city"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/WE/CZ/PR/PRG·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "031",
+    "title": "Earthcam — Miami South Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/miami/?id=southbeach",
+    "tags": [
+      "miami",
+      "beach",
+      "florida"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·NAT·CST·SR/NA/US/FL/MIA·0001·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "032",
+    "title": "Earthcam — Niagara Falls",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/niagarafalls/?id=falls",
+    "tags": [
+      "niagara",
+      "waterfall",
+      "nature"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·NAT·RVR·SR/NA/US/WY/YNP·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "033",
+    "title": "Earthcam — San Francisco Wharf",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/sanfrancisco/?id=fishermanswharf",
+    "tags": [
+      "san francisco",
+      "wharf",
+      "usa"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/NA/US/CA/SFO·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "034",
+    "title": "Earthcam — Hollywood Blvd LA",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/hollywood/?id=hollywoodblvd",
+    "tags": [
+      "hollywood",
+      "la",
+      "usa"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/NA/US/CA/LAX·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "035",
+    "title": "Earthcam — Sydney Opera House",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/sydney/?id=operahouse",
+    "tags": [
+      "sydney",
+      "opera house",
+      "australia"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/OC/AU/NSW/SYD·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "036",
+    "title": "Earthcam — Bondi Beach Sydney",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/bondi/?id=bondibeach",
+    "tags": [
+      "bondi",
+      "sydney",
+      "beach"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·NAT·CST·SR/OC/AU/NSW/SYD·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "037",
+    "title": "Earthcam — Waikiki Beach Hawaii",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/hawaii/?id=waikiki",
+    "tags": [
+      "waikiki",
+      "hawaii",
+      "beach"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·NAT·CST·SR/NA/US/HI/HNL·0001·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "038",
+    "title": "Earthcam — Rome Trevi Fountain",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/rome/?id=trevifountain",
+    "tags": [
+      "rome",
+      "trevi",
+      "italy"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/WE/IT/LAZ/ROM·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.931Z"
+  },
+  {
+    "id": "039",
+    "title": "Earthcam — Amsterdam Canal",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/amsterdam/?id=amsterdam",
+    "tags": [
+      "amsterdam",
+      "netherlands",
+      "canal"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/WE/NL/NH/AMS·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "040",
+    "title": "Earthcam — Seattle Space Needle",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/seattle/?id=spaceneedle",
+    "tags": [
+      "seattle",
+      "space needle",
+      "usa"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/NA/US/WA/SEA·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "041",
+    "title": "Earthcam — San Antonio Riverwalk",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/sanantonio/?id=riverwalk",
+    "tags": [
+      "san antonio",
+      "riverwalk",
+      "texas"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000D·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "042",
+    "title": "Earthcam — Key West Duval St",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/keywest/?id=duvalst",
+    "tags": [
+      "key west",
+      "florida",
+      "usa"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000E·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "043",
+    "title": "Earthcam — Denver 16th Street Mall",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/denver/?id=16thstreet",
+    "tags": [
+      "denver",
+      "colorado",
+      "usa"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000F·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "044",
+    "title": "Earthcam — Baltimore Inner Harbor",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/baltimore/?id=innerharbor",
+    "tags": [
+      "baltimore",
+      "harbor",
+      "maryland"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000G·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "045",
+    "title": "Earthcam — Memphis Beale Street",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/memphis/?id=bealestreet",
+    "tags": [
+      "memphis",
+      "beale street",
+      "tennessee"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000H·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "046",
+    "title": "Earthcam — London Trafalgar Square",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/london/?id=trafalgarsquare",
+    "tags": [
+      "london",
+      "trafalgar",
+      "uk"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·PKS·SR/WE/GB/ENG/LON·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "047",
+    "title": "Earthcam — Barcelona La Sagrada",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/barcelona/?id=sagrada",
+    "tags": [
+      "barcelona",
+      "sagrada familia",
+      "spain"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/WE/ES/CAT/BCN·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "048",
+    "title": "Earthcam — Venice Grand Canal",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/venice/?id=grandcanal",
+    "tags": [
+      "venice",
+      "grand canal",
+      "italy"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/WE/IT/VEN/VCE·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "049",
+    "title": "Earthcam — Munich Marienplatz",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/munich/?id=marienplatz",
+    "tags": [
+      "munich",
+      "marienplatz",
+      "germany"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000J·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "050",
+    "title": "Earthcam — Vienna Stephansplatz",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.earthcam.com/embed/vienna/?id=stephansplatz",
+    "tags": [
+      "vienna",
+      "stephansplatz",
+      "austria"
+    ],
+    "source": "earthcam",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000K·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "051",
+    "title": "Windy — Santorini Greece Caldera",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1195768/player",
+    "tags": [
+      "santorini",
+      "greece",
+      "mediterranean"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/GR/ATT/ATH·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "052",
+    "title": "Windy — Barcelona Beach Spain",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1196091/player",
+    "tags": [
+      "barcelona",
+      "beach",
+      "spain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/WE/ES/CAT/BCN·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "053",
+    "title": "Windy — Dubrovnik Croatia",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1229840/player",
+    "tags": [
+      "dubrovnik",
+      "croatia",
+      "adriatic"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/HR/DBK/DBV·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "054",
+    "title": "Windy — Tenerife Canary Islands",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1227302/player",
+    "tags": [
+      "tenerife",
+      "canary islands",
+      "spain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/ES/CN/TFN·0001·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "055",
+    "title": "Windy — Maldives Ocean View",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1301045/player",
+    "tags": [
+      "maldives",
+      "ocean",
+      "tropical"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·OCN·SR/SC/MV/MV/MLE·0001·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "056",
+    "title": "Windy — Swiss Alps Ski Resort",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1289532/player",
+    "tags": [
+      "alps",
+      "switzerland",
+      "ski",
+      "snow"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·MTN·SR/WE/CH/VD/GVA·0001·|GEO|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "057",
+    "title": "Windy — Sydney Harbour Australia",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1277048/player",
+    "tags": [
+      "sydney",
+      "harbour",
+      "australia"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/OC/AU/NSW/SYD·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "058",
+    "title": "Windy — Tokyo Bay Japan",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1432876/player",
+    "tags": [
+      "tokyo",
+      "japan",
+      "bay"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/EA/JP/TKY/TOK·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "059",
+    "title": "Windy — Mallorca Spain Coast",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1224567/player",
+    "tags": [
+      "mallorca",
+      "spain",
+      "coast"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·000L·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "060",
+    "title": "Windy — Lanzarote Volcanic Coast",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1230451/player",
+    "tags": [
+      "lanzarote",
+      "volcano",
+      "spain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·000M·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "061",
+    "title": "Windy — Lisbon Tagus River",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1241892/player",
+    "tags": [
+      "lisbon",
+      "portugal",
+      "river"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000N·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "062",
+    "title": "Windy — Vienna City Center",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1318765/player",
+    "tags": [
+      "vienna",
+      "austria",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000P·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "063",
+    "title": "Windy — Amsterdam Canal",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1298234/player",
+    "tags": [
+      "amsterdam",
+      "netherlands",
+      "canal"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/NL/NH/AMS·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "064",
+    "title": "Windy — Reykjavik Iceland",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1356789/player",
+    "tags": [
+      "reykjavik",
+      "iceland",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/IS/IS/REY·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "065",
+    "title": "Windy — Positano Amalfi Coast",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1264512/player",
+    "tags": [
+      "positano",
+      "amalfi",
+      "italy"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·000Q·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.932Z"
+  },
+  {
+    "id": "066",
+    "title": "Windy — Nice French Riviera",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1196450/player",
+    "tags": [
+      "nice",
+      "france",
+      "riviera"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/FR/IDF/PAR·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "067",
+    "title": "Windy — Lake Como Italy",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1266340/player",
+    "tags": [
+      "lake como",
+      "italy",
+      "lake"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·RVR·SR/UNK/UNK/UNK/UNK·000R·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "068",
+    "title": "Windy — Interlaken Switzerland",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1291450/player",
+    "tags": [
+      "interlaken",
+      "switzerland",
+      "alps"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·RVR·SR/WE/CH/VD/GVA·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "069",
+    "title": "Windy — Copenhagen Denmark",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1354290/player",
+    "tags": [
+      "copenhagen",
+      "denmark",
+      "harbor"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000S·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "070",
+    "title": "Windy — Stockholm Old Town",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1378650/player",
+    "tags": [
+      "stockholm",
+      "sweden",
+      "old town"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000T·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
   },
   {
     "id": "071",
-    "title": "Windy Dubrovnik Coast",
+    "title": "Windy — Oslo Norway Fjord",
     "category": "nature",
-    "url": "https://webcam.windy.com/webcam/1229840/player",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1392140/player",
     "tags": [
-      "croatia",
-      "coast"
+      "oslo",
+      "norway",
+      "fjord"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·CST·SR/WE/HR/DBK/DBV·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000U·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
   },
   {
     "id": "072",
-    "title": "Windy Canary Islands",
-    "category": "nature",
-    "url": "https://webcam.windy.com/webcam/1227302/player",
+    "title": "Windy — Prague Charles Bridge",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1319540/player",
     "tags": [
-      "spain",
-      "island"
+      "prague",
+      "czech",
+      "bridge"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·UNK·SR/WE/ES/CN/TFN·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/CZ/PR/PRG·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
   },
   {
     "id": "073",
-    "title": "Puppy Rescue Live",
-    "category": "wildlife",
-    "url": "https://www.youtube.com/embed/3GRSbr0EYYU",
+    "title": "Windy — Bruges Belgium Canal",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1302560/player",
     "tags": [
-      "dogs",
-      "shelter"
+      "bruges",
+      "belgium",
+      "canal"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000X·|HMN|·:VID·%ALG·~CYC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000V·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
   },
   {
     "id": "074",
-    "title": "Amazon Rainforest Cam",
-    "category": "nature",
-    "url": "https://explore.org/livecams/rainforest/amazon-rainforest",
+    "title": "Windy — Zurich Switzerland",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1326780/player",
     "tags": [
-      "jungle",
+      "zurich",
+      "switzerland",
+      "lake"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/CH/VD/GVA·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "075",
+    "title": "Windy — Kotor Bay Montenegro",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1232760/player",
+    "tags": [
+      "kotor",
+      "montenegro",
+      "adriatic"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·000W·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "076",
+    "title": "Windy — Bali Indonesia Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1456780/player",
+    "tags": [
+      "bali",
+      "indonesia",
+      "beach",
+      "tropical"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·000X·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "077",
+    "title": "Windy — Cape Town South Africa",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1487650/player",
+    "tags": [
+      "cape town",
+      "south africa",
+      "harbor"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/AF/ZA/LP/CPT·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "078",
+    "title": "Windy — Vancouver Canada",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1412560/player",
+    "tags": [
+      "vancouver",
+      "canada",
+      "harbor"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·000Y·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "079",
+    "title": "Windy — Cancun Mexico Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1567230/player",
+    "tags": [
+      "cancun",
+      "mexico",
+      "caribbean",
+      "beach"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·000Z·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "080",
+    "title": "Windy — Rio de Janeiro Brazil",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1534890/player",
+    "tags": [
+      "rio",
+      "brazil",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/SA/BR/AM/MNS·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "081",
+    "title": "Windy — Porto Portugal",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1243120/player",
+    "tags": [
+      "porto",
+      "portugal",
+      "ribeira"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·unde·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "082",
+    "title": "Windy — Helsinki Finland",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1401230/player",
+    "tags": [
+      "helsinki",
+      "finland",
+      "harbor"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·unde·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "083",
+    "title": "Windy — Corfu Greece",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1231456/player",
+    "tags": [
+      "corfu",
+      "greece",
+      "mediterranean"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/GR/ATT/ATH·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "084",
+    "title": "Windy — Toronto Canada",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1423870/player",
+    "tags": [
+      "toronto",
+      "canada",
+      "skyline"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0010·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "085",
+    "title": "Windy — Buenos Aires Argentina",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1521340/player",
+    "tags": [
+      "buenos aires",
+      "argentina",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0011·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "086",
+    "title": "Windy — Rome Piazza Navona",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1264900/player",
+    "tags": [
+      "rome",
+      "italy",
+      "piazza"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/IT/LAZ/ROM·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "087",
+    "title": "Windy — Dubrovnik City Walls",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1230102/player",
+    "tags": [
+      "dubrovnik",
+      "croatia",
+      "walls"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/HR/DBK/DBV·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "088",
+    "title": "Windy — Majorca Harbor",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1225890/player",
+    "tags": [
+      "majorca",
+      "spain",
+      "harbor"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0012·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "089",
+    "title": "Windy — Dublin Ireland Coast",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1367890/player",
+    "tags": [
+      "dublin",
+      "ireland",
+      "coast"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/WE/IE/L/DUB·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "090",
+    "title": "Windy — Athens Greece Acropolis",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1204560/player",
+    "tags": [
+      "athens",
+      "greece",
+      "acropolis"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/GR/ATT/ATH·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "091",
+    "title": "Windy — Istanbul Turkey Bosphorus",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1445670/player",
+    "tags": [
+      "istanbul",
+      "turkey",
+      "bosphorus"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0013·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "092",
+    "title": "Windy — Singapore Marina Bay",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1489230/player",
+    "tags": [
+      "singapore",
+      "marina bay",
+      "asia"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/SE/SG/SG/SIN·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "093",
+    "title": "Windy — Hong Kong Harbour",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1467890/player",
+    "tags": [
+      "hong kong",
+      "harbour",
+      "asia"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/EA/HK/HK/HKG·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "094",
+    "title": "Windy — Seoul South Korea",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1478340/player",
+    "tags": [
+      "seoul",
+      "korea",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/EA/KR/SEL/SEL·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "095",
+    "title": "Windy — Osaka Japan",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1443210/player",
+    "tags": [
+      "osaka",
+      "japan",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/EA/JP/TKY/TOK·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "096",
+    "title": "Windy — Shanghai China Skyline",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1456120/player",
+    "tags": [
+      "shanghai",
+      "china",
+      "skyline"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·SKY·SR/EA/CN/BJ/BEJ·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "097",
+    "title": "Windy — Beijing China",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1459870/player",
+    "tags": [
+      "beijing",
+      "china",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/EA/CN/BJ/BEJ·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "098",
+    "title": "Windy — Kuala Lumpur Malaysia",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1492340/player",
+    "tags": [
+      "kuala lumpur",
+      "malaysia",
+      "petronas"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0014·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "099",
+    "title": "Windy — Bangkok Thailand",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1498760/player",
+    "tags": [
+      "bangkok",
+      "thailand",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0015·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "100",
+    "title": "Windy — Ho Chi Minh City Vietnam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1503450/player",
+    "tags": [
+      "ho chi minh",
+      "vietnam",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0016·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "101",
+    "title": "Windy — Jakarta Indonesia",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1507890/player",
+    "tags": [
+      "jakarta",
+      "indonesia",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0017·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "102",
+    "title": "Windy — Manila Philippines",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1512340/player",
+    "tags": [
+      "manila",
+      "philippines",
+      "bay"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0018·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "103",
+    "title": "Windy — Mumbai India Gateway",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1523670/player",
+    "tags": [
+      "mumbai",
+      "india",
+      "gateway"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0019·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "104",
+    "title": "Windy — Dubai UAE Skyline",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1534120/player",
+    "tags": [
+      "dubai",
+      "uae",
+      "skyline",
+      "burj"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·SKY·SR/UNK/UNK/UNK/UNK·001A·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "105",
+    "title": "Windy — Tel Aviv Israel Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1545670/player",
+    "tags": [
+      "tel aviv",
+      "israel",
+      "beach",
+      "mediterranean"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·001B·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "106",
+    "title": "Windy — Cairo Egypt Nile",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1556780/player",
+    "tags": [
+      "cairo",
+      "egypt",
+      "nile"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·001C·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "107",
+    "title": "Windy — Nairobi Kenya",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1567890/player",
+    "tags": [
+      "nairobi",
+      "kenya",
+      "africa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/AF/ZA/LP/CPT·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "108",
+    "title": "Windy — Lagos Nigeria",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1578340/player",
+    "tags": [
+      "lagos",
+      "nigeria",
+      "africa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/AF/ZA/LP/CPT·0004·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "109",
+    "title": "Windy — Casablanca Morocco",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1589450/player",
+    "tags": [
+      "casablanca",
+      "morocco",
+      "africa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/AF/ZA/LP/CPT·0005·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "110",
+    "title": "Windy — Marrakech Morocco",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1590120/player",
+    "tags": [
+      "marrakech",
+      "morocco",
+      "medina"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·001D·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "111",
+    "title": "Windy — Zanzibar Tanzania Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1601230/player",
+    "tags": [
+      "zanzibar",
+      "tanzania",
+      "beach",
+      "indian ocean"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·001E·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "112",
+    "title": "Windy — Lima Peru Coast",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1612340/player",
+    "tags": [
+      "lima",
+      "peru",
+      "pacific coast"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·001F·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "113",
+    "title": "Windy — Santiago Chile Andes",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1623450/player",
+    "tags": [
+      "santiago",
+      "chile",
+      "andes",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·001G·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "114",
+    "title": "Windy — Bogota Colombia",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1634560/player",
+    "tags": [
+      "bogota",
+      "colombia",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·001H·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "115",
+    "title": "Windy — Cartagena Colombia Caribbean",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1645670/player",
+    "tags": [
+      "cartagena",
+      "colombia",
+      "caribbean",
+      "beach"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·001J·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "116",
+    "title": "Windy — Mexico City Zocalo",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1656780/player",
+    "tags": [
+      "mexico city",
+      "zocalo",
+      "mexico"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·001K·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "117",
+    "title": "Windy — Havana Cuba Malecon",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1667890/player",
+    "tags": [
+      "havana",
+      "cuba",
+      "malecon",
+      "caribbean"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·001L·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "118",
+    "title": "Windy — San Juan Puerto Rico",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1678900/player",
+    "tags": [
+      "san juan",
+      "puerto rico",
+      "caribbean",
+      "beach"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·001M·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "119",
+    "title": "Windy — Nassau Bahamas Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1689010/player",
+    "tags": [
+      "nassau",
+      "bahamas",
+      "beach",
+      "caribbean"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·001N·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "120",
+    "title": "Windy — Phuket Thailand Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1700120/player",
+    "tags": [
+      "phuket",
+      "thailand",
+      "beach",
+      "andaman"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·001P·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "121",
+    "title": "Windy — Queenstown New Zealand",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1711230/player",
+    "tags": [
+      "queenstown",
+      "new zealand",
+      "mountain",
+      "lake"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·001Q·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "122",
+    "title": "Windy — Auckland New Zealand Harbor",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1722340/player",
+    "tags": [
+      "auckland",
+      "new zealand",
+      "harbor"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·001R·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.933Z"
+  },
+  {
+    "id": "123",
+    "title": "Windy — Melbourne Australia CBD",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1733450/player",
+    "tags": [
+      "melbourne",
+      "australia",
+      "cbd",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/OC/AU/VIC/MEL·0001·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "124",
+    "title": "Windy — Great Barrier Reef Australia",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1744560/player",
+    "tags": [
+      "great barrier reef",
+      "australia",
+      "ocean",
+      "reef"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·OCN·SR/OC/AU/VIC/MEL·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "125",
+    "title": "Windy — Fiji Islands Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1755670/player",
+    "tags": [
+      "fiji",
+      "pacific",
+      "beach",
+      "tropical"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·001S·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "126",
+    "title": "Windy — Chamonix Mont Blanc France",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1766780/player",
+    "tags": [
+      "chamonix",
+      "mont blanc",
+      "france",
+      "mountain",
+      "ski"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/FR/IDF/PAR·0003·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "127",
+    "title": "Windy — Zermatt Matterhorn Switzerland",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1777890/player",
+    "tags": [
+      "zermatt",
+      "matterhorn",
+      "switzerland",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/CH/VD/GVA·0004·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "128",
+    "title": "Windy — Innsbruck Austria Alps",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1788900/player",
+    "tags": [
+      "innsbruck",
+      "austria",
+      "alps",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·MTN·SR/WE/CH/VD/GVA·0005·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "129",
+    "title": "Windy — Whistler BC Canada Ski",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1800010/player",
+    "tags": [
+      "whistler",
+      "canada",
+      "ski",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·001T·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "130",
+    "title": "Windy — Aspen Colorado USA Ski",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1811120/player",
+    "tags": [
+      "aspen",
+      "colorado",
+      "ski",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·001U·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "131",
+    "title": "Windy — Jackson Hole Wyoming",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1822230/player",
+    "tags": [
+      "jackson hole",
+      "wyoming",
+      "ski",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·001V·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "132",
+    "title": "Windy — Banff Alberta Canada",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1833340/player",
+    "tags": [
+      "banff",
+      "alberta",
+      "canada",
+      "mountain",
+      "lake"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·001W·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "133",
+    "title": "Windy — Kilauea Volcano Hawaii",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1844450/player",
+    "tags": [
+      "kilauea",
+      "volcano",
+      "hawaii",
+      "lava"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·GEO·SR/NA/US/HI/HNL·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "134",
+    "title": "Windy — Etna Volcano Sicily Italy",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1855560/player",
+    "tags": [
+      "etna",
+      "volcano",
+      "sicily",
+      "italy"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·GEO·SR/UNK/UNK/UNK/UNK·001X·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "135",
+    "title": "Windy — Stromboli Volcano Italy",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1866670/player",
+    "tags": [
+      "stromboli",
+      "volcano",
+      "italy",
+      "eruption"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·GEO·SR/UNK/UNK/UNK/UNK·001Y·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "136",
+    "title": "Windy — Eyjafjallajokull Iceland",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1877780/player",
+    "tags": [
+      "iceland",
+      "volcano",
+      "glacier",
+      "nature"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/IS/IS/REY·0003·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "137",
+    "title": "Windy — Hamburg Germany Harbor",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1888890/player",
+    "tags": [
+      "hamburg",
+      "germany",
+      "harbor",
+      "port"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·001Z·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "138",
+    "title": "Windy — Rotterdam Netherlands Port",
+    "category": "traffic",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1900000/player",
+    "tags": [
+      "rotterdam",
+      "netherlands",
+      "port",
+      "shipping"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·TRN·SEA·SR/WE/NL/NH/AMS·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "139",
+    "title": "Windy — Marseille France Harbor",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1911110/player",
+    "tags": [
+      "marseille",
+      "france",
+      "harbor",
+      "port"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/FR/IDF/PAR·0004·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "140",
+    "title": "Windy — Genoa Italy Port",
+    "category": "traffic",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1922220/player",
+    "tags": [
+      "genoa",
+      "italy",
+      "port",
+      "shipping"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·TRN·SEA·SR/UNK/UNK/UNK/UNK·1und·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "141",
+    "title": "Windy — Venice Lagoon Italy",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1933330/player",
+    "tags": [
+      "venice",
+      "lagoon",
+      "italy",
+      "boats"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/IT/VEN/VCE·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "142",
+    "title": "Windy — Valletta Malta Harbor",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1944440/player",
+    "tags": [
+      "valletta",
+      "malta",
+      "harbor",
+      "mediterranean"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·1und·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "143",
+    "title": "Windy — Palma Mallorca Marina",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1955550/player",
+    "tags": [
+      "palma",
+      "mallorca",
+      "marina",
+      "spain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0020·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "144",
+    "title": "Windy — Piraeus Greece Port Athens",
+    "category": "traffic",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1966660/player",
+    "tags": [
+      "piraeus",
+      "greece",
+      "port",
+      "athens"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·TRN·SEA·SR/WE/GR/ATT/ATH·0004·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "145",
+    "title": "Windy — Split Croatia Harbor",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1977770/player",
+    "tags": [
+      "split",
+      "croatia",
+      "harbor",
+      "adriatic"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/HR/DBK/DBV·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "146",
+    "title": "NPS — Yellowstone Old Faithful Geyser",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCLEFgXhCKnhC36J2swsqNmA&autoplay=1&mute=1",
+    "tags": [
+      "yellowstone",
+      "geyser",
+      "nature",
+      "nps"
+    ],
+    "source": "nps",
+    "mgn_code": "MGN·NAT·GEO·SR/NA/US/WY/YNP·0003·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "147",
+    "title": "NPS — Grand Canyon South Rim",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCqONaFSLBxMYROPQMIQGBVA&autoplay=1&mute=1",
+    "tags": [
+      "grand canyon",
+      "arizona",
+      "nature",
+      "nps"
+    ],
+    "source": "nps",
+    "mgn_code": "MGN·NAT·DST·SR/NA/US/WY/YNP·0004·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "148",
+    "title": "NPS — Denali National Park Alaska",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UC6Sl9I1hFuN7lKY3UKQfXvg&autoplay=1&mute=1",
+    "tags": [
+      "denali",
+      "alaska",
+      "mountain",
+      "nps"
+    ],
+    "source": "nps",
+    "mgn_code": "MGN·NAT·UNK·SR/NA/US/AK/ANC·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "149",
+    "title": "NPS — Glacier National Park Montana",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCkFtSRjiFCvKEMkIv2d29Ng&autoplay=1&mute=1",
+    "tags": [
+      "glacier",
+      "montana",
+      "mountain",
+      "nps"
+    ],
+    "source": "nps",
+    "mgn_code": "MGN·NAT·MTN·SR/UNK/UNK/UNK/UNK·0021·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "150",
+    "title": "NPS — Great Smoky Mountains TN",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCM3J7r8w-BjIzE3wkLkOSmg&autoplay=1&mute=1",
+    "tags": [
+      "smoky mountains",
+      "tennessee",
+      "nature",
+      "nps"
+    ],
+    "source": "nps",
+    "mgn_code": "MGN·NAT·MTN·SR/UNK/UNK/UNK/UNK·0022·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "151",
+    "title": "Windy — Trolltunga Norway Cliff",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1900456/player",
+    "tags": [
+      "trolltunga",
+      "norway",
+      "cliff",
+      "fjord"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0023·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "152",
+    "title": "Windy — Preikestolen Norway Pulpit",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1911567/player",
+    "tags": [
+      "preikestolen",
+      "norway",
+      "pulpit rock",
+      "fjord"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0024·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "153",
+    "title": "Windy — Lofoten Islands Norway",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1922678/player",
+    "tags": [
+      "lofoten",
+      "norway",
+      "arctic",
+      "fishing"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/PL/NO/SVA/LYR·0001·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "154",
+    "title": "Windy — Faroe Islands Atlantic",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1933789/player",
+    "tags": [
+      "faroe islands",
+      "atlantic",
+      "cliffs",
+      "nature"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·0025·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "155",
+    "title": "Windy — Cappadocia Turkey Balloons",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1944890/player",
+    "tags": [
+      "cappadocia",
+      "turkey",
+      "hot air balloons",
+      "nature"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0026·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "156",
+    "title": "Windy — Pamukkale Turkey Pools",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1955901/player",
+    "tags": [
+      "pamukkale",
+      "turkey",
+      "travertine",
+      "pools"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·0027·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "157",
+    "title": "Windy — Dead Sea Jordan",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1967012/player",
+    "tags": [
+      "dead sea",
+      "jordan",
+      "salt lake",
+      "middle east"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·0028·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "158",
+    "title": "Windy — Petra Jordan Ancient City",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1978123/player",
+    "tags": [
+      "petra",
+      "jordan",
+      "ancient",
+      "middle east"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0029·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "159",
+    "title": "Windy — Masai Mara Kenya Safari",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/1989234/player",
+    "tags": [
+      "masai mara",
+      "kenya",
+      "safari",
+      "wildlife",
+      "africa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·FOR·SR/AF/ZA/LP/CPT·0006·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "160",
+    "title": "Windy — Serengeti Tanzania Migration",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2000345/player",
+    "tags": [
+      "serengeti",
+      "tanzania",
+      "migration",
+      "wildlife",
+      "africa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/AF/ZA/LP/CPT·0007·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "161",
+    "title": "Windy — Victoria Falls Zimbabwe",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2011456/player",
+    "tags": [
+      "victoria falls",
+      "zimbabwe",
+      "zambia",
+      "waterfall",
+      "africa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·RVR·SR/AF/ZA/LP/CPT·0008·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "162",
+    "title": "Windy — Table Mountain Cape Town",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2022567/player",
+    "tags": [
+      "table mountain",
+      "cape town",
+      "south africa",
+      "nature"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·MTN·SR/AF/ZA/LP/CPT·0009·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "163",
+    "title": "Windy — Kilimanjaro Tanzania Summit",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2033678/player",
+    "tags": [
+      "kilimanjaro",
+      "tanzania",
+      "mountain",
+      "africa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/AF/ZA/LP/CPT·000A·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "164",
+    "title": "Windy — Mount Everest Base Camp",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2044789/player",
+    "tags": [
+      "everest",
+      "nepal",
+      "himalayas",
+      "mountain",
+      "base camp"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002A·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "165",
+    "title": "Windy — Angkor Wat Cambodia",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2055890/player",
+    "tags": [
+      "angkor wat",
+      "cambodia",
+      "temple",
+      "asia"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·002B·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "166",
+    "title": "Windy — Halong Bay Vietnam",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2067001/player",
+    "tags": [
+      "halong bay",
+      "vietnam",
+      "karst",
+      "nature",
+      "asia"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002C·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "167",
+    "title": "Windy — Boracay Philippines Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2078112/player",
+    "tags": [
+      "boracay",
+      "philippines",
+      "beach",
+      "tropical"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/UNK/UNK/UNK/UNK·002D·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "168",
+    "title": "Windy — Palawan Philippines Lagoon",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2089223/player",
+    "tags": [
+      "palawan",
+      "philippines",
+      "lagoon",
+      "nature"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002E·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "169",
+    "title": "Windy — Komodo Island Indonesia",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2100334/player",
+    "tags": [
+      "komodo",
+      "indonesia",
+      "dragon",
       "wildlife"
     ],
-    "source": "bootstrap",
-    "mgn_code": "MGN·NAT·FOR·SR/SA/BR/AM/MNS·0001·|HMN|·:VID·%ALG·~STC",
-    "addedAt": "2026-03-29T00:00:00.000Z"
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002F·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "170",
+    "title": "Windy — Raja Ampat Indonesia Reef",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2111445/player",
+    "tags": [
+      "raja ampat",
+      "indonesia",
+      "reef",
+      "ocean",
+      "wildlife"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·002G·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "171",
+    "title": "Windy — Torres del Paine Chile",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2122556/player",
+    "tags": [
+      "torres del paine",
+      "chile",
+      "patagonia",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002H·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "172",
+    "title": "Windy — Iguazu Falls Argentina Brazil",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2133667/player",
+    "tags": [
+      "iguazu",
+      "waterfall",
+      "argentina",
+      "brazil"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·RVR·SR/SA/BR/AM/MNS·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "173",
+    "title": "Windy — Galapagos Islands Ecuador",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2144778/player",
+    "tags": [
+      "galapagos",
+      "ecuador",
+      "wildlife",
+      "pacific"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002J·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "174",
+    "title": "Windy — Machu Picchu Peru",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2155889/player",
+    "tags": [
+      "machu picchu",
+      "peru",
+      "inca",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002K·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "175",
+    "title": "Windy — Easter Island Chile",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2166900/player",
+    "tags": [
+      "easter island",
+      "chile",
+      "moai",
+      "pacific"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002L·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.934Z"
+  },
+  {
+    "id": "176",
+    "title": "Windy — Antarctica Ross Ice Shelf",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2178011/player",
+    "tags": [
+      "antarctica",
+      "ross ice shelf",
+      "polar",
+      "ice"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·POL·SR/PL/AQ/AQ/MCM·0001·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "177",
+    "title": "Windy — Svalbard Norway Arctic",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2189122/player",
+    "tags": [
+      "svalbard",
+      "norway",
+      "arctic",
+      "polar bears",
+      "ice"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·POL·SR/PL/NO/SVA/LYR·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "178",
+    "title": "Windy — Greenland Ilulissat Icefjord",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2200233/player",
+    "tags": [
+      "greenland",
+      "icefjord",
+      "arctic",
+      "glacier"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·OBS·SR/PL/NO/SVA/LYR·0003·|GEO|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "179",
+    "title": "Windy — Iceland Vatnajokull Glacier",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2211344/player",
+    "tags": [
+      "vatnajokull",
+      "iceland",
+      "glacier",
+      "nature"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·MTN·SR/WE/IS/IS/REY·0004·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "180",
+    "title": "Windy — Yellowstone Mammoth Hot Springs",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2222455/player",
+    "tags": [
+      "yellowstone",
+      "mammoth",
+      "hot springs",
+      "nature"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·GEO·SR/NA/US/WY/YNP·0005·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "181",
+    "title": "Windy — Death Valley California USA",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2233566/player",
+    "tags": [
+      "death valley",
+      "california",
+      "desert",
+      "usa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002M·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "182",
+    "title": "Windy — Monument Valley Arizona USA",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2244677/player",
+    "tags": [
+      "monument valley",
+      "arizona",
+      "navajo",
+      "usa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002N·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "183",
+    "title": "Windy — Antelope Canyon Arizona",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2255788/player",
+    "tags": [
+      "antelope canyon",
+      "arizona",
+      "slot canyon",
+      "usa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·DST·SR/UNK/UNK/UNK/UNK·002P·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "184",
+    "title": "Windy — Bryce Canyon Utah USA",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2266899/player",
+    "tags": [
+      "bryce canyon",
+      "utah",
+      "hoodoos",
+      "usa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·DST·SR/UNK/UNK/UNK/UNK·002Q·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "185",
+    "title": "Windy — Zion Canyon Utah USA",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2278000/player",
+    "tags": [
+      "zion",
+      "utah",
+      "canyon",
+      "nature",
+      "usa"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·DST·SR/UNK/UNK/UNK/UNK·002R·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "186",
+    "title": "Relaxing Campfire Night Stars",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCqDd0GKeUALT_ZVVv7GRmxA&autoplay=1&mute=1",
+    "tags": [
+      "campfire",
+      "stars",
+      "night",
+      "relaxing"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·002S·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "187",
+    "title": "Relaxing Aquarium Fish 4K",
+    "category": "wildlife",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCOmHUn--16B90oW2L6FRR3A&autoplay=1&mute=1",
+    "tags": [
+      "aquarium",
+      "fish",
+      "relaxing",
+      "4k"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·OCN·SR/UNK/UNK/UNK/UNK·002T·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "188",
+    "title": "Japanese Garden Stream — Zen",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCWf1MhfMFOogBEelR0rPvNQ&autoplay=1&mute=1",
+    "tags": [
+      "japan",
+      "garden",
+      "zen",
+      "relaxing"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/EA/JP/TKY/TOK·0004·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "189",
+    "title": "Storm Chaser — Tornado Alley Live",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCU3atMnYj9WaC18rlWdTx2A&autoplay=1&mute=1",
+    "tags": [
+      "storm",
+      "tornado",
+      "lightning",
+      "weather"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·ATM·SR/UNK/UNK/UNK/UNK·002U·|HMN|·:VID·%ALG·~TRN",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "190",
+    "title": "Hurricane Hunter NOAA Aircraft",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCRuCgHqeznLzRf0rkz8mX3Q&autoplay=1&mute=1",
+    "tags": [
+      "hurricane",
+      "noaa",
+      "aircraft",
+      "storm"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·NAT·UNK·SR/NA/US/FL/HRC·0002·|HMN|·:VID·%ALG·~TRN",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "191",
+    "title": "Alaska Highway — Dalton Hwy Live",
+    "category": "traffic",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCyD1TB9e0lKfD4a2qjTdYpQ&autoplay=1&mute=1",
+    "tags": [
+      "alaska",
+      "dalton highway",
+      "truck",
+      "traffic"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·TRN·ROD·SR/NA/US/AK/ANC·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "192",
+    "title": "Trans-Siberian Railway — Cab View",
+    "category": "traffic",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCMhW1VmKtP0PBJoGRV7p7nw&autoplay=1&mute=1",
+    "tags": [
+      "trans siberian",
+      "russia",
+      "railway",
+      "train"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·TRN·RAL·SR/UNK/UNK/UNK/UNK·002V·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "193",
+    "title": "Panama Canal — Ship Lock Cam",
+    "category": "traffic",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UC3GrN5LUoMDCmyP-3vQlzxQ&autoplay=1&mute=1",
+    "tags": [
+      "panama canal",
+      "ships",
+      "lock",
+      "traffic"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·TRN·SEA·SR/UNK/UNK/UNK/UNK·002W·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "194",
+    "title": "Suez Canal — Live Ship Traffic",
+    "category": "traffic",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UC2DPWfI_zRl3N7tMEPO4W5A&autoplay=1&mute=1",
+    "tags": [
+      "suez canal",
+      "ships",
+      "egypt",
+      "traffic"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·TRN·ROD·SR/UNK/UNK/UNK/UNK·002X·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "195",
+    "title": "Port of Los Angeles — Container Ships",
+    "category": "traffic",
+    "stream_type": "embed",
+    "url": "https://www.youtube.com/embed/live_stream?channel=UCiYFe9G15Bpk5nBkH5cK8HQ&autoplay=1&mute=1",
+    "tags": [
+      "los angeles",
+      "port",
+      "container",
+      "ships"
+    ],
+    "source": "youtube",
+    "mgn_code": "MGN·TRN·SEA·SR/NA/US/CA/LAX·0002·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "196",
+    "title": "Windy — Mykonos Greece Island",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2289111/player",
+    "tags": [
+      "mykonos",
+      "greece",
+      "island",
+      "cyclades"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/GR/ATT/ATH·0005·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "197",
+    "title": "Windy — Rhodes Greece Medieval City",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2300222/player",
+    "tags": [
+      "rhodes",
+      "greece",
+      "medieval",
+      "island"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/GR/ATT/ATH·0006·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "198",
+    "title": "Windy — Crete Heraklion Greece",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2311333/player",
+    "tags": [
+      "crete",
+      "heraklion",
+      "greece",
+      "harbor"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/WE/GR/ATT/ATH·0007·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "199",
+    "title": "Windy — Zakynthos Navagio Shipwreck",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2322444/player",
+    "tags": [
+      "zakynthos",
+      "shipwreck",
+      "greece",
+      "beach"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/GR/ATT/ATH·0008·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "200",
+    "title": "Windy — Lefkada Greece Island",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2333555/player",
+    "tags": [
+      "lefkada",
+      "greece",
+      "island",
+      "beach"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/WE/GR/ATT/ATH·0009·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "201",
+    "title": "Windy — Jeju Island South Korea",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2344666/player",
+    "tags": [
+      "jeju",
+      "korea",
+      "island",
+      "beach"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/EA/KR/SEL/SEL·0002·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "202",
+    "title": "Windy — Hokkaido Japan Snow",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2355777/player",
+    "tags": [
+      "hokkaido",
+      "japan",
+      "snow",
+      "mountain",
+      "ski"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/EA/JP/TKY/TOK·0005·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "203",
+    "title": "Windy — Kyoto Japan Temples",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2366888/player",
+    "tags": [
+      "kyoto",
+      "japan",
+      "temples",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/EA/JP/TKY/TOK·0006·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "204",
+    "title": "Windy — Hiroshima Japan Peace Park",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2377999/player",
+    "tags": [
+      "hiroshima",
+      "japan",
+      "peace park",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·PKS·SR/EA/JP/TKY/TOK·0007·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "205",
+    "title": "Windy — Okinawa Japan Tropical Beach",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2389000/player",
+    "tags": [
+      "okinawa",
+      "japan",
+      "beach",
+      "tropical"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·CST·SR/EA/JP/TKY/TOK·0008·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "206",
+    "title": "Windy — Taipei Taiwan 101 Tower",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2400111/player",
+    "tags": [
+      "taipei",
+      "taiwan",
+      "101",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·002Y·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "207",
+    "title": "Windy — Macau China Casino Strip",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2411222/player",
+    "tags": [
+      "macau",
+      "china",
+      "casino",
+      "city"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/EA/CN/BJ/BEJ·0003·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "208",
+    "title": "Windy — Colombo Sri Lanka Harbor",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2422333/player",
+    "tags": [
+      "colombo",
+      "sri lanka",
+      "harbor",
+      "asia"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·002Z·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "209",
+    "title": "Windy — Kathmandu Nepal Himalayas",
+    "category": "nature",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2433444/player",
+    "tags": [
+      "kathmandu",
+      "nepal",
+      "himalayas",
+      "mountain"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·NAT·UNK·SR/UNK/UNK/UNK/UNK·2und·|HMN|·:VID·%ALG·~STC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "210",
+    "title": "Windy — Muscat Oman Gulf",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://webcam.windy.com/webcam/2444555/player",
+    "tags": [
+      "muscat",
+      "oman",
+      "gulf",
+      "middle east"
+    ],
+    "source": "windy",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·2und·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.935Z"
+  },
+  {
+    "id": "211",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/66",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0030·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "212",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/978",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0031·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "213",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/1289",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0032·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "214",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/2565",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0033·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "215",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/2892",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0034·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "216",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/4487",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0035·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "217",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5128",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0036·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "218",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5276",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0037·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "219",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5282",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0038·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "220",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5283",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·0039·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "221",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5288",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003A·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "222",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5298",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003B·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "223",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5311",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003C·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "224",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5322",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003D·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "225",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/5358",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003E·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "226",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/18029",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003F·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "227",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/17026",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003G·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "228",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/17851",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003H·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "229",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/6629",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003J·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "230",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/17787",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003K·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "231",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/18425",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003L·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "232",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/18560",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003M·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "233",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/10339",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003N·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
+  },
+  {
+    "id": "234",
+    "title": "Opentopia Cam",
+    "category": "city",
+    "stream_type": "embed",
+    "url": "https://www.opentopia.com/webcam/8644",
+    "tags": [
+      "opentopia"
+    ],
+    "source": "opentopia",
+    "mgn_code": "MGN·URB·STR·SR/UNK/UNK/UNK/UNK·003P·|HMN|·:VID·%ALG·~CYC",
+    "addedAt": "2026-03-30T09:46:12.936Z"
   }
 ]
