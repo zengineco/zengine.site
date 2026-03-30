@@ -796,8 +796,8 @@
 
   /* ===== CONFIG BLOCK ===== */
   // REPLACE THESE with your actual Supabase values before deploying
-  var SUPABASE_URL      = 'https://kzjyokiiygryzlxbqwjv.supabase.co';
-  var SUPABASE_ANON_KEY = 'sb_publishable_ejU0TdTLaDCeUKRRz5eV6w_byPXyFbE';
+  var SUPABASE_URL      = 'https://YOUR_PROJECT_REF.supabase.co';
+  var SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
   var JSON_FALLBACK     = '/data/streams.json';
   var SCAN_INTERVAL_MS  = 15000;  // auto-scan: 15 seconds per channel
   var GRID_THUMB_LOAD   = false;  // DECISION: false = no iframes in grid (performance)
@@ -910,6 +910,10 @@
     var s = state.streams[index];
     if (!s) { return; }
 
+    // Clean up any active refresh/blocked timers from previous channel
+    clearRefreshTimer();
+    clearBlockedTimer();
+
     // Flash
     flashSwitch();
 
@@ -917,10 +921,12 @@
     els.hudChannel.textContent = s.id || String(index + 1).padStart(3, '0');
     els.hudTitle.textContent   = s.title || 'Unknown';
 
-    // Render stream in active frame
+    // Hide static, show frame
     els.staticScreen.style.display = 'none';
     els.activeFrame.classList.add('visible');
-    els.activeFrame.innerHTML = buildStreamEl(s, true);
+
+    // DECISION: buildStreamEl now takes only (stream) — mode auto-detected by source
+    els.activeFrame.innerHTML = buildStreamEl(s);
 
     // Update bar highlight
     updateBarHighlight(index);
@@ -935,28 +941,193 @@
     updateMGNPanel(s);
   }
 
-  /* ===== BUILD STREAM ELEMENT ===== */
-  // READS: stream, fullscreen bool  WRITES: HTML string
-  function buildStreamEl(s, fullscreen) {
-    var w = fullscreen ? '100%' : '100%';
-    var h = fullscreen ? '100%' : '100%';
+  /* ===== STREAM RENDER ENGINE =====
+     Three render modes based on source + stream_type:
 
-    if (s.stream_type === 'mjpeg') {
-      return '<img src="' + esc(s.url) + '" alt="' + esc(s.title) + '" ' +
-             'style="width:' + w + ';height:' + h + ';object-fit:cover;display:block;" ' +
-             'onerror="showDeadSignal()">';
+     MODE 1 — youtube / direct embed:
+       <iframe> — always works, no special handling needed.
+
+     MODE 2 — mjpeg / dot / noaa / wsdot / txdot / odot:
+       <img src="url?t=TIMESTAMP"> with setInterval cache-buster every 30s.
+       Turns JPEG snapshots into pseudo-live updating feeds.
+
+     MODE 3 — earthcam / windy / opentopia (blocked iframes):
+       Try rendering as <img src="embedUrl"> first — some serve a
+       still frame this way. If that 404s, try the embed as iframe anyway.
+       If iframe sends X-Frame-Options block, auto-skip to next channel.
+  ===== */
+
+  var REFRESH_INTERVAL_MS = 30000;  // 30s — DOT cam refresh rate
+  var BLOCKED_TIMEOUT_MS  = 4000;   // 4s — how long to wait before auto-skipping blocked iframes
+  var state_refreshTimer  = null;   // holds setInterval for MJPEG refresh
+  var state_blockedTimer  = null;   // holds setTimeout for blocked iframe auto-skip
+
+  // READS: source string  WRITES: render mode string
+  // DECISION: mode assigned by source, not stream_type, because
+  // stream_type alone doesn't distinguish blocked-embed from working-embed
+  function getRenderMode(s) {
+    var src = (s.source || '').toLowerCase();
+    // Always good iframes
+    if (src === 'youtube' || src === 'explore' || src === 'nps') {
+      return 'iframe';
     }
-    // embed (iframe)
-    return '<iframe src="' + esc(s.url) + '" ' +
-           'allow="autoplay; fullscreen; picture-in-picture" allowfullscreen ' +
-           'style="width:' + w + ';height:' + h + ';border:none;display:block;" ' +
-           'onerror="showDeadSignal()">' +
-           '</iframe>';
+    // MJPEG snapshot feeds — need cache-busting refresh
+    if (s.stream_type === 'mjpeg' ||
+        src === 'wsdot' || src === 'odot' || src === 'txdot' ||
+        src === '511ny' || src === '511' || src === 'noaa_img' ||
+        /dot$|dot_/.test(src)) {
+      return 'refresh-img';
+    }
+    // Potentially blocked embed sources — try img first, fallback iframe
+    if (src === 'earthcam' || src === 'windy' || src === 'opentopia' ||
+        src === 'camhacker' || src === 'insecam') {
+      return 'try-img';
+    }
+    // Default: try iframe
+    return 'iframe';
   }
 
+  /* ===== BUILD STREAM ELEMENT ===== */
+  // READS: stream object  WRITES: HTML string injected into #active-frame
+  function buildStreamEl(s) {
+    var mode = getRenderMode(s);
+    var url  = s.url || '';
+
+    clearRefreshTimer();
+    clearBlockedTimer();
+
+    if (mode === 'iframe') {
+      // DECISION: YouTube always embeds cleanly. No fallback needed.
+      return '<iframe id="stream-iframe" src="' + esc(url) + '" ' +
+             'allow="autoplay; fullscreen; picture-in-picture; encrypted-media" ' +
+             'allowfullscreen sandbox="allow-scripts allow-same-origin allow-presentation" ' +
+             'style="width:100%;height:100%;border:none;display:block;" ' +
+             'onload="onIframeLoaded()" ' +
+             'onerror="onStreamError()"></iframe>';
+    }
+
+    if (mode === 'refresh-img') {
+      // Cache-bust by appending timestamp to URL.
+      // Some MJPEG URLs already have query params — handle both cases.
+      var sep = url.indexOf('?') >= 0 ? '&' : '?';
+      var stamped = url + sep + 't=' + Date.now();
+
+      // Start auto-refresh interval
+      state_refreshTimer = setInterval(function() {
+        var img = document.getElementById('stream-img');
+        if (!img) { clearRefreshTimer(); return; }
+        var base = img.dataset.base || url;
+        var s2   = base.indexOf('?') >= 0 ? '&' : '?';
+        img.src  = base + s2 + 't=' + Date.now();
+        // Update the refresh timestamp display
+        var ts = document.getElementById('refresh-ts');
+        if (ts) { ts.textContent = 'Updated ' + new Date().toLocaleTimeString(); }
+      }, REFRESH_INTERVAL_MS);
+
+      return '<div style="position:relative;width:100%;height:100%;background:#000;">' +
+             '<img id="stream-img" ' +
+             'src="' + esc(stamped) + '" ' +
+             'data-base="' + esc(url) + '" ' +
+             'alt="' + esc(s.title) + '" ' +
+             'style="width:100%;height:100%;object-fit:contain;display:block;" ' +
+             'onerror="onStreamError()">' +
+             '<div id="refresh-ts" style="position:absolute;bottom:8px;right:12px;' +
+             'font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.3);' +
+             'letter-spacing:0.1em;pointer-events:none;">Live · refreshes every 30s</div>' +
+             '</div>';
+    }
+
+    if (mode === 'try-img') {
+      // DECISION: Earthcam/Windy block iframes via X-Frame-Options.
+      // We can't detect this in JS before load. Strategy:
+      // 1. Render as <img> — some embed URLs serve a still frame this way
+      // 2. Start a timer — if img errors, try as iframe
+      // 3. If iframe loads but is blank (blocked), auto-skip after BLOCKED_TIMEOUT_MS
+      var sep2     = url.indexOf('?') >= 0 ? '&' : '?';
+      var stamped2 = url + sep2 + 't=' + Date.now();
+
+      // Try as refreshing img first
+      state_refreshTimer = setInterval(function() {
+        var img = document.getElementById('stream-img');
+        if (!img) { clearRefreshTimer(); return; }
+        var base = img.dataset.base || url;
+        var s3   = base.indexOf('?') >= 0 ? '&' : '?';
+        img.src  = base + s3 + 't=' + Date.now();
+      }, REFRESH_INTERVAL_MS);
+
+      return '<div style="position:relative;width:100%;height:100%;background:#000;">' +
+             '<img id="stream-img" ' +
+             'src="' + esc(stamped2) + '" ' +
+             'data-base="' + esc(url) + '" ' +
+             'alt="' + esc(s.title) + '" ' +
+             'style="width:100%;height:100%;object-fit:contain;display:block;" ' +
+             'onerror="escalateToIframe(\'' + esc(url) + '\')">' +
+             '<div id="refresh-ts" style="position:absolute;bottom:8px;right:12px;' +
+             'font-family:var(--mono);font-size:9px;color:rgba(255,255,255,0.3);' +
+             'letter-spacing:0.1em;pointer-events:none;">Connecting...</div>' +
+             '</div>';
+    }
+
+    // Fallback
+    return '<iframe src="' + esc(url) + '" ' +
+           'style="width:100%;height:100%;border:none;" allowfullscreen ' +
+           'onerror="onStreamError()"></iframe>';
+  }
+
+  /* ===== ESCALATE BLOCKED IMG → IFRAME ===== */
+  // Called when try-img source's <img> 404s — fall back to iframe,
+  // but set a timer to auto-skip if iframe stays blank (X-Frame-Options block)
+  function escalateToIframe(url) {
+    var frame = document.getElementById('active-frame');
+    if (!frame) { return; }
+    clearRefreshTimer();
+
+    frame.innerHTML = '<iframe id="stream-iframe" src="' + esc(url) + '" ' +
+      'allow="autoplay; fullscreen" allowfullscreen ' +
+      'style="width:100%;height:100%;border:none;display:block;" ' +
+      'onload="onIframeLoaded()" ' +
+      'onerror="onStreamError()"></iframe>';
+
+    // If iframe doesn't confirm loaded within BLOCKED_TIMEOUT_MS, skip channel
+    state_blockedTimer = setTimeout(function() {
+      console.log('[TV] Iframe timeout — likely blocked, skipping channel');
+      tuneChannel(state.currentIndex + 1);
+    }, BLOCKED_TIMEOUT_MS);
+  }
+
+  /* ===== IFRAME LOAD CONFIRMED ===== */
+  // Fires on iframe onload — clears the blocked timer so we don't skip
+  function onIframeLoaded() {
+    clearBlockedTimer();
+    // Clear "Connecting..." label if present
+    var ts = document.getElementById('refresh-ts');
+    if (ts) { ts.textContent = ''; }
+  }
+
+  /* ===== STREAM ERROR ===== */
+  function onStreamError() {
+    clearRefreshTimer();
+    clearBlockedTimer();
+    showDeadSignal();
+    // Auto-skip after 2s
+    setTimeout(function() {
+      if (state.scanning) { return; } // scanner handles it
+      tuneChannel(state.currentIndex + 1);
+    }, 2000);
+  }
+
+  /* ===== DEAD SIGNAL ===== */
   function showDeadSignal() {
     els.staticScreen.style.display = 'flex';
-    els.staticScreen.querySelector('.static-sub').textContent = 'Signal lost — try next channel';
+    els.staticScreen.querySelector('.static-sub').textContent = 'No signal — switching channel...';
+  }
+
+  /* ===== TIMER CLEANUP ===== */
+  function clearRefreshTimer() {
+    if (state_refreshTimer) { clearInterval(state_refreshTimer); state_refreshTimer = null; }
+  }
+  function clearBlockedTimer() {
+    if (state_blockedTimer) { clearTimeout(state_blockedTimer); state_blockedTimer = null; }
   }
 
   /* ===== CHANNEL FLASH ===== */
@@ -1003,7 +1174,7 @@
               // DECISION: GRID_THUMB_LOAD=false → placeholder div, not live iframe
               // avoids loading 50+ iframes simultaneously which kills performance
               (GRID_THUMB_LOAD
-                ? buildStreamEl(s, false)
+                ? buildStreamEl(s)
                 : '<div style="width:100%;height:100%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;"><span style="font-family:var(--vt);font-size:28px;color:#333;">' + esc(s.id || String(i+1).padStart(3,'0')) + '</span></div>'
               ) +
               '<div class="thumb-overlay"></div>' +
@@ -1209,6 +1380,9 @@
     loadStreams();
   });
   </script>
+
+</body>
+</html>
 
 </body>
 </html>
