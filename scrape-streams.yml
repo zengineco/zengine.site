@@ -1,0 +1,83 @@
+# =============================================================
+# File:    .github/workflows/scrape-streams.yml
+# Project: zengine.site — Live Stream Atlas
+# Author:  © 2026 Zengine™
+# Version: v1.0.0
+#
+# Runs scrapeStreams.js every 6 hours.
+# Commits updated data/streams.json back to repo.
+# Manual trigger available via workflow_dispatch.
+#
+# REQUIRED SECRETS (set in repo Settings → Secrets → Actions):
+#   None required for current source set.
+#   Add YOUTUBE_API_KEY here if YouTube source added later.
+#
+# PERMISSIONS REQUIRED:
+#   Repo Settings → Actions → General → Workflow permissions
+#   → Read and write permissions (for git push step)
+# =============================================================
+
+name: Refresh Live Streams
+
+on:
+  schedule:
+    # Every 6 hours: midnight, 6am, noon, 6pm UTC
+    - cron: "0 0,6,12,18 * * *"
+  workflow_dispatch:
+    # Manual trigger from Actions tab anytime
+    inputs:
+      debug:
+        description: "Enable debug output"
+        required: false
+        default: "false"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: |
+          npm install --save-dev node-fetch@2 cheerio abort-controller
+          echo "Dependencies installed"
+
+      - name: Run stream scraper
+        run: node scripts/scrapeStreams.js
+        env:
+          NODE_ENV: production
+          # Add secrets here as needed:
+          # YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+
+      - name: Check output
+        run: |
+          if [ -f "data/streams.json" ]; then
+            COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('data/streams.json','utf8')).length)")
+            echo "streams.json updated — $COUNT streams"
+          else
+            echo "WARNING: streams.json not found"
+            exit 1
+          fi
+
+      - name: Commit and push updated streams
+        run: |
+          git config --global user.name  "zengine-cam-bot"
+          git config --global user.email "bot@zengine.site"
+          git add data/streams.json
+          # Only commit if file actually changed
+          git diff --staged --quiet && echo "No changes — skipping commit" || \
+            git commit -m "🎥 refresh streams [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
