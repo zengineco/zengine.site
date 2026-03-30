@@ -1,0 +1,20 @@
+{
+  "name": "zengine-cam-scraper",
+  "version": "1.0.0",
+  "description": "Live stream scraper for zengine.site — Zengine™ stream atlas",
+  "main": "scripts/scrapeStreams.js",
+  "scripts": {
+    "scrape": "node scripts/scrapeStreams.js",
+    "scrape:debug": "DEBUG=1 node scripts/scrapeStreams.js"
+  },
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "cheerio": "^1.0.0",
+    "node-fetch": "^2.7.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Zengine™",
+  "license": "UNLICENSED"
+}
