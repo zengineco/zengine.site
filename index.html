@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- =========================================================
+    WORKFLOW STACK
+    File:       index.html
+    Brand:      Zengine.site
+    Author:     © 2026 Zengine™ | www.zengine.site
+    Version:    v1.0.0
+    Date:       2026-03-30
+
+    BOOT ORDER:
+      1. CSS variables + reset
+      2. Font imports
+      3. DOM: #screen | #scanlines | #hud | #channel-grid | #sidebar
+      4. JS: loadStreams() → renderGrid() → initControls()
+             initKeyboard() → initAutoScan() → initMGNPanel()
+
+    REPLACE BEFORE DEPLOY:
+      SUPABASE_URL      — line ~780
+      SUPABASE_ANON_KEY — line ~781
+
+    ASSET MANIFEST:
+      /js/streamFetch.js — optional (logic inline here for single-file deploy)
+      /data/streams.json — fallback if Supabase unavailable
+  ========================================================= -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Zengine.site — Live stream atlas. Every channel on Earth, addressed." />
+  <meta name="theme-color" content="#080808" />
+  <title>Zengine.site — Live</title>
+  <link rel="canonical" href="https://zengine.site/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Oswald:wght@200;400;600&family=VT323&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --black:       #080808;
+      --dark:        #111111;
+      --dark2:       #1a1a1a;
+      --panel:       rgba(12,12,12,0.94);
+      --border:      rgba(255,255,255,0.07);
+      --border2:     rgba(255,255,255,0.12);
+      --gold:        #c8a45a;
+      --gold-dim:    rgba(200,164,90,0.15);
+      --gold-glow:   rgba(200,164,90,0.06);
+      --red:         #e03030;
+      --green:       #30c060;
+      --white:       #f0f0f0;
+      --muted:       #555;
+      --muted2:      #333;
+      --mono:        'Share Tech Mono', 'Courier New', monospace;
+      --display:     'Oswald', 'Impact', sans-serif;
+      --vt:          'VT323', monospace;
+      --ease:        cubic-bezier(0.16, 1, 0.3, 1);
+      --sidebar-w:   280px;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--mono);
+    }
+    button { background: none; border: none; cursor: pointer; color: inherit; font: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== SCANLINES ===== */
+    #scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.08) 2px,
+        rgba(0,0,0,0.08) 4px
+      );
+    }
+    /* CRT vignette */
+    #vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center,
+        transparent 60%,
+        rgba(0,0,0,0.55) 100%
+      );
+    }
+
+    /* ===== LAYOUT ===== */
+    #app {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ===== MAIN TV AREA ===== */
+    #tv-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      position: relative;
+    }
+
+    /* ===== TOP HUD ===== */
+    #hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: var(--dark);
+      border-bottom: 1px solid var(--border);
+      gap: 16px;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .hud-logo {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .hud-logo span { color: var(--gold); }
+
+    .hud-channel {
+      font-family: var(--vt);
+      font-size: 28px;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .hud-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 12px;
+    }
+
+    .hud-live {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .hud-live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: blink 1.4s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+
+    .hud-controls {
+      display: flex;
+      gap: 4px;
+    }
+    .hud-btn {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border: 1px solid var(--border2);
+      border-radius: 3px;
+      color: var(--muted);
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .hud-btn:hover,
+    .hud-btn.active { color: var(--gold); border-color: var(--gold); }
+
+    .hud-count {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    /* ===== SCREEN ===== */
+    #screen {
+      flex: 1;
+      position: relative;
+      background: #000;
+      overflow: hidden;
+    }
+
+    /* Active single-channel frame */
+    #active-frame {
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+    #active-frame.visible { display: block; }
+    #active-frame iframe {
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
+    #active-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Static / no signal */
+    #static-screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      gap: 16px;
+    }
+    .static-text {
+      font-family: var(--vt);
+      font-size: 48px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      animation: flicker 3s infinite;
+    }
+    .static-sub {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted2);
+    }
+    @keyframes flicker {
+      0%, 95%, 100% { opacity: 1; }
+      96%            { opacity: 0.4; }
+      97%            { opacity: 1; }
+      98%            { opacity: 0.2; }
+    }
+
+    /* Channel switch flash */
+    #switch-flash {
+      position: absolute;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 50;
+      transition: opacity 0.08s;
+    }
+    #switch-flash.flash { opacity: 0.6; }
+
+    /* ===== CHANNEL GRID (browse mode) ===== */
+    #grid-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: none;
+      overflow-y: auto;
+      padding: 20px;
+      z-index: 40;
+    }
+    #grid-overlay.open { display: block; }
+
+    .grid-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .grid-title {
+      font-family: var(--display);
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .grid-close {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 4px 10px;
+      border: 1px solid var(--border2);
+      border-radius: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .grid-close:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* Category filter pills */
+    .grid-filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .filter-pill {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--border2);
+      border-radius: 2px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .filter-pill:hover,
+    .filter-pill.active {
+      color: var(--gold);
+      border-color: var(--gold);
+      background: var(--gold-glow);
+    }
+
+    #channel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2px;
+    }
+
+    .channel-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--dark2);
+      cursor: pointer;
+      overflow: hidden;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .channel-thumb:hover {
+      border-color: var(--gold);
+      transform: scale(1.02);
+      z-index: 2;
+    }
+    .channel-thumb.current {
+      border-color: var(--red);
+    }
+
+    .channel-thumb iframe,
+    .channel-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .channel-thumb:hover iframe,
+    .channel-thumb:hover img { opacity: 1; }
+
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+    }
+    .thumb-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 8px 10px;
+    }
+    .thumb-num {
+      font-family: var(--vt);
+      font-size: 16px;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .thumb-title {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+    .thumb-dead {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--vt);
+      font-size: 22px;
+      color: var(--muted2);
+    }
+
+    /* ===== BOTTOM CHANNEL BAR ===== */
+    #channel-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 8px 16px;
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      overflow-x: auto;
+      flex-shrink: 0;
+      scrollbar-width: none;
+    }
+    #channel-bar::-webkit-scrollbar { display: none; }
+
+    .bar-item {
+      flex-shrink: 0;
+      font-family: var(--vt);
+      font-size: 18px;
+      color: var(--muted);
+      padding: 2px 10px;
+      cursor: pointer;
+      transition: color 0.15s;
+      border-right: 1px solid var(--muted2);
+      white-space: nowrap;
+    }
+    .bar-item:last-child { border-right: none; }
+    .bar-item:hover { color: var(--white); }
+    .bar-item.active { color: var(--gold); }
+
+    /* ===== SIDEBAR — MGN INFO ===== */
+    #sidebar {
+      width: var(--sidebar-w);
+      background: var(--panel);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow: hidden;
+      transition: width 0.3s var(--ease);
+    }
+    #sidebar.collapsed { width: 0; }
+
+    .sidebar-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sidebar-title {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .sidebar-close {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .sidebar-close:hover { color: var(--white); }
+
+    .sidebar-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--muted2) transparent;
+    }
+
+    .mgn-block {
+      background: var(--dark2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 12px 14px;
+    }
+    .mgn-block-label {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .mgn-code-display {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--gold);
+      line-height: 1.6;
+      word-break: break-all;
+      letter-spacing: 0.04em;
+    }
+    .mgn-code-display .seg-prefix { color: var(--gold); }
+    .mgn-code-display .seg-dom    { color: #7cb8e8; }
+    .mgn-code-display .seg-locus  { color: #8cc87c; }
+    .mgn-code-display .seg-opt    { color: var(--muted); }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .info-val {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--white);
+      text-align: right;
+      word-break: break-all;
+    }
+    .info-val.gold { color: var(--gold); }
+
+    .conf-bar {
+      height: 3px;
+      background: var(--dark2);
+      border-radius: 2px;
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .conf-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width 0.4s var(--ease);
+    }
+
+    .sidebar-kbd {
+      padding: 0 16px 16px;
+    }
+    .kbd-title {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 8px;
+    }
+    .kbd-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+    }
+    .kbd-key {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      background: var(--dark2);
+      border: 1px solid var(--muted2);
+      border-radius: 3px;
+      padding: 2px 6px;
+    }
+    .kbd-desc {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    /* ===== AUTO-SCAN INDICATOR ===== */
+    #scan-bar {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: var(--gold);
+      width: 0%;
+      transition: width linear;
+      z-index: 20;
+    }
+
+    /* ===== LOADING ===== */
+    #loading {
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      z-index: 500;
+      transition: opacity 0.6s;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    .loading-logo {
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 200;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .loading-logo span { color: var(--gold); }
+    .loading-sub {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .loading-dots {
+      font-family: var(--vt);
+      font-size: 24px;
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      animation: loadingDots 1.2s infinite;
+    }
+    @keyframes loadingDots {
+      0%   { content: '.'; opacity: 0.3; }
+      33%  { opacity: 0.6; }
+      66%  { opacity: 1; }
+      100% { opacity: 0.3; }
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      #sidebar { display: none; }
+      .hud-title { display: none; }
+      #channel-bar { display: none; }
+      #channel-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loading">
+    <div class="loading-logo">ZEN<span>G</span>INE</div>
+    <div class="loading-sub">Tuning in...</div>
+    <div class="loading-dots">● ● ●</div>
+  </div>
+
+  <!-- SCANLINES + VIGNETTE -->
+  <div id="scanlines" aria-hidden="true"></div>
+  <div id="vignette"  aria-hidden="true"></div>
+
+  <!-- APP -->
+  <div id="app">
+
+    <!-- MAIN TV -->
+    <div id="tv-main">
+
+      <!-- HUD -->
+      <div id="hud">
+        <div class="hud-logo">ZEN<span>G</span>INE<span style="color:var(--muted);font-size:11px;margin-left:6px;letter-spacing:0.1em;">.SITE</span></div>
+        <div class="hud-channel" id="hud-channel">--</div>
+        <div class="hud-title"   id="hud-title">No Signal</div>
+        <div class="hud-live"><div class="hud-live-dot"></div>LIVE</div>
+        <div class="hud-controls">
+          <button class="hud-btn" id="btn-prev" title="Previous channel (←)">◀ PREV</button>
+          <button class="hud-btn" id="btn-next" title="Next channel (→)">NEXT ▶</button>
+          <button class="hud-btn" id="btn-scan" title="Auto-scan channels (S)">⟳ SCAN</button>
+          <button class="hud-btn" id="btn-grid" title="Browse all channels (G)">▦ GRID</button>
+          <button class="hud-btn" id="btn-mgn"  title="Toggle MGN info panel (M)">MGN·</button>
+        </div>
+        <div class="hud-count" id="hud-count">0 channels</div>
+      </div>
+
+      <!-- SCREEN -->
+      <div id="screen">
+        <!-- Active stream frame -->
+        <div id="active-frame">
+          <!-- populated by JS -->
+        </div>
+
+        <!-- Static / no signal -->
+        <div id="static-screen">
+          <div class="static-text">NO SIGNAL</div>
+          <div class="static-sub">Loading channels...</div>
+        </div>
+
+        <!-- Channel switch flash -->
+        <div id="switch-flash"></div>
+
+        <!-- Auto-scan progress bar -->
+        <div id="scan-bar"></div>
+
+        <!-- Channel grid overlay -->
+        <div id="grid-overlay">
+          <div class="grid-header">
+            <div class="grid-title">▦ All Channels</div>
+            <button class="grid-close" id="grid-close-btn">✕ Close</button>
+          </div>
+          <div class="grid-filters" id="grid-filters">
+            <button class="filter-pill active" data-cat="all">All</button>
+            <button class="filter-pill" data-cat="city">City</button>
+            <button class="filter-pill" data-cat="nature">Nature</button>
+            <button class="filter-pill" data-cat="wildlife">Wildlife</button>
+            <button class="filter-pill" data-cat="traffic">Traffic</button>
+            <button class="filter-pill" data-cat="space">Space</button>
+          </div>
+          <div id="channel-grid">
+            <!-- populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- CHANNEL BAR -->
+      <div id="channel-bar" id="channel-bar">
+        <!-- populated by JS -->
+      </div>
+
+    </div><!-- /tv-main -->
+
+    <!-- SIDEBAR — MGN INFO -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">Modulign · DAG-OR v3.0</div>
+        <button class="sidebar-close" id="sidebar-close" title="Close (M)">✕</button>
+      </div>
+      <div class="sidebar-body" id="sidebar-body">
+        <div class="mgn-block">
+          <div class="mgn-block-label">MGN· Address</div>
+          <div class="mgn-code-display" id="mgn-code-display">—</div>
+        </div>
+        <div class="mgn-block" id="mgn-segments">
+          <!-- segment rows populated by JS -->
+        </div>
+        <div class="mgn-block" id="mgn-confidence-block">
+          <div class="mgn-block-label">Confidence</div>
+          <div class="info-val gold" id="mgn-confidence">—</div>
+          <div class="conf-bar">
+            <div class="conf-fill" id="conf-fill" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="mgn-block">
+          <div class="mgn-block-label">Stream Info</div>
+          <div id="mgn-stream-info">
+            <!-- populated by JS -->
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-kbd">
+        <div class="kbd-title">Keyboard</div>
+        <div class="kbd-row"><span class="kbd-key">← →</span><span class="kbd-desc">Change channel</span></div>
+        <div class="kbd-row"><span class="kbd-key">S</span><span class="kbd-desc">Auto-scan</span></div>
+        <div class="kbd-row"><span class="kbd-key">G</span><span class="kbd-desc">Browse grid</span></div>
+        <div class="kbd-row"><span class="kbd-key">M</span><span class="kbd-desc">MGN panel</span></div>
+        <div class="kbd-row"><span class="kbd-key">F</span><span class="kbd-desc">Fullscreen</span></div>
+        <div class="kbd-row"><span class="kbd-key">Esc</span><span class="kbd-desc">Close overlay</span></div>
+      </div>
+    </div><!-- /sidebar -->
+
+  </div><!-- /app -->
+
+  <script>
+  // =============================================================
+  // BOOT ORDER:
+  //   1. Config
+  //   2. State
+  //   3. loadStreams() — Supabase → JSON fallback
+  //   4. renderGrid() — channel grid + bar
+  //   5. tuneChannel(index) — switch active stream
+  //   6. initControls() — buttons + keyboard
+  //   7. initAutoScan() — timer-based channel cycling
+  //   8. initMGNPanel() — sidebar populate
+  // =============================================================
+
+  'use strict';
+
+  /* ===== CONFIG BLOCK ===== */
+  // REPLACE THESE with your actual Supabase values before deploying
+  var SUPABASE_URL      = 'https://YOUR_PROJECT_REF.supabase.co';
+  var SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+  var JSON_FALLBACK     = '/data/streams.json';
+  var SCAN_INTERVAL_MS  = 15000;  // auto-scan: 15 seconds per channel
+  var GRID_THUMB_LOAD   = false;  // DECISION: false = no iframes in grid (performance)
+                                  // set true to load live thumbs in grid (heavy)
+
+  /* ===== STATE ===== */
+  var state = {
+    streams:      [],
+    filtered:     [],
+    currentIndex: 0,
+    scanning:     false,
+    scanTimer:    null,
+    scanProgress: null,
+    gridOpen:     false,
+    sidebarOpen:  true,
+    activeCategory: 'all'
+  };
+
+  /* ===== DOM REFS ===== */
+  var els = {
+    loading:      document.getElementById('loading'),
+    activeFrame:  document.getElementById('active-frame'),
+    staticScreen: document.getElementById('static-screen'),
+    switchFlash:  document.getElementById('switch-flash'),
+    hudChannel:   document.getElementById('hud-channel'),
+    hudTitle:     document.getElementById('hud-title'),
+    hudCount:     document.getElementById('hud-count'),
+    channelGrid:  document.getElementById('channel-grid'),
+    channelBar:   document.getElementById('channel-bar'),
+    gridOverlay:  document.getElementById('grid-overlay'),
+    sidebar:      document.getElementById('sidebar'),
+    sidebarBody:  document.getElementById('sidebar-body'),
+    mgnCode:      document.getElementById('mgn-code-display'),
+    mgnSegments:  document.getElementById('mgn-segments'),
+    mgnConfidence:document.getElementById('mgn-confidence'),
+    confFill:     document.getElementById('conf-fill'),
+    mgnStreamInfo:document.getElementById('mgn-stream-info'),
+    scanBar:      document.getElementById('scan-bar'),
+    btnPrev:      document.getElementById('btn-prev'),
+    btnNext:      document.getElementById('btn-next'),
+    btnScan:      document.getElementById('btn-scan'),
+    btnGrid:      document.getElementById('btn-grid'),
+    btnMGN:       document.getElementById('btn-mgn')
+  };
+
+  /* ===== LOAD STREAMS ===== */
+  // READS: Supabase → JSON fallback  WRITES: state.streams
+  function loadStreams() {
+    var supabaseOk = SUPABASE_URL.indexOf('YOUR_PROJECT') === -1 &&
+                     SUPABASE_ANON_KEY.indexOf('YOUR_ANON') === -1;
+
+    var promise = supabaseOk
+      ? fetch(SUPABASE_URL + '/rest/v1/streams_with_mgn?is_active=eq.true&order=id.asc', {
+          headers: {
+            'apikey':        SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+          }
+        })
+        .then(function(r) {
+          if (!r.ok) { throw new Error('Supabase ' + r.status); }
+          return r.json();
+        })
+        .catch(function(e) {
+          console.warn('[TV] Supabase failed (' + e.message + ') — trying JSON fallback');
+          return fetch(JSON_FALLBACK).then(function(r) { return r.json(); });
+        })
+      : fetch(JSON_FALLBACK).then(function(r) { return r.json(); });
+
+    promise
+      .then(function(data) {
+        state.streams  = data || [];
+        state.filtered = state.streams.slice();
+        console.log('[TV] Loaded ' + state.streams.length + ' streams');
+        onStreamsLoaded();
+      })
+      .catch(function(e) {
+        console.error('[TV] Both sources failed: ' + e.message);
+        els.staticScreen.querySelector('.static-sub').textContent = 'Could not load channels.';
+        hideLoading();
+      });
+  }
+
+  /* ===== ON STREAMS LOADED ===== */
+  function onStreamsLoaded() {
+    els.hudCount.textContent = state.streams.length + ' channels';
+    renderBar();
+    renderGrid();
+    hideLoading();
+    // Auto-tune to channel 1
+    if (state.streams.length > 0) {
+      tuneChannel(0);
+    }
+  }
+
+  /* ===== HIDE LOADING ===== */
+  function hideLoading() {
+    els.loading.classList.add('hidden');
+    setTimeout(function() { els.loading.style.display = 'none'; }, 700);
+  }
+
+  /* ===== TUNE CHANNEL ===== */
+  // READS: index  WRITES: #active-frame, HUD, MGN panel
+  function tuneChannel(index) {
+    if (!state.streams.length) { return; }
+
+    // Clamp and wrap
+    index = ((index % state.streams.length) + state.streams.length) % state.streams.length;
+    state.currentIndex = index;
+
+    var s = state.streams[index];
+    if (!s) { return; }
+
+    // Flash
+    flashSwitch();
+
+    // HUD update
+    els.hudChannel.textContent = s.id || String(index + 1).padStart(3, '0');
+    els.hudTitle.textContent   = s.title || 'Unknown';
+
+    // Render stream in active frame
+    els.staticScreen.style.display = 'none';
+    els.activeFrame.classList.add('visible');
+    els.activeFrame.innerHTML = buildStreamEl(s, true);
+
+    // Update bar highlight
+    updateBarHighlight(index);
+
+    // Update grid highlight
+    var thumbs = document.querySelectorAll('.channel-thumb');
+    for (var i = 0; i < thumbs.length; i++) {
+      thumbs[i].classList.toggle('current', parseInt(thumbs[i].dataset.index) === index);
+    }
+
+    // Update MGN panel
+    updateMGNPanel(s);
+  }
+
+  /* ===== BUILD STREAM ELEMENT ===== */
+  // READS: stream, fullscreen bool  WRITES: HTML string
+  function buildStreamEl(s, fullscreen) {
+    var w = fullscreen ? '100%' : '100%';
+    var h = fullscreen ? '100%' : '100%';
+
+    if (s.stream_type === 'mjpeg') {
+      return '<img src="' + esc(s.url) + '" alt="' + esc(s.title) + '" ' +
+             'style="width:' + w + ';height:' + h + ';object-fit:cover;display:block;" ' +
+             'onerror="showDeadSignal()">';
+    }
+    // embed (iframe)
+    return '<iframe src="' + esc(s.url) + '" ' +
+           'allow="autoplay; fullscreen; picture-in-picture" allowfullscreen ' +
+           'style="width:' + w + ';height:' + h + ';border:none;display:block;" ' +
+           'onerror="showDeadSignal()">' +
+           '</iframe>';
+  }
+
+  function showDeadSignal() {
+    els.staticScreen.style.display = 'flex';
+    els.staticScreen.querySelector('.static-sub').textContent = 'Signal lost — try next channel';
+  }
+
+  /* ===== CHANNEL FLASH ===== */
+  function flashSwitch() {
+    els.switchFlash.classList.add('flash');
+    setTimeout(function() { els.switchFlash.classList.remove('flash'); }, 120);
+  }
+
+  /* ===== RENDER CHANNEL BAR ===== */
+  // READS: state.streams  WRITES: #channel-bar innerHTML
+  function renderBar() {
+    var html = '';
+    for (var i = 0; i < state.streams.length; i++) {
+      var s = state.streams[i];
+      html += '<div class="bar-item" data-index="' + i + '" onclick="tuneChannel(' + i + ')">' +
+              esc(s.id || String(i+1).padStart(3,'0')) +
+              '</div>';
+    }
+    els.channelBar.innerHTML = html;
+  }
+
+  function updateBarHighlight(index) {
+    var items = els.channelBar.querySelectorAll('.bar-item');
+    for (var i = 0; i < items.length; i++) {
+      items[i].classList.toggle('active', parseInt(items[i].dataset.index) === index);
+    }
+    // Scroll bar item into view
+    var active = els.channelBar.querySelector('.bar-item.active');
+    if (active) { active.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+  }
+
+  /* ===== RENDER CHANNEL GRID ===== */
+  // READS: state.filtered  WRITES: #channel-grid innerHTML
+  function renderGrid() {
+    var html = '';
+    var list = state.filtered;
+    for (var i = 0; i < list.length; i++) {
+      var s     = list[i];
+      var idx   = state.streams.indexOf(s);
+      var isCur = idx === state.currentIndex;
+      html += '<div class="channel-thumb' + (isCur ? ' current' : '') + '" ' +
+              'data-index="' + idx + '" ' +
+              'onclick="tuneFromGrid(' + idx + ')">' +
+              // DECISION: GRID_THUMB_LOAD=false → placeholder div, not live iframe
+              // avoids loading 50+ iframes simultaneously which kills performance
+              (GRID_THUMB_LOAD
+                ? buildStreamEl(s, false)
+                : '<div style="width:100%;height:100%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;"><span style="font-family:var(--vt);font-size:28px;color:#333;">' + esc(s.id || String(i+1).padStart(3,'0')) + '</span></div>'
+              ) +
+              '<div class="thumb-overlay"></div>' +
+              '<div class="thumb-info">' +
+              '<div class="thumb-num">' + esc(s.id || String(idx+1).padStart(3,'0')) + '</div>' +
+              '<div class="thumb-title">' + esc(s.title || '') + '</div>' +
+              '</div>' +
+              '</div>';
+    }
+    els.channelGrid.innerHTML = html || '<div style="color:var(--muted);padding:32px;font-size:12px;">No channels in this category.</div>';
+  }
+
+  function tuneFromGrid(index) {
+    closeGrid();
+    tuneChannel(index);
+  }
+
+  /* ===== CATEGORY FILTER ===== */
+  // READS: category string  WRITES: state.filtered, re-renders grid
+  function filterCategory(cat) {
+    state.activeCategory = cat;
+    state.filtered = cat === 'all'
+      ? state.streams.slice()
+      : state.streams.filter(function(s) { return s.category === cat; });
+
+    // Update pills
+    var pills = document.querySelectorAll('.filter-pill');
+    for (var i = 0; i < pills.length; i++) {
+      pills[i].classList.toggle('active', pills[i].dataset.cat === cat);
+    }
+    renderGrid();
+  }
+
+  /* ===== AUTO SCAN ===== */
+  // READS: state.scanning  WRITES: tuneChannel() on interval
+  function toggleScan() {
+    state.scanning = !state.scanning;
+    els.btnScan.classList.toggle('active', state.scanning);
+
+    if (state.scanning) {
+      startScan();
+    } else {
+      stopScan();
+    }
+  }
+
+  function startScan() {
+    stopScan();
+    animateScanBar();
+    state.scanTimer = setInterval(function() {
+      tuneChannel(state.currentIndex + 1);
+      animateScanBar();
+    }, SCAN_INTERVAL_MS);
+  }
+
+  function stopScan() {
+    if (state.scanTimer) { clearInterval(state.scanTimer); state.scanTimer = null; }
+    if (state.scanProgress) { clearTimeout(state.scanProgress); state.scanProgress = null; }
+    els.scanBar.style.width = '0%';
+    els.scanBar.style.transition = 'none';
+  }
+
+  function animateScanBar() {
+    els.scanBar.style.transition = 'none';
+    els.scanBar.style.width = '0%';
+    // force reflow
+    void els.scanBar.offsetWidth;
+    els.scanBar.style.transition = 'width ' + (SCAN_INTERVAL_MS / 1000) + 's linear';
+    els.scanBar.style.width = '100%';
+  }
+
+  /* ===== GRID TOGGLE ===== */
+  function openGrid()  { state.gridOpen = true;  els.gridOverlay.classList.add('open'); }
+  function closeGrid() { state.gridOpen = false; els.gridOverlay.classList.remove('open'); }
+  function toggleGrid() { state.gridOpen ? closeGrid() : openGrid(); }
+
+  /* ===== SIDEBAR TOGGLE ===== */
+  function toggleSidebar() {
+    state.sidebarOpen = !state.sidebarOpen;
+    els.sidebar.classList.toggle('collapsed', !state.sidebarOpen);
+    els.btnMGN.classList.toggle('active', state.sidebarOpen);
+  }
+
+  /* ===== UPDATE MGN PANEL ===== */
+  // READS: stream object  WRITES: sidebar DOM elements
+  function updateMGNPanel(s) {
+    var code = s.mgn_code || '—';
+
+    // Color-coded MGN display
+    // Format: MGN·DOM·SUB·REALM/G1/G2/G3/G4·NOD·|SCL|·:MED·%OBS·~DYN
+    var parts = code.split('\u00B7');
+    var coloredParts = parts.map(function(p, i) {
+      if (i === 0) { return '<span class="seg-prefix">' + esc(p) + '</span>'; }
+      if (i === 1 || i === 2) { return '<span class="seg-dom">' + esc(p) + '</span>'; }
+      if (i === 3) { return '<span class="seg-locus">' + esc(p) + '</span>'; }
+      return '<span class="seg-opt">' + esc(p) + '</span>';
+    });
+    els.mgnCode.innerHTML = coloredParts.join('<span style="color:var(--muted2)">·</span>');
+
+    // Segments
+    var segs = [
+      { key: 'Domain',    val: (s.mgn_domain || '—') + ' · ' + (s.mgn_subdomain || '—') },
+      { key: 'Realm',     val: s.mgn_realm    || '—' },
+      { key: 'Region',    val: [s.mgn_g1, s.mgn_g2, s.mgn_g3, s.mgn_g4].filter(Boolean).join(' / ') || '—' },
+      { key: 'Scale',     val: s.mgn_scale    || '|HMN|' },
+      { key: 'Medium',    val: s.mgn_medium   || ':VID' },
+      { key: 'Observer',  val: '%ALG' },
+    ];
+    var segHtml = '<div class="mgn-block-label">Segments</div>';
+    segs.forEach(function(row) {
+      segHtml += '<div class="info-row">' +
+        '<span class="info-key">' + esc(row.key) + '</span>' +
+        '<span class="info-val">' + esc(row.val) + '</span>' +
+        '</div>';
+    });
+    els.mgnSegments.innerHTML = segHtml;
+
+    // Confidence
+    var conf = s.confidence || 0;
+    var confPct = Math.round(conf * 100);
+    els.mgnConfidence.textContent = confPct + '%';
+    els.confFill.style.width = confPct + '%';
+
+    // Stream info
+    var infoRows = [
+      { key: 'Title',    val: s.title    || '—' },
+      { key: 'Source',   val: s.source   || '—' },
+      { key: 'Category', val: s.category || '—' },
+      { key: 'Type',     val: s.stream_type || '—' },
+      { key: 'GSI-ID',   val: s.gsi_id ? s.gsi_id.substring(0, 8) + '…' : '—' }
+    ];
+    var infoHtml = '';
+    infoRows.forEach(function(row) {
+      infoHtml += '<div class="info-row">' +
+        '<span class="info-key">' + esc(row.key) + '</span>' +
+        '<span class="info-val">' + esc(row.val) + '</span>' +
+        '</div>';
+    });
+    els.mgnStreamInfo.innerHTML = infoHtml;
+  }
+
+  /* ===== ESCAPE HTML ===== */
+  function esc(str) {
+    return (str || '').toString()
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ===== FULLSCREEN ===== */
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(function() {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  /* ===== INIT CONTROLS ===== */
+  function initControls() {
+    els.btnPrev.addEventListener('click', function() { tuneChannel(state.currentIndex - 1); });
+    els.btnNext.addEventListener('click', function() { tuneChannel(state.currentIndex + 1); });
+    els.btnScan.addEventListener('click', toggleScan);
+    els.btnGrid.addEventListener('click', toggleGrid);
+    els.btnMGN.addEventListener('click',  toggleSidebar);
+
+    document.getElementById('grid-close-btn').addEventListener('click', closeGrid);
+    document.getElementById('sidebar-close').addEventListener('click', toggleSidebar);
+
+    // Category filter pills
+    var pills = document.querySelectorAll('.filter-pill');
+    for (var i = 0; i < pills.length; i++) {
+      pills[i].addEventListener('click', function() {
+        filterCategory(this.dataset.cat);
+      });
+    }
+
+    // Keyboard
+    document.addEventListener('keydown', function(e) {
+      if (e.target.tagName === 'INPUT') { return; }
+      switch(e.key) {
+        case 'ArrowLeft':  tuneChannel(state.currentIndex - 1); break;
+        case 'ArrowRight': tuneChannel(state.currentIndex + 1); break;
+        case 's': case 'S': toggleScan(); break;
+        case 'g': case 'G': toggleGrid(); break;
+        case 'm': case 'M': toggleSidebar(); break;
+        case 'f': case 'F': toggleFullscreen(); break;
+        case 'Escape':
+          if (state.gridOpen) { closeGrid(); }
+          if (state.scanning) { toggleScan(); }
+          break;
+      }
+    });
+
+    // Grid overlay click outside
+    els.gridOverlay.addEventListener('click', function(e) {
+      if (e.target === els.gridOverlay) { closeGrid(); }
+    });
+  }
+
+  /* ===== BOOT ===== */
+  document.addEventListener('DOMContentLoaded', function() {
+    initControls();
+    loadStreams();
+  });
+  </script>
+
+</body>
+</html>
