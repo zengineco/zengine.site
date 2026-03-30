@@ -47,8 +47,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: "24"
+          # DECISION: cache: "npm" removed — requires package-lock.json committed
+          # to repo. We install deps fresh each run instead (fast enough at ~5s).
 
       - name: Install dependencies
         run: |
