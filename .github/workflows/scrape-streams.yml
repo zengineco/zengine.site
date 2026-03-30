@@ -1,30 +1,32 @@
 # =============================================================
-# File:    .github/workflows/scrape-streams.yml
-# Project: zengine.site — Live Stream Atlas
-# Author:  © 2026 Zengine™
-# Version: v1.0.0
+# FILE:    .github/workflows/scrape-streams.yml
+# PROJECT: Zengine.site × Modulign Standard DAG-OR v3.0
+# AUTHOR:  © 2026 Zengine™
+# VERSION: v1.1.0
+# DATE:    2026-03-29
+# /* ===== LAST STABLE: v1.0.0 — 2026-03-29 ===== */
 #
 # Runs scrapeStreams.js every 6 hours.
-# Commits updated data/streams.json back to repo.
-# Manual trigger available via workflow_dispatch.
+# Generates MGN· codes for every stream (DAG-OR v3.0).
+# Writes to Supabase (mgn_observation_registry, streams, mgn_entity_registry).
+# Commits updated data/streams.json back to repo (frontend JSON fallback).
 #
-# REQUIRED SECRETS (set in repo Settings → Secrets → Actions):
-#   None required for current source set.
-#   Add YOUTUBE_API_KEY here if YouTube source added later.
+# REQUIRED REPO SECRETS (Settings → Secrets and variables → Actions):
+#   SUPABASE_URL              — https://[your-project-ref].supabase.co
+#   SUPABASE_SERVICE_ROLE_KEY — service_role key (NEVER the anon key here)
 #
 # PERMISSIONS REQUIRED:
 #   Repo Settings → Actions → General → Workflow permissions
 #   → Read and write permissions (for git push step)
 # =============================================================
 
-name: Refresh Live Streams
+name: Refresh Live Streams + MGN Registry
 
 on:
   schedule:
     # Every 6 hours: midnight, 6am, noon, 6pm UTC
     - cron: "0 0,6,12,18 * * *"
   workflow_dispatch:
-    # Manual trigger from Actions tab anytime
     inputs:
       debug:
         description: "Enable debug output"
@@ -34,7 +36,7 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout repo
@@ -53,31 +55,35 @@ jobs:
           npm install --save-dev node-fetch@2 cheerio abort-controller
           echo "Dependencies installed"
 
-      - name: Run stream scraper
+      - name: Run stream scraper + MGN codegen
         run: node scripts/scrapeStreams.js
         env:
-          NODE_ENV: production
-          # Add secrets here as needed:
-          # YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          NODE_ENV:                   production
+          SUPABASE_URL:               ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY:  ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          # DECISION: service_role key is passed ONLY as a GitHub secret.
+          # It is never written to any file, never logged, never committed.
+          # Frontend uses SUPABASE_ANON_KEY which is safe to expose in client JS.
 
-      - name: Check output
+      - name: Verify output
         run: |
           if [ -f "data/streams.json" ]; then
             COUNT=$(node -e "console.log(JSON.parse(require('fs').readFileSync('data/streams.json','utf8')).length)")
-            echo "streams.json updated — $COUNT streams"
+            echo "streams.json updated — $COUNT streams with MGN codes"
+            # Show first MGN code as sanity check
+            node -e "var s=JSON.parse(require('fs').readFileSync('data/streams.json','utf8')); console.log('Sample MGN:', s[0] && s[0].mgn_code || 'none')"
           else
-            echo "WARNING: streams.json not found"
+            echo "ERROR: streams.json not found"
             exit 1
           fi
 
-      - name: Commit and push updated streams
+      - name: Commit JSON fallback to repo
         run: |
           git config --global user.name  "zengine-cam-bot"
           git config --global user.email "bot@zengine.site"
           git add data/streams.json
-          # Only commit if file actually changed
           git diff --staged --quiet && echo "No changes — skipping commit" || \
-            git commit -m "🎥 refresh streams [$(date -u '+%Y-%m-%d %H:%M UTC')]"
+            git commit -m "🎥 refresh streams + MGN registry [$(date -u '+%Y-%m-%d %H:%M UTC')]"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
