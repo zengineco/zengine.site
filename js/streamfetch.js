@@ -22,8 +22,8 @@ var ZengineCam = (function() {
   // ===== CONFIG =====
   // DECISION: anon key is public-safe. RLS enforces SELECT-only.
   // Replace these with your actual project values.
-  var SUPABASE_URL      = 'https://YOUR_PROJECT_REF.supabase.co';
-  var SUPABASE_ANON_KEY = 'YOUR_ANON_KEY_HERE';
+  var SUPABASE_URL      = 'https://kzjyokiiygryzlxbqwjv.supabase.co';
+  var SUPABASE_ANON_KEY = 'sb_publishable_ejU0TdTLaDCeUKRRz5eV6w_byPXyFbE';
   var JSON_FALLBACK     = '/data/streams.json';
 
   // ===== FETCH FROM SUPABASE =====
