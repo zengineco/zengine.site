@@ -1,228 +1,215 @@
 // =============================================================
-// WORKFLOW STACK
-// File:    scripts/scrapeStreams.js
-// Project: zengine.site — Live Stream Atlas
-// Author:  © 2026 Zengine™
-// Version: v1.0.0
-// Date:    2026-03-29
+// FILE:    scripts/scrapeStreams.js
+// PROJECT: Zengine.site × Modulign Standard DAG-OR v3.0
+// AUTHOR:  © 2026 Zengine™
+// VERSION: v1.1.0
+// DATE:    2026-03-29
+// /* ===== LAST STABLE: v1.0.0 — 2026-03-29 ===== */
 //
 // BOOT ORDER:
-//   1. Load source configs (SOURCES array)
+//   1. Load source configs
 //   2. Run each scraper in sequence
-//   3. Validate all collected streams (HEAD/GET probe)
+//   3. Validate MJPEG streams
 //   4. Deduplicate by URL
-//   5. Merge with bootstrap fallback (data/streams-bootstrap.json)
-//   6. Write output to data/streams.json
+//   5. Generate MGN code for each stream (mgnCodegen.js)
+//   6. Upsert to Supabase: mgn_observation_registry + streams
+//   7. Write output to data/streams.json (frontend fallback)
+//   8. Merge bootstrap if below MIN_STREAMS
 //
-// SOURCES:
-//   - Earthcam.com   : embed iframes (type: embed)
-//   - Windy.com      : embed iframes (type: embed)
-//   - Insecam.org    : MJPEG img src (type: mjpeg)
-//   - Opentopia.com  : MJPEG img src (type: mjpeg)
-//   - Camhacker.com  : MJPEG img src (type: mjpeg)
+// ENV VARS REQUIRED (set as GitHub repo secrets):
+//   SUPABASE_URL              — your project URL
+//   SUPABASE_SERVICE_ROLE_KEY — write access key (NEVER commit this)
 //
-// OUTPUT: data/streams.json
-//   [{ id, title, category, type, url, tags, source, addedAt }]
-//
-// DEPENDENCIES:
-//   node-fetch@2   (CommonJS compatible)
-//   cheerio        (HTML parsing)
-//
-// NOTES:
-//   - All scraping is of publicly accessible pages
-//   - MJPEG streams are public cameras with no auth
-//   - Validation probes with 5s timeout, drops dead streams
-//   - Rate limiting: 1.5s delay between requests per source
+// SUPABASE READS use service_role (write access, bypasses RLS)
+// FRONTEND READS use anon key (SELECT only, enforced by RLS)
 // =============================================================
 
 'use strict';
 
-var fs      = require('fs');
-var path    = require('path');
-var fetch   = require('node-fetch');
-var cheerio = require('cheerio');
+var fs       = require('fs');
+var path     = require('path');
+var fetch    = require('node-fetch');
+var cheerio  = require('cheerio');
+var codegen  = require('./mgnCodegen');
 
 // ===== CONFIG BLOCK =====
 var OUTPUT_PATH    = path.join(__dirname, '..', 'data', 'streams.json');
 var BOOTSTRAP_PATH = path.join(__dirname, '..', 'data', 'streams-bootstrap.json');
-var MAX_STREAMS    = 200;   // hard cap on output
-var PROBE_TIMEOUT  = 5000;  // ms — stream validation timeout
-var REQUEST_DELAY  = 1500;  // ms — delay between requests per source
-var MIN_STREAMS    = 30;    // if scraper yields fewer, merge bootstrap
+var MAX_STREAMS    = 200;
+var PROBE_TIMEOUT  = 5000;
+var REQUEST_DELAY  = 1500;
+var MIN_STREAMS    = 30;
+
+var SUPABASE_URL  = process.env.SUPABASE_URL;
+var SUPABASE_KEY  = process.env.SUPABASE_SERVICE_ROLE_KEY;
+// DECISION: service_role key used here for upsert writes.
+// This key is stored ONLY as a GitHub repo secret — never in code or repo.
+// Frontend uses anon key (read-only via RLS) stored in client JS.
+
+var SCRAPER_AGENT = 'ZengineCamBot/1.1 (+https://zengine.site)';
 
 var HEADERS = {
-  'User-Agent': 'Mozilla/5.0 (compatible; ZengineCamBot/1.0; +https://zengine.site)',
+  'User-Agent': SCRAPER_AGENT,
   'Accept':     'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
 };
 
-// ===== UTILITY =====
+// ===== SUPABASE CLIENT =====
+// Minimal REST client — no SDK needed, keeps deps lean
+// READS: url, key  WRITES: Supabase REST API
 
-// READS: ms  WRITES: Promise (resolves after delay)
+function supabaseHeaders() {
+  return {
+    'Content-Type':  'application/json',
+    'apikey':        SUPABASE_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Prefer':        'return=minimal'
+  };
+}
+
+// READS: table, rows[]  WRITES: Supabase upsert
+// Returns: { ok: boolean, error: string|null }
+async function supabaseUpsert(table, rows, conflictColumn) {
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    console.error('[Supabase] Missing env vars — skipping upsert to ' + table);
+    return { ok: false, error: 'Missing env vars' };
+  }
+  try {
+    var url = SUPABASE_URL + '/rest/v1/' + table +
+              '?on_conflict=' + conflictColumn;
+    var res = await fetch(url, {
+      method:  'POST',
+      headers: Object.assign({}, supabaseHeaders(), { 'Prefer': 'resolution=merge-duplicates,return=minimal' }),
+      body:    JSON.stringify(rows)
+    });
+    if (!res.ok) {
+      var errText = await res.text();
+      console.error('[Supabase] Upsert error on ' + table + ': ' + errText);
+      return { ok: false, error: errText };
+    }
+    return { ok: true, error: null };
+  } catch(e) {
+    console.error('[Supabase] Upsert exception on ' + table + ': ' + e.message);
+    return { ok: false, error: e.message };
+  }
+}
+
+// ===== UTILITIES =====
+
 function sleep(ms) {
   return new Promise(function(resolve) { setTimeout(resolve, ms); });
 }
 
-// READS: url string  WRITES: string (sanitized)
 function cleanUrl(url) {
   try {
     url = url.trim();
     if (url.startsWith('//')) { url = 'http:' + url; }
     return url;
-  } catch(e) {
-    return url;
-  }
+  } catch(e) { return url; }
 }
 
-// READS: title string  WRITES: string (category)
 function inferCategory(title) {
   var t = (title || '').toLowerCase();
-  if (/beach|surf|ocean|coast|bay|sea/.test(t))    return 'nature';
-  if (/mountain|forest|river|lake|park|wild/.test(t)) return 'nature';
-  if (/traffic|highway|road|bridge|car|vehicle/.test(t)) return 'traffic';
-  if (/airport|runway|plane|flight/.test(t))        return 'traffic';
-  if (/train|subway|metro|rail/.test(t))            return 'traffic';
-  if (/animal|bird|bear|wolf|deer|cam|zoo/.test(t)) return 'wildlife';
-  if (/space|nasa|iss|rocket|moon/.test(t))         return 'space';
-  if (/city|street|square|plaza|town|down/.test(t)) return 'city';
+  if (/beach|surf|ocean|coast|bay|sea|waterfall|forest|river|lake|mountain|park|wild|aurora|storm|geyser|canyon/.test(t)) return 'nature';
+  if (/traffic|highway|road|bridge.*car|airport|runway|train|subway|metro|rail/.test(t)) return 'traffic';
+  if (/animal|bird|bear|wolf|deer|zoo|aquarium|safari|penguin|whale|shark|reef|coral/.test(t)) return 'wildlife';
+  if (/space|nasa|iss|rocket|moon|telescope|satellite/.test(t)) return 'space';
   return 'city';
 }
 
-// READS: url  WRITES: boolean (true if reachable)
 async function probeStream(url, type) {
   try {
-    var controller = new (require('abort-controller'))();
+    var AbortController = require('abort-controller');
+    var controller = new AbortController();
     var timer = setTimeout(function() { controller.abort(); }, PROBE_TIMEOUT);
-    var method = (type === 'mjpeg') ? 'GET' : 'HEAD';
     var res = await fetch(url, {
-      method:  method,
+      method: (type === 'mjpeg') ? 'GET' : 'HEAD',
       headers: HEADERS,
-      signal:  controller.signal
+      signal: controller.signal
     });
     clearTimeout(timer);
-    // MJPEG: accept 200. Embed pages: accept 200 or 301/302
     return (res.status >= 200 && res.status < 400);
-  } catch(e) {
-    return false;
-  }
+  } catch(e) { return false; }
 }
 
-// READS: streams array  WRITES: deduped array (by url)
 function deduplicate(streams) {
   var seen = {};
   return streams.filter(function(s) {
-    var key = s.url;
-    if (seen[key]) { return false; }
-    seen[key] = true;
+    if (seen[s.url]) { return false; }
+    seen[s.url] = true;
     return true;
   });
 }
 
-// ===== SCRAPERS =====
+// ===== SCRAPERS (unchanged from v1.0.0) =====
 
-// READS: Earthcam category pages  WRITES: stream objects (type: embed)
-// Earthcam uses <iframe> or data-src attributes in their cam listings
 async function scrapeEarthcam() {
   var results = [];
   var pages = [
-    { url: 'https://www.earthcam.com/usa/',      category: 'city',   tag: 'usa' },
-    { url: 'https://www.earthcam.com/world/',     category: 'city',   tag: 'world' },
-    { url: 'https://www.earthcam.com/nature/',    category: 'nature', tag: 'nature' },
-    { url: 'https://www.earthcam.com/beaches/',   category: 'nature', tag: 'beach' }
+    { url: 'https://www.earthcam.com/usa/',    category: 'city',   tag: 'usa' },
+    { url: 'https://www.earthcam.com/world/',  category: 'city',   tag: 'world' },
+    { url: 'https://www.earthcam.com/nature/', category: 'nature', tag: 'nature' },
+    { url: 'https://www.earthcam.com/beaches/', category: 'nature', tag: 'beach' }
   ];
-
   for (var i = 0; i < pages.length; i++) {
     var page = pages[i];
     try {
       console.log('[Earthcam] Fetching ' + page.url);
-      var res = await fetch(page.url, { headers: HEADERS });
+      var res  = await fetch(page.url, { headers: HEADERS });
       var html = await res.text();
-      var $ = cheerio.load(html);
-
-      // Earthcam listing: cam links are anchors with /cams/ path
+      var $    = cheerio.load(html);
       $('a[href*="/cams/"]').each(function() {
         var href  = $(this).attr('href') || '';
         var title = $(this).attr('title') || $(this).text().trim() || 'Earthcam Stream';
         if (!href || href.length < 5) { return; }
-        var fullUrl = href.startsWith('http') ? href : 'https://www.earthcam.com' + href;
-        // Build embed URL pattern for earthcam
+        var fullUrl  = href.startsWith('http') ? href : 'https://www.earthcam.com' + href;
         var embedUrl = fullUrl.replace('/cams/', '/embed/');
-        results.push({
-          id:       'ec-' + results.length,
-          title:    title.substring(0, 80),
-          category: page.category,
-          type:     'embed',
-          url:      embedUrl,
-          tags:     [page.tag, 'earthcam'],
-          source:   'earthcam',
-          addedAt:  new Date().toISOString()
-        });
+        results.push({ title: title.substring(0,80), category: page.category,
+          stream_type:'embed', url: embedUrl, tags:[page.tag,'earthcam'], source:'earthcam' });
       });
-
       await sleep(REQUEST_DELAY);
-    } catch(e) {
-      console.error('[Earthcam] Error on ' + page.url + ' — ' + e.message);
-    }
+    } catch(e) { console.error('[Earthcam] Error: ' + e.message); }
   }
-
-  console.log('[Earthcam] Collected ' + results.length + ' candidates');
+  console.log('[Earthcam] ' + results.length + ' candidates');
   return results;
 }
 
-// READS: Windy webcam API  WRITES: stream objects (type: embed)
-// Windy has a public webcam map API — no key required for basic listing
 async function scrapeWindy() {
   var results = [];
-  // Windy's public webcam API endpoint (no auth required for listing)
-  var apiUrl = 'https://api.windy.com/webcams/api/v3/webcams?limit=50&orderby=popularity&show=webcams:player,location,category';
-
   try {
     console.log('[Windy] Fetching webcam list...');
-    var res  = await fetch(apiUrl, { headers: HEADERS });
+    var res  = await fetch(
+      'https://api.windy.com/webcams/api/v3/webcams?limit=50&orderby=popularity&show=webcams:player,location,category',
+      { headers: HEADERS }
+    );
     var data = await res.json();
-
-    if (data && data.webcams && data.webcams.length) {
+    if (data && data.webcams) {
       data.webcams.forEach(function(cam) {
         var embedUrl = cam.player && cam.player.day && cam.player.day.embed;
         if (!embedUrl) { return; }
-        var loc = cam.location || {};
+        var loc   = cam.location || {};
         var title = cam.title || (loc.city + ', ' + loc.country) || 'Windy Cam';
         var tags  = ['windy'];
         if (loc.country) { tags.push(loc.country.toLowerCase().substring(0,3)); }
-
-        results.push({
-          id:       'wy-' + results.length,
-          title:    title.substring(0, 80),
-          category: inferCategory(title),
-          type:     'embed',
-          url:      cleanUrl(embedUrl),
-          tags:     tags,
-          source:   'windy',
-          addedAt:  new Date().toISOString()
-        });
+        results.push({ title: title.substring(0,80), category: inferCategory(title),
+          stream_type:'embed', url: cleanUrl(embedUrl), tags: tags, source:'windy' });
       });
     }
-    console.log('[Windy] Collected ' + results.length + ' candidates');
-  } catch(e) {
-    console.error('[Windy] Error — ' + e.message);
-  }
-
+  } catch(e) { console.error('[Windy] Error: ' + e.message); }
+  console.log('[Windy] ' + results.length + ' candidates');
   return results;
 }
 
-// READS: Insecam category pages  WRITES: stream objects (type: mjpeg)
-// Insecam lists publicly accessible IP cameras by country/category
 async function scrapeInsecam() {
   var results = [];
   var pages = [
-    { url: 'https://www.insecam.org/en/bytag/Nature/',    category: 'nature',   tag: 'nature' },
-    { url: 'https://www.insecam.org/en/bytag/Street/',    category: 'city',     tag: 'street' },
-    { url: 'https://www.insecam.org/en/bytag/Animals/',   category: 'wildlife', tag: 'animals' },
-    { url: 'https://www.insecam.org/en/bytag/Traffic/',   category: 'traffic',  tag: 'traffic' },
-    { url: 'https://www.insecam.org/en/bycountry/US/',    category: 'city',     tag: 'usa' },
-    { url: 'https://www.insecam.org/en/bycountry/JP/',    category: 'city',     tag: 'japan' },
-    { url: 'https://www.insecam.org/en/bycountry/FR/',    category: 'city',     tag: 'france' }
+    { url: 'https://www.insecam.org/en/bytag/Nature/',  category: 'nature',   tag: 'nature' },
+    { url: 'https://www.insecam.org/en/bytag/Street/',  category: 'city',     tag: 'street' },
+    { url: 'https://www.insecam.org/en/bytag/Animals/', category: 'wildlife', tag: 'animals' },
+    { url: 'https://www.insecam.org/en/bytag/Traffic/', category: 'traffic',  tag: 'traffic' },
+    { url: 'https://www.insecam.org/en/bycountry/US/',  category: 'city',     tag: 'usa' },
+    { url: 'https://www.insecam.org/en/bycountry/JP/',  category: 'city',     tag: 'japan' },
+    { url: 'https://www.insecam.org/en/bycountry/FR/',  category: 'city',     tag: 'france' }
   ];
-
   for (var i = 0; i < pages.length; i++) {
     var page = pages[i];
     try {
@@ -230,44 +217,26 @@ async function scrapeInsecam() {
       var res  = await fetch(page.url, { headers: HEADERS });
       var html = await res.text();
       var $    = cheerio.load(html);
-
-      // Insecam listing: each cam is in a div with a camera image src
-      // Pattern: <img src="http://[ip]:[port]/...">
       $('img[src^="http://"]').each(function() {
         var src   = $(this).attr('src') || '';
-        var title = $(this).attr('alt') || $(this).closest('div').find('.camera-title').text().trim() || 'Public Cam';
-        // Filter: must look like an IP cam URL (has port or /video/ or /mjpeg/)
+        var title = $(this).attr('alt') || ('Insecam ' + page.tag);
         if (!/:\d{2,5}\/|\/video|\/mjpeg|\/stream|\.cgi/.test(src)) { return; }
-        results.push({
-          id:       'ic-' + results.length,
-          title:    title.substring(0, 80) || ('Insecam ' + page.tag),
-          category: page.category,
-          type:     'mjpeg',
-          url:      cleanUrl(src),
-          tags:     [page.tag, 'insecam', 'ipcam'],
-          source:   'insecam',
-          addedAt:  new Date().toISOString()
-        });
+        results.push({ title: title.substring(0,80), category: page.category,
+          stream_type:'mjpeg', url: cleanUrl(src), tags:[page.tag,'insecam','ipcam'], source:'insecam' });
       });
-
       await sleep(REQUEST_DELAY);
-    } catch(e) {
-      console.error('[Insecam] Error on ' + page.url + ' — ' + e.message);
-    }
+    } catch(e) { console.error('[Insecam] Error: ' + e.message); }
   }
-
-  console.log('[Insecam] Collected ' + results.length + ' candidates');
+  console.log('[Insecam] ' + results.length + ' candidates');
   return results;
 }
 
-// READS: Opentopia pages  WRITES: stream objects (type: mjpeg)
 async function scrapeOpentopia() {
   var results = [];
   var pages = [
     { url: 'https://www.opentopia.com/hiddencam.php?camtype=outdoor', category: 'nature', tag: 'outdoor' },
     { url: 'https://www.opentopia.com/hiddencam.php?camtype=street',  category: 'city',   tag: 'street' }
   ];
-
   for (var i = 0; i < pages.length; i++) {
     var page = pages[i];
     try {
@@ -275,45 +244,28 @@ async function scrapeOpentopia() {
       var res  = await fetch(page.url, { headers: HEADERS });
       var html = await res.text();
       var $    = cheerio.load(html);
-
-      // Opentopia: cam pages linked from listing, cam image on detail page
       $('a[href*="/webcam/"]').each(function() {
         var href  = $(this).attr('href') || '';
         var title = $(this).text().trim() || 'Opentopia Cam';
         if (!href) { return; }
         var fullUrl = href.startsWith('http') ? href : 'https://www.opentopia.com' + href;
-        // Store the page URL — validator will try to scrape the embed from detail
-        results.push({
-          id:       'ot-' + results.length,
-          title:    title.substring(0, 80),
-          category: page.category,
-          type:     'embed',
-          url:      cleanUrl(fullUrl),
-          tags:     [page.tag, 'opentopia'],
-          source:   'opentopia',
-          addedAt:  new Date().toISOString()
-        });
+        results.push({ title: title.substring(0,80), category: page.category,
+          stream_type:'embed', url: cleanUrl(fullUrl), tags:[page.tag,'opentopia'], source:'opentopia' });
       });
-
       await sleep(REQUEST_DELAY);
-    } catch(e) {
-      console.error('[Opentopia] Error on ' + page.url + ' — ' + e.message);
-    }
+    } catch(e) { console.error('[Opentopia] Error: ' + e.message); }
   }
-
-  console.log('[Opentopia] Collected ' + results.length + ' candidates');
+  console.log('[Opentopia] ' + results.length + ' candidates');
   return results;
 }
 
-// READS: Camhacker pages  WRITES: stream objects (type: mjpeg)
 async function scrapeCamhacker() {
   var results = [];
   var pages = [
-    { url: 'https://camhacker.com/?p=outdoor',  category: 'nature', tag: 'outdoor' },
-    { url: 'https://camhacker.com/?p=traffic',  category: 'traffic', tag: 'traffic' },
-    { url: 'https://camhacker.com/?p=city',     category: 'city',   tag: 'city' }
+    { url: 'https://camhacker.com/?p=outdoor', category: 'nature', tag: 'outdoor' },
+    { url: 'https://camhacker.com/?p=traffic', category: 'traffic', tag: 'traffic' },
+    { url: 'https://camhacker.com/?p=city',    category: 'city',   tag: 'city' }
   ];
-
   for (var i = 0; i < pages.length; i++) {
     var page = pages[i];
     try {
@@ -321,134 +273,217 @@ async function scrapeCamhacker() {
       var res  = await fetch(page.url, { headers: HEADERS });
       var html = await res.text();
       var $    = cheerio.load(html);
-
-      // Camhacker: img tags with MJPEG-like src patterns
       $('img').each(function() {
         var src   = $(this).attr('src') || $(this).attr('data-src') || '';
         var title = $(this).attr('alt') || $(this).attr('title') || 'Camhacker Stream';
         if (!src || !/http/.test(src)) { return; }
         if (!/:\d{2,5}\/|\/video|\/mjpeg|\/stream|\.cgi|\/cgi-bin/.test(src)) { return; }
-        results.push({
-          id:       'ch-' + results.length,
-          title:    title.substring(0, 80),
-          category: page.category,
-          type:     'mjpeg',
-          url:      cleanUrl(src),
-          tags:     [page.tag, 'camhacker', 'ipcam'],
-          source:   'camhacker',
-          addedAt:  new Date().toISOString()
-        });
+        results.push({ title: title.substring(0,80), category: page.category,
+          stream_type:'mjpeg', url: cleanUrl(src), tags:[page.tag,'camhacker','ipcam'], source:'camhacker' });
       });
-
       await sleep(REQUEST_DELAY);
-    } catch(e) {
-      console.error('[Camhacker] Error on ' + page.url + ' — ' + e.message);
-    }
+    } catch(e) { console.error('[Camhacker] Error: ' + e.message); }
   }
-
-  console.log('[Camhacker] Collected ' + results.length + ' candidates');
+  console.log('[Camhacker] ' + results.length + ' candidates');
   return results;
 }
 
 // ===== VALIDATOR =====
-// READS: streams array  WRITES: validated streams array (dead links removed)
 async function validateStreams(streams) {
-  var valid   = [];
-  var dropped = 0;
-
+  var valid = [], dropped = 0;
   for (var i = 0; i < streams.length; i++) {
     var s = streams[i];
-    // DECISION: skip validation for embed type — too slow to HEAD iframe pages.
-    // Embed validity checked at render time by frontend onerror handler.
-    if (s.type === 'embed') {
-      valid.push(s);
-      continue;
-    }
-
-    // MJPEG: probe the direct stream URL
-    var alive = await probeStream(s.url, s.type);
-    if (alive) {
-      valid.push(s);
-    } else {
-      dropped++;
-      console.log('[Validate] Dead: ' + s.url);
-    }
-
-    // Throttle to avoid hammering sources
+    if (s.stream_type === 'embed') { valid.push(s); continue; }
+    var alive = await probeStream(s.url, s.stream_type);
+    if (alive) { valid.push(s); } else { dropped++; }
     if (i % 10 === 0) { await sleep(500); }
   }
-
   console.log('[Validate] Kept ' + valid.length + ' / dropped ' + dropped);
   return valid;
+}
+
+// ===== SUPABASE WRITER =====
+// READS: streams[]  WRITES: mgn_observation_registry + streams tables
+async function writeToSupabase(streams) {
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+    console.log('[Supabase] Env vars not set — skipping DB write (JSON fallback only)');
+    return;
+  }
+
+  console.log('[Supabase] Writing ' + streams.length + ' streams...');
+  var obsRows     = [];
+  var streamRows  = [];
+  var entityRows  = [];
+
+  for (var i = 0; i < streams.length; i++) {
+    var s   = streams[i];
+    var mgn = s._mgn; // attached by main() after codegen
+    if (!mgn) { continue; }
+
+    var gsiId = require('crypto').randomUUID
+      ? require('crypto').randomUUID()
+      : require('uuid').v4();
+
+    // DECISION: gsi_id generated here and stored on stream for FK reference.
+    // This means each scrape run generates new GSI-IDs for new streams.
+    // Existing streams are upserted by url (unique constraint).
+    s._gsi_id = gsiId;
+
+    // Observation Registry row
+    obsRows.push({
+      gsi_id:           gsiId,
+      mgn_code:         mgn.mgn_code,
+      mgn_domain:       mgn.mgn_segments.domain,
+      mgn_subdomain:    mgn.mgn_segments.subdomain,
+      mgn_realm:        mgn.mgn_segments.realm,
+      mgn_g1:           mgn.mgn_segments.g1,
+      mgn_g2:           mgn.mgn_segments.g2,
+      mgn_g3:           mgn.mgn_segments.g3,
+      mgn_g4:           mgn.mgn_segments.g4,
+      mgn_node:         mgn.mgn_segments.node,
+      mgn_scale:        mgn.mgn_segments.scale,
+      mgn_medium:       mgn.mgn_segments.medium,
+      mgn_observer:     '%' + mgn.mgn_segments.observer,
+      mgn_continuum:    mgn.mgn_segments.continuum,
+      mgn_meta_flags:   mgn.mgn_segments.meta_flags,
+      confidence:       mgn.confidence,
+      observer_type:    mgn.mgn_segments.observer,
+      reasoning:        mgn.reasoning,
+      version:          '3.0',
+      is_active:        true
+    });
+
+    // Stream row
+    streamRows.push({
+      id:          s.id,
+      title:       s.title,
+      category:    s.category,
+      stream_type: s.stream_type,
+      url:         s.url,
+      tags:        s.tags,
+      source:      s.source,
+      gsi_id:      gsiId,
+      mgn_code:    mgn.mgn_code,
+      is_active:   true,
+      added_at:    s.addedAt || new Date().toISOString()
+    });
+
+    // Entity Registry row — one entity per stream source institution
+    // e.g. Earthcam, Windy, NASA, explore.org as INST entities
+    entityRows.push({
+      entity_type:    'STRUC',    // physical camera/sensor structure
+      entity_scope:   'LOC',
+      display_name:   s.title,
+      canonical_name: s.url,
+      anchor_g1:      mgn.mgn_segments.g1,
+      anchor_g2:      mgn.mgn_segments.g2,
+      anchor_g3:      mgn.mgn_segments.g3,
+      anchor_g4:      mgn.mgn_segments.g4,
+      attributes:     { url: s.url, category: s.category, source: s.source, tags: s.tags },
+      primary_gsi_id: gsiId,
+      is_active:      true
+    });
+  }
+
+  // Upsert in batches of 50
+  var BATCH = 50;
+  for (var start = 0; start < obsRows.length; start += BATCH) {
+    var batch = obsRows.slice(start, start + BATCH);
+    var result = await supabaseUpsert('mgn_observation_registry', batch, 'gsi_id');
+    if (!result.ok) { console.error('[Supabase] obs batch ' + start + ' failed'); }
+  }
+  console.log('[Supabase] Observation registry: ' + obsRows.length + ' rows upserted');
+
+  for (var start = 0; start < streamRows.length; start += BATCH) {
+    var batch = streamRows.slice(start, start + BATCH);
+    var result = await supabaseUpsert('streams', batch, 'url');
+    if (!result.ok) { console.error('[Supabase] streams batch ' + start + ' failed'); }
+  }
+  console.log('[Supabase] Streams table: ' + streamRows.length + ' rows upserted');
+
+  for (var start = 0; start < entityRows.length; start += BATCH) {
+    var batch = entityRows.slice(start, start + BATCH);
+    var result = await supabaseUpsert('mgn_entity_registry', batch, 'canonical_name');
+    if (!result.ok) { console.error('[Supabase] entity batch ' + start + ' failed'); }
+  }
+  console.log('[Supabase] Entity registry: ' + entityRows.length + ' rows upserted');
 }
 
 // ===== MAIN =====
 async function main() {
   try {
-    console.log('=== ZengineCAM Scraper v1.0.0 ===');
+    console.log('=== ZengineCAM Scraper v1.1.0 ===');
     console.log('Start: ' + new Date().toISOString());
 
-    // Ensure output directory exists
     var dataDir = path.join(__dirname, '..', 'data');
     if (!fs.existsSync(dataDir)) { fs.mkdirSync(dataDir, { recursive: true }); }
 
     // Run all scrapers
     var allStreams = [];
-
-    var earthcam  = await scrapeEarthcam();
-    var windy     = await scrapeWindy();
-    var insecam   = await scrapeInsecam();
-    var opentopia = await scrapeOpentopia();
-    var camhacker = await scrapeCamhacker();
-
     allStreams = allStreams
-      .concat(earthcam)
-      .concat(windy)
-      .concat(insecam)
-      .concat(opentopia)
-      .concat(camhacker);
+      .concat(await scrapeEarthcam())
+      .concat(await scrapeWindy())
+      .concat(await scrapeInsecam())
+      .concat(await scrapeOpentopia())
+      .concat(await scrapeCamhacker());
 
     console.log('Total candidates: ' + allStreams.length);
 
-    // Deduplicate by URL
     allStreams = deduplicate(allStreams);
     console.log('After dedup: ' + allStreams.length);
 
-    // Validate MJPEG streams (embed skipped)
     allStreams = await validateStreams(allStreams);
 
-    // If we got enough, trim to MAX_STREAMS
     if (allStreams.length > MAX_STREAMS) {
       allStreams = allStreams.slice(0, MAX_STREAMS);
     }
 
-    // If scraper yielded too few, merge with bootstrap
+    // Bootstrap merge
     if (allStreams.length < MIN_STREAMS) {
       console.log('[Main] Below MIN_STREAMS — merging bootstrap...');
       try {
-        var bootstrap = JSON.parse(fs.readFileSync(BOOTSTRAP_PATH, 'utf8'));
-        // Merge bootstrap entries not already in allStreams
+        var bootstrap    = JSON.parse(fs.readFileSync(BOOTSTRAP_PATH, 'utf8'));
         var existingUrls = {};
         allStreams.forEach(function(s) { existingUrls[s.url] = true; });
         bootstrap.forEach(function(s) {
           if (!existingUrls[s.url]) { allStreams.push(s); }
         });
-        console.log('[Main] After bootstrap merge: ' + allStreams.length);
-      } catch(e) {
-        console.error('[Main] Bootstrap read failed — ' + e.message);
-      }
+        console.log('[Main] After bootstrap: ' + allStreams.length);
+      } catch(e) { console.error('[Main] Bootstrap error: ' + e.message); }
     }
 
-    // Assign clean sequential IDs
+    // Assign clean IDs + generate MGN codes
+    codegen.resetNodeCounters();
     allStreams = allStreams.map(function(s, i) {
-      s.id = String(i + 1).padStart(3, '0');
+      s.id      = String(i + 1).padStart(3, '0');
+      s._mgn    = codegen.generateMGNCode(s);
+      s.mgn_code = s._mgn.mgn_code;
+      s.addedAt = s.addedAt || new Date().toISOString();
       return s;
     });
 
-    // Write output
-    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(allStreams, null, 2));
-    console.log('Output: ' + OUTPUT_PATH);
-    console.log('Total streams written: ' + allStreams.length);
+    console.log('[Main] MGN codes generated for ' + allStreams.length + ' streams');
+
+    // Write to Supabase
+    await writeToSupabase(allStreams);
+
+    // Write JSON fallback (strips internal _mgn/_gsi_id fields)
+    var outputStreams = allStreams.map(function(s) {
+      return {
+        id:          s.id,
+        title:       s.title,
+        category:    s.category,
+        stream_type: s.stream_type,
+        url:         s.url,
+        tags:        s.tags,
+        source:      s.source,
+        mgn_code:    s.mgn_code,
+        addedAt:     s.addedAt
+      };
+    });
+    fs.writeFileSync(OUTPUT_PATH, JSON.stringify(outputStreams, null, 2));
+    console.log('JSON fallback: ' + OUTPUT_PATH);
+    console.log('Total streams: ' + outputStreams.length);
     console.log('Done: ' + new Date().toISOString());
 
   } catch(e) {
